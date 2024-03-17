@@ -1,0 +1,148 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\PIC;
+use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Spatie\Permission\Models\Role;
+use Yajra\DataTables\Facades\DataTables;
+
+class PICController extends Controller
+{
+    protected $table = 'pic';
+    public function __construct()
+    {
+        $this->middleware('permission:pic_create');
+        $this->middleware('permission:pic_delete');
+        $this->middleware('permission:pic_detail');
+        $this->middleware('permission:pic_show');
+        $this->middleware('permission:pic_update');
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $usernya = new User;
+        $userrole = $usernya->join();
+        $tabelRole =  Role::all();
+        return view("pengaturan.pic.pic_index")->with([
+            'userrole' => $userrole, 'tabelRole' => $tabelRole
+        ]);
+    }
+
+    public function list()
+    {
+        $pic = PIC::where('id_unit', Auth::user()->id_unit)->get();
+
+        return DataTables::of($pic)
+            ->addIndexColumn()
+            ->addColumn('action', function ($row) {
+                $aksi = '<button type="button" class="btn btn-warning btn-edit" data-id="' . $row->id . '" title="Edit PIC"><i class="ri-pencil-line"></i></a>';
+                $aksi .= '<button type="button" class="btn btn-danger btn-delete" data-id="' . $row->id . '" title="Hapus PIC"><i class="ri-delete-bin-line"></i></a>';
+                return '<div class="row ml-3"><div class="flex align-items-center list-user-action"><div class="row">' . $aksi . '</div></div></div>';
+            })
+            ->rawColumns(['action'])
+            ->toJson();
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        $request->validate([
+            'name' => ['required'],
+            'nip' => ['required', 'numeric'],
+        ], [
+            'required' => ':attribute wajib diisi!',
+            'numeric' => ':attribute tidak Valid!',
+        ], [
+            'name' => 'Nama PIC',
+            'nip' => 'NIP',
+        ]);
+
+        try {
+            PIC::create([
+                'id_unit' => Auth::user()->id_unit,
+                'name' => $request->name,
+                'nip' => $request->nip,
+            ]);
+            return response()->json(['status' => true, 'message' => 'PIC Berhasil Ditambahkan'], 200);
+        } catch (\Throwable $th) {
+            return response()->json(['status' => false, 'message' => 'Terjadi Kesalahan'], 500);
+            //throw $th;
+        }
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $pic = PIC::findOrFail($id);
+        return response()->json($pic, 200);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+
+        $request->validate([
+            'name' => ['required'],
+            'nip' => ['required', 'numeric'],
+        ], [
+            'required' => ':attribute wajib diisi!',
+            'numeric' => ':attribute tidak Valid!',
+        ], [
+            'name' => 'Nama PIC',
+            'nip' => 'NIP',
+        ]);
+
+        try {
+            PIC::findOrFail($id)->update([
+                'id_unit' => Auth::user()->id_unit,
+                'name' => $request->name,
+                'nip' => $request->nip,
+            ]);
+            return response()->json(['status' => true, 'message' => 'Data PIC Berhasil Diupdate'], 200);
+        } catch (\Throwable $th) {
+            return response()->json(['status' => false, 'message' => 'Terjadi Kesalahan'], 500);
+            //throw $th;
+        }
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function delete($id)
+    {
+        try {
+            PIC::findOrFail($id)->delete();
+            return response()->json(['status' => true, 'message' => 'Data PIC Berhasil Dihapus'], 200);
+        } catch (\Throwable $th) {
+            return response()->json(['status' => false, 'message' => 'Terjadi Kesalahan'], 500);
+            //throw $th;
+        }
+    }
+}

@@ -1,0 +1,92 @@
+id;id_mak;kelompok
+1;7;51010112 | Beban Tunjangan Uang Makan
+2;1;51120104 | Beban Lembur
+3;5;51030102 | Beban Barang Habis Pakai Kegiatan - Konsumsi
+4;11;51030212 | Beban Paket Meeting
+5;11;51010402 | Beban Uang Harian Paket Meeting
+6;16;51040103 | Beban Perjalanan Dinas Non Pegawai-DN
+7;8;51010401 | Beban Uang Sidang 
+8;16;51040104 | Beban Perjalanan Dinas Non Pegawai-LN
+9;1;51020101 | Beban Honorarium Non Pegawai
+10;8;51030213 | Beban Pelatihan dan Sertifikasi
+11;9;51010301 | Beban Bantuan Beasiswa
+12;1;51010101 | Beban Gaji Pokok
+13;7;51010116 | Beban Tunjangan Kesejahteraan Pegawai
+14;13;51120103 | Beban Pemeriksaan Kesehatan
+15;7;51010115 | Beban Tunjangan Asuransi 
+16;9;51120101 | Beban Uang duka wafat
+17;9;51120108 | Beban Penghargaan Purna Tugas
+18;7;51010113 | Beban Tunjangan - Komunikasi
+19;5;51030104 | Beban Barang Habis Pakai Kegiatan Lainnya
+20;9;51120105 | Beban Bantuan Beasiswa
+21;8;51030403 | Beban Program Kemahasiswaan
+22;9;51120106 | Beban Hadiah Penyelenggaraan Lomba
+23;16;51040101 | Beban Perjalanan Dinas Pegawai-DN
+24;2;51030304 | Beban Sewa Peralatan dan mesin
+25;2;51030302 | Beban Sewa Bangunan dan Ruangan
+26;2;51030303 | Beban Sewa Kendaraan dan Alat Angkutan
+27;6;51050101 | Beban Pemeliharaan Peralatan dan Mesin
+28;5;11060101 | Persediaan Barang Operasional Kantor
+29;12;51050102 | Beban Pemeliharaan Gedung dan Bangunan
+30;5;51030101 | Beban Barang Habis Pakai Kegiatan - ATK
+31;10;51030205 | Beban Iklan dan Promosi
+32;16;51040102 | Beban Perjalanan Dinas Pegawai-LN
+33;5;51030210 | Beban Penggandaan dan Percetakan
+34;11;51030201 | Beban Listrik
+35;11;51030202 | Beban Telepon
+36;11;51030203 | Beban Air 
+37;3;51030103 | Beban Bahan Bakar Minyak (BBM) 
+38;5;51030209 | Beban Pengiriman Barang dan Dokumen
+39;5;11060102 | Persediaan Obat-Obatan
+40;1;51010201 | Beban Remunerasi Pendidik
+41;1;51010202 | Beban Remunerasi Non Pendidik
+42;5;12030103 | Peralatan dan Mesin
+43;12;12030102 | Gedung dan Bangunan
+44;8;51120102 | Beban Peningkatan Softskill
+45;13;51030214 | Beban Jasa Kebersihan
+46;11;51030206 | Beban Langganan Domain dan Web Hosting
+47;11;51030207 | Beban Langganan Akses Jaringan Global (Bandwidth Internet)
+48;11;51030208 | Beban Langganan Software
+49;1;51010102 | Beban Pembulatan Gaji
+50;7;51010103 | Beban Tunjangan Suami/Istri
+51;7;51010104 | Beban Tunjangan Anak
+52;7;51010105 | Beban Tunjangan Jabatan Struktural
+53;7;51010106 | Beban Tunjangan Jabatan Fungsional
+54;7;51010107 | Beban Tunjangan PPh
+55;7;51010108 | Beban Tunjangan Beras
+56;7;51010109 | Beban Tunjangan Umum
+57;7;51010110 | Beban Tunjangan Profesi Dosen
+58;7;51010111 | Beban Tunjangan Kehormatan Professor
+59;7;51010114 | Beban Tunjangan - Transportasi
+60;1;511111 | Gaji Pokok
+61;1;511119 | Pembulatan Gaji
+62;7;511121 | Tunjangan Suami/Istri
+63;7;511122 | Tunjangan Anak
+64;7;511123 | Tunjangan Jabatan Struktural
+65;7;511124 | Tunjangan Jabatan Fungsional
+66;7;511125 | Tunjangan PPh
+67;7;511126 | Tunjangan Beras
+68;7;511151 | Tunjangan Umum
+69;7;511153 | Tunjangan Profesi Dosen
+70;7;511154 | Tunjangan Kehormatan Profesor
+71;4;511129 | Uang Makan
+72;5;51030105 | Beban Barang Habis Pakai Medis dan Protokol Kesehatan
+73;2;51030305 | Beban Sewa Properti Kegiatan
+74;8;51030401 | Beban Penugasan Penelitian
+75;8;51030402 | Beban Penugasan Pengabdian
+76;5;51030204 | Beban Langganan Media Cetak dan Digital
+77;5;12030105 | Aset Tetap Lainnya
+78;13;51030211 | Beban Jasa Konsultan
+79;13;51030215 | Beban Jasa Keamanan
+80;11;13010301 | Software
+81;11;13010302 | Lisensi dan Franchise
+82;15;13010303 | Hak Cipta
+83;15;13010304 | Paten
+84;14;51110109 | Beban Pajak Lainnya
+85;14;51110104 | Beban Pajak Penghasilan Pasal 4 (2)
+86;14;51110101 | Beban Pajak Penghasilan Badan
+87;14;51110102 | Beban Pajak Bumi dan Bangunan (PBB)
+88;14;51110103 | Beban Pajak Kendaraan Bermotor
+89;5;51120109 | Beban lainnya
+90;11;51020103 | Beban Uang Harian Paket Meeting
+91;5;11060103 | Persediaan Yang Akan Diserahkan Masyarakat

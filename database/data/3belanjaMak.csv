@@ -1,0 +1,326 @@
+id;id_kelompok;belanja
+1;1;Satuan Biaya Uang Makan Pegawai Tetap
+2;2;Satuan Biaya Lembur
+3;3;Konsumsi Rapat/Audit dan Reviu SPI/Persiapan Akreditasi (Non UNS Food)
+4;3;Kegiatan Wisuda atau Rapat Khusus Tingkat Universitas
+5;4;Satuan Biaya Rapat/Pertemuan di Luar Kantor (UNS INN)
+6;4;Satuan Biaya Rapat/Pertemuan Halfday di Luar Lingkungan UNS
+7;4;Satuan Biaya Rapat/Pertemuan Fullday di Luar Lingkungan UNS
+8;4;"- Satuan Biaya Rapat/Pertemuan Fullboard di Luar Lingkungan UNS
+
+- Golongan A	:	Rektor, Wakil Rektor, Pimpinan MWA, Pimpinan Senat Akademik Universitas, Pimpinan Dewan Profesor, Direktur, Dekan
+
+- Golongan B	:	Anggota MWA, Pimpinan Senat Akademik Fakultas, Ketua SPI, Kepala Kantor, Kepala Biro, Ketua Lembaga, Sekretaris Universitas, Wakil Dekan, atau yang setara
+
+- Golongan C	:	Selain Golongan A dan B 
+"
+9;5;Uang Harian Kegiatan Rapat/Pertemuan Fullboard di Luar Kota di Luar Kantor
+10;5;Uang Harian Kegiatan Rapat/Pertemuan Fullboard di Dalam Kota di Luar Kantor
+11;5;Uang Harian Kegiatan Rapat/Pertemuan Fullday/Halfday di Dalam Kota di Luar Kantor
+12;6;Satuan Biaya Transportasi Kegiatan Dalam Kota (PP)
+13;7;Uang Sidang MWA
+14;7;Uang Sidang Senat Akademik/Dewan Professor
+15;7;Uang Sidang Senat Akademik Fakultas/Sekolah
+16;8;Satuan Biaya Kegiatan Internasionalisasi
+17;9;Honorarium Pengajar  Diploma, Sarjana, Profesi
+18;9;Honorarium Pengajar  S-2/Sp1
+19;9;Honorarium Pengajar  S-3/Sp2
+20;9;Honorarium Pengajar Kelas Internasional
+21;9;Honorarium Kegiatan Skripsi/ Tugas Akhir dari Luar UNS
+22;9;Honorarium Kegiatan Magister/Tesis dari Luar UNS
+23;9;Honorarium Kegiatan Doktoral/Disertasi dari Luar UNS
+24;9;Honorarium Kegiatan Program Lompatan Kreatif UNS
+25;9;Honorarium Tenaga Kependidikan Kontrak Profesional Bidang Sistem Informasi Kelompok Senior
+26;9;Honorarium Tenaga Kependidikan Kontrak Profesional Bidang Sistem Informasi Kelompok Junior
+27;9;Honorarium Tenaga Kependidikan Kontrak Profesional Bidang Lainnya (pengalaman di bidangnya dibawah 20 tahun)
+28;9;Honorarium Tenaga Kependidikan Kontrak Profesional Bidang Lainnya (pengalaman di bidangnya minimal 20 tahun)
+29;9;Honorarium Tenaga Magang Mahasiswa (Diploma/S1/S2/S3)
+30;9;Honorarium Narasumber Seminar/Workshop/Sarasehan/Diseminasi/Rakor/Sosialisasi/FGD/Kegiatan Dosen Tamu/Kegiatan Pelatihan/Kegiatan Sejenis Tingkat Lokal/Nasional
+31;9;Seminar/Workshop/Sarasehan/Diseminasi/Rakor/Sosialisasi/ FGD/Kegiatan Dosen Tamu/ Kegiatan Pelatihan/Kegiatan Sejenis Tingkat Internasional
+32;9;Honorarium Panitia
+33;9;Honorarium Tim Pelaksana Kegiatan
+34;9;Honorarium Tim Penyusun Jurnal
+35;9;Honorarium Tim Penyusun Buletin/Majalah
+36;9;Honorarium Tim Pengelola Website
+37;9;Honorarium Rohaniawan
+38;9;Honorarium Instruktur Senam
+39;9;Honorarium Wasit/Juri
+40;9;Honorarium Reviewer Karya Ilmiah
+41;9;Honorarium Penunjang Penelitian/Pengabdian Kepada Masyarakat
+42;9;Honorarium Komite Penilaian Dan/Atau Reviewer Proposal/ Keluaran Penelitian
+43;9;Biaya Proofreader dan Digital Object Identifier (DOI) Number
+44;9;Satuan Biaya Penulisan Buku dan Pembuatan Materi Kuliah
+45;10;Satuan Biaya Kepesertaan Kegiatan
+46;11;Satuan Beasiswa Tugas Belajar Dosen dan Tenaga Kependidikan 
+47;12;Satuan Biaya Kesejahteraan
+48;14;Biaya Kesehatan
+49;18;Biaya Paket Data dan Komunikasi
+50;20;Besaran Penghargaan Beasiswa Prestasi Tingkat Internasional
+51;20;Besaran Penghargaan Beasiswa Prestasi Tingkat Nasional
+52;20;Besaran Penghargaan Beasiswa Prestasi Tingkat Provinsi/ Universitas
+53;21;Dana Program Kewirausahaan
+54;21;Satuan Biaya Santunan Pelayanan Kesehatan Bagi Mahasiswa
+55;19;Satuan Biaya Kegiatan Bidang Kemahasiswaan
+56;21;Satuan Biaya Kegiatan Mahasiswa Inbound/Outbound Exchange
+57;24;Satuan Biaya Sewa Mesin Fotocopy
+58;25;Satuan Biaya Sewa Gedung Pertemuan 
+59;26;Satuan Biaya Sewa Kendaraan Pelaksanaan Kegiatan Insidentil: Roda 4
+60;26;Satuan Biaya Sewa Kendaraan Pelaksanaan Kegiatan Insidentil: Roda 6/Bus Sedang
+61;26;Satuan Biaya Sewa Kendaraan Pelaksanaan Kegiatan Insidentil: Roda 6/Bus Besar
+62;27;Satuan Biaya Pemeliharaan Sarana Kantor
+63;27;Satuan Biaya Pemeliharaan Genset
+64;28;BHP Persediaan
+65;29;Biaya Pemeliharaan Gedung/Bangunan
+66;27;Biaya Pemeliharaan Dan Operasional Kendaraan Dinas
+67;19;Satuan Biaya Seragam Dinas/Kegiatan
+68;30;Satuan Biaya Media Promosi
+69;23;Satuan Biaya Transportasi Darat Dari Kota Surakarta ke Kota/Kabupaten Dalam Propinsi Jawa Tengah (Satu Kali Perjalanan)
+70;23;Satuan Uang Harian Perjalanan Dinas Dalam Negeri: Luar Kota
+71;23;Satuan Uang Harian Perjalanan Dinas Dalam Negeri: Lebih dari 8 Jam
+72;23;Satuan Uang Harian Perjalanan Dinas Dalam Negeri: Diklat
+73;23;Satuan Uang Representasi
+74;23;Satuan Biaya Penginapan Perjadin-Pegawai-DN: Golongan A
+75;6;Satuan Biaya Penginapan Non Pegawai: Eselon 3/Golongan 4
+76;6;Satuan Biaya Penginapan Non Pegawai: Pejabat Negara/Eselon 2
+77;23;Satuan Biaya Penginapan Perjadin-Pegawai-DN: Golongan B
+78;23;Satuan Biaya Penginapan Perjadin-Pegawai-DN: Golongan C
+79;6;Satuan Biaya Penginapan Non Pegawai: Pejabat Negara/Eselon 1
+80;23;Satuan Biaya Penginapan Perjadin-Pegawai-DN: Golongan D
+81;23;Satuan Biaya Tiket Pesawat Perjadin-Pegawai-DN-PP: Bisnis
+82;6;Satuan Biaya Tiket Pesawat Perjadin-Non Pegawai-DN-PP: Bisnis
+83;23;Satuan Biaya Tiket Pesawat Perjadin-Pegawai-DN-PP: Ekonomi
+84;23;Satuan Biaya Taksi Perjalanan Dinas Dalam Negeri
+85;32;Satuan Uang Harian Perjalanan Dinas Luar Negeri : Golongan A
+86;32;Satuan Uang Harian Perjalanan Dinas Luar Negeri : Golongan B
+87;32;Satuan Uang Harian Perjalanan Dinas Luar Negeri : Golongan C
+88;32;Satuan Uang Harian Perjalanan Dinas Luar Negeri : Golongan D
+89;32;Satuan Biaya Tiket Pesawat Perjadin-Pegawai-LN-PP: Eksekutif
+90;32;Satuan Biaya Tiket Pesawat Perjadin-Pegawai-LN-PP: Bisnis
+91;32;Satuan Biaya Tiket Pesawat Perjadin-Pegawai-LN-PP: Ekonomi
+92;6;Satuan Biaya Tiket Pesawat Perjadin-Non Pegawai-LN-PP: Eksekutif
+93;33;Biaya Penggandaan dan Percetakan
+94;34;Biaya Telepon, Air, Listrik (TAL)
+95;37;Bahan Bakar Mesin
+96;30;Bahan Habis Pakai - ATK Kegiatan
+97;38;Biaya Pengiriman
+98;39;BHP Medis (Rumah Sakit)
+99;40;Remunerasi
+100;42;Peralatan Komputer Jaringan
+101;42;Peralatan Jaringan (Komputer)
+102;42;Peralatan Mainframe (Komputer)
+103;42;Peralatan Personal Komputer
+104;42;Personal Komputer
+105;42;Peralatan Kantor
+106;42;Peralatan Kedokteran Umum
+107;42;Peralatan Komunikasi
+108;42;Peralatan Rumah Tangga
+109;42;Kendaraan Dinas Bermotor Perorangan (Roda 4)
+110;42;Kendaraan Bermotor Penumpang (Roda 4 dan Roda 6)
+111;42;Kendaraan Bermotor Angkutan Barang
+112;42;Kendaraan Bermotor Beroda Dua
+113;43;Gedung dan Bangunan (Kapitalisasi)
+114;44;Satuan Biaya Pelatihan Softskill
+115;45;Biaya Jasa Kebersihan
+116;46;Biaya Langganan
+117;31;Biaya Iklan dan Promosi
+118;6;Satuan Biaya Tiket Pesawat Perjadin-Non Pegawai-DN-PP: Ekonomi
+119;6;Satuan Biaya Tiket Pesawat Perjadin-Non Pegawai-LN-PP: Bisnis
+120;6;Satuan Biaya Tiket Pesawat Perjadin-Non Pegawai-LN-PP: Ekonomi
+121;6;Satuan Biaya Penginapan Non Pegawai: Eselon 4/Golongan 3,2,1
+122;12;Gaji Selain PNS
+123;60;Gaji PNS
+124;72;Bahan Habis Pakai (Protokol Kesehatan)
+125;25;Biaya Sewa Properti Kegiatan Lainnya (selain SBM)
+126;74;Hibah Penelian dan Pengabdian Masyarakat (P2M)
+127;28;Bahan Praktikum
+128;42;Pengadaan Peralatan Laboratorium
+129;43;Tambah Daya
+130;77;Pengadaan Aset Lainnya
+131;32;Biaya pengurusan visa
+132;78;Jasa Tenaga Ahli
+133;14;Satuan Biaya Pemeriksaan
+134;10;Biaya Registrasi (Pendaftaran, Perijinan)
+135;28;Semen
+136;28;Kaca
+137;28;Pasir
+138;28;Batu
+139;28;Cat
+140;28;Baja
+141;28;Besi Beton
+142;28;Tegel
+143;28;Genteng
+144;28;Plat
+145;28;Minyak Cat/Thinner
+146;28;Bahan Bangunan Dan Konstruksi Lainnya
+147;28;Bahan Kimia Lainnya
+148;28;Bahan Kimia Nuklir
+149;28;Bahan Kimia Gas
+150;28;Bahan Kimia Cair
+151;28;Bahan Kimia Padat
+152;28;Bahan Peledak Lainnya
+153;28;Minyak Pelumas
+154;28;Minyak Hydrolis
+155;28;Bahan Bakar Gas
+156;28;Bahan Bakar Dan Pelumas Lainnya
+157;28;Kawat
+158;28;Kayu
+159;28;Logam/Metalorgi
+160;28;Latex
+161;28;Biji Plastik
+162;28;Karet (Bahan Baku)
+163;28;Bahan Baku Lainnya
+164;28;Barang Dalam Proses
+165;28;Barang Dalam Proses Lainnya
+166;28;Bahan Lainnya
+167;28;Suku Cadang Alat Angkutan Darat Bermotor
+168;28;Suku Cadang Alat Angkutan Lainnya
+169;28;Suku Cadang Alat Kedokteran Umum
+170;28;Suku Cadang Alat Kedokteran Gigi
+171;28;Suku Cadang Alat Kedokteran Kebidanan Dan Penyakit Kandungan
+172;28;Suku Cadang Alat Kedokteran Mata
+173;28;Suku Cadang Alat Kedokteran Lainnya
+174;28;Suku Cadang Alat Laboratorium Hidro Kimia
+175;28;Suku Cadang Alat Laboratorium Bahan Bangunan Konstruksi
+176;28;Suku Cadang Alat Laboratorium Aspal, Cat Dan Kimia
+177;28;Suku Cadang Alat Laboratorium Mekanika Tanah Dan Batuan
+178;28;Suku Cadang Alat Laboratorium Logam, Mesin Dan Listrik
+179;28;Suku Cadang Alat Laboratorium Umum
+180;28;Suku Cadang Alat Laboratorium Microbiologi
+181;28;Suku Cadang Alat Laboratorium Kimia
+182;28;Suku Cadang Alat Laboratorium Patologi
+183;28;Suku Cadang Alat Laboratorium Radio Isotop
+184;28;Suku Cadang Alat Laboratorium Makanan
+185;28;Suku Cadang Alat Laboratorium Farmasi
+186;28;Suku Cadang Alat Laboratorium Fisika
+187;28;Suku Cadang Alat Laboratorium Pertanian (Suku Cadang Alat Laborat
+188;28;Suku Cadang Alat Laboratorium Kualitas Air
+189;28;Suku Cadang Alat Laboratorium Elektronika Dan Daya
+190;28;Suku Cadang Alat Laboratorium Biologi
+191;28;Suku Cadang Alat Laboratorium Lainnya
+192;28;Suku Cadang Alat Studio
+193;28;Suku Cadang Alat Studio Dan Komunikasi Lainnya
+194;28;Suku Cadang Alat Pemeliharaan Tanaman/Ikan/Ternak
+195;28;Suku Cadang Alat Produksi
+196;28;Suku Cadang Alat Pertanian Lainnya
+197;28;Suku Cadang Alat Bengkel Bermesin
+198;28;Suku Cadang Alat Bengkel Tidak Bermesin
+199;28;Suku Cadang Alat Bengkel Lainnya
+200;28;Suku Cadang Pendukung
+201;28;Suku Cadang Lainnya
+202;28;Alat Tulis
+203;28;Tinta Tulis, Tinta Stempel
+204;28;Penjepit Kertas
+205;28;Penghapus / Korektor
+206;28;Buku Tulis
+207;28;Ordner dan Map
+208;28;Penggaris
+209;28;Cutter (Alat Tulis Kantor)
+210;28;Pita Mesin Ketik
+211;28;Alat Perekat
+212;28;Staples
+213;28;Isi Staples
+214;28;Barang Cetakan
+215;28;Seminar Kit
+216;28;Alat Tulis Kantor Lainnya
+217;28;Kertas HVS
+218;28;Berbagai Kertas
+219;28;Kertas Cover
+220;28;Amplop
+221;28;Kop Surat
+222;28;Kertas dan Cover Lainnya
+223;28;Transparent Sheet
+224;28;Tinta Cetak
+225;28;Plat Cetak
+226;28;Stensil Sheet
+227;28;Chenical/Bahan Kimia Cetak
+228;28;Film Cetak
+229;28;Bahan Cetak Lainnya
+230;28;Continuous Form
+231;28;Pita Printer
+232;28;Tinta/Toner Printer
+233;28;Disket
+234;28;USB / Flashdisk
+235;28;Kartu Memori
+236;28;CD/DVD Drive
+237;28;Memori Internal
+238;28;Mouse
+239;28;CD / DVD
+240;28;Bahan Komputer Lainnya
+241;28;Sapu dan Sikat
+242;28;Alat - Alat Pel dan Lap
+243;28;Ember, Slang, Dan Tempat Air Lainnya
+244;28;Keset Dan Tempat Sampah
+245;28;Kunci, Kran Dan Semprotan
+246;28;Alat Pengikat
+247;28;Peralatan Ledeng
+248;28;Bahan Kimia Untuk Pembersih
+249;28;Alat Untuk Makan Dan Minum
+250;28;Pengharum Ruangan
+251;28;Kuas
+252;28;Perabot Kantor Lainnya
+253;28;Kabel Listrik
+254;28;Lampu Listrik
+255;28;Stop Kontak
+256;28;Saklar
+257;28;Stacker
+258;28;Balast
+259;28;Strater
+260;28;Vitting
+261;28;Accu
+262;28;Batu Baterai
+263;28;Alat Listrik Lainnya
+264;28;Bahan Baku Pakaian
+265;28;Penutup Kepala
+266;28;Penutup Badan
+267;28;Penutup Tangan
+268;28;Penutup Kaki
+269;28;Atribut
+270;28;Perlengkapan Lapangan
+271;28;Perlengkapan Dinas Lainnya
+272;28;Meterai
+273;28;Stempel
+274;28;Perlengkapan Penunjang Kegiatan Kantor Lainnya
+275;28;Persediaan Berupa Alat  Penunjang Kedokteran
+276;28;Persediaan Berupa Alat  Penunjang Laboratorium
+277;28;Alat Penunjang Kegiatan  Kantor Lainnya
+278;28;Persediaan Berupa Bahan Penunjang Kedokteran
+279;28;Persediaan Berupa Bahan Penunjang Laboratorium
+280;28;Bahan Penunjang Kegiatan  Kantor Lainnya
+281;28;Minyak Pelumas (Barang Konsumsi)
+282;28;Alat/bahan Untuk Kegiatan Kantor Lainnya
+283;28;Pita Cukai, Materai, Leges
+284;28;Persediaan Untuk Tujuan Strategis/Berjaga-jaga Lainnya
+285;28;Makanan/Sembako
+286;28;Minuman
+287;28;Natura dan Pakan Lainnya
+288;28;Hewan/Ternak
+289;28;Biota Laut/Ikan
+290;28;Tanaman
+291;28;Persediaan Penelitian Biologi Lainnya
+292;28;Peternakan
+293;28;Perkebunan dan Kehutanan
+294;28;Hewan dan Tanaman
+295;28;Peralatan dan Mesin
+296;28;Komponen Lainnya
+297;28;Pipa Baja Lainnya
+298;28;Pipa Plastik PVC
+299;28;Rambu-rambu Lainnya
+300;80;Aset Tidak Berwujud
+301;84;Biaya Pajak
+302;89;Biaya Lainnya
+303;3;BHP Konsumsi Kerumahtanggaan
+304;19;BHP Pemeliharaan Kerumahtanggaan
+305;6;Satuan Uang Harian Dalam Negeri - Non Pegawai: Luar Kota
+306;8;Satuan Uang Harian - Non Pegawai : Golongan D
+307;30;Media Promosi untuk tamu pejabat tingkat menteri/eselon I/pejabat yang setara dan asesor narasumber/ pakar/praktisi/professional
+308;7;Satuan Biaya Uang Saku Rapat 
+309;19;Satuan Biaya Pendukung Acara Kegiatan
+310;22;Satuan Biaya Hadiah untuk Kegiatan Dies Natalis
+311;3;Satuan Biaya Penyediaan Logistik Covid-19
+312;3;Konsumsi Rapat/Audit dan Reviu SPI/Persiapan Akreditasi (UNS Food)
+313;9;Insentif (Non UNS)
+314;91;Persediaan Yang Akan Diserahkan Masyarakat
+315;3;Satuan Biaya Suplemen Kesehatan
+316;9;Honorarium Pengajar oleh Instruktur Industri dan Asisten Dosen
+317;9;Insentif Profesor Kehormatan UNS
+318;9;Honorarium Praktik Pengalaman Lapangan (PPL)/Magang Pendidikan
