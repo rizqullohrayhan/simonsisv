@@ -21,17 +21,13 @@
                                         <?php for ($st = 0; $st < count($status); $st++) {
                                             if ($status[$st]->id == $trx_status_tor[$q3]->id_status) {
                                                 $wstatus = $status[$st]->nama_status;
-                                                if ($wstatus == 'Proses Pengajuan') {
+                                                if ($wstatus == 'Belum Dinilai') {
                                                     $warnaLingkar = 'timeline-dots';
-                                                } elseif ($wstatus == 'Verifikasi') {
+                                                } elseif ($wstatus == 'Sudah Dinilai') {
                                                     $warnaLingkar = 'timeline-dots border-warning';
-                                                } elseif ($wstatus == 'Review') {
-                                                    $warnaLingkar = 'timeline-dots  border-info';
                                                 } elseif ($wstatus == 'Revisi') {
                                                     $warnaLingkar = 'timeline-dots  border-danger';
-                                                } elseif ($wstatus == 'Validasi') {
-                                                    $warnaLingkar = 'timeline-dots  border-success';
-                                                } elseif ($wstatus == 'Pengajuan Perbaikan') {
+                                                } elseif ($wstatus == 'Sudah Revisi') {
                                                     $warnaLingkar = 'timeline-dots';
                                                 }
                                             }

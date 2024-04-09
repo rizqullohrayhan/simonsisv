@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Tahun;
 use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
@@ -31,5 +32,13 @@ class AppServiceProvider extends ServiceProvider
         config(['app.locale' => 'id']);
         Carbon::setLocale('id');
         date_default_timezone_set('Asia/Jakarta');
+        $this->cekTahun();
+    }
+
+    private function cekTahun(){
+        $tahun = Tahun::where('tahun', date('Y'))->first();
+        if (!$tahun) {
+            Tahun::create(['tahun' => date('Y')]);
+        }
     }
 }

@@ -16,11 +16,7 @@ class StatusKegAngSeeder extends Seeder
     {
         DB::table('status')->insert([
             [
-                'nama_status' => 'Proses Pengajuan',
-                'kategori' => 'TOR'
-            ],
-            [
-                'nama_status' => 'Verifikasi', //DIVERIFIKASI BPU
+                'nama_status' => 'Belum Dinilai',
                 'kategori' => 'TOR'
             ],
             [
@@ -28,21 +24,13 @@ class StatusKegAngSeeder extends Seeder
                 'kategori' => 'TOR'
             ],
             [
-                'nama_status' => 'Validasi', //DIVALIDASI WD 2
+                'nama_status' => 'Sudah Revisi',
                 'kategori' => 'TOR'
             ],
             [
-                'nama_status' => 'Pengajuan Perbaikan',
+                'nama_status' => 'Sudah Dinilai',
                 'kategori' => 'TOR'
             ],
-            [
-                'nama_status' => 'Verifikasi Kaprodi',
-                'kategori' => 'TOR'
-            ],
-            // [
-            //     'nama_status' => 'Review',
-            //     'kategori' => 'TOR'
-            // ],
         ]);
     }
 }

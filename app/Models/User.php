@@ -93,4 +93,13 @@ class User extends Authenticatable
         // $this->relationsType("Model","Foreign_key","Local_key");
         return $this->belongsTo('Spatie\Permission\Models\Role', 'role', 'id');
     }
+    /**
+     * Get all of the trxStatusTor for the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function trxStatusTor()
+    {
+        return $this->hasMany(TrxStatusTor::class, 'create_by', 'id');
+    }
 }

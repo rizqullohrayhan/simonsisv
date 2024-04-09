@@ -15,9 +15,10 @@
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="{{ asset('findash/assets/js/jquery.min.js') }}"></script>
+{{-- <script src="{{ asset('findash/assets/js/jquery.min.js') }}"></script> --}}
 <script src="{{ asset('findash/assets/js/popper.min.js') }}"></script>
 <script src="{{ asset('findash/assets/js/bootstrap.min.js') }}"></script>
+{{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script> --}}
 <!-- Appear JavaScript -->
 <script src="{{ asset('findash/assets/js/jquery.appear.js') }}"></script>
 <!-- Countdown JavaScript -->
@@ -68,47 +69,7 @@
 <!-- Custom JavaScript -->
 <script src="{{ asset('findash/assets/js/custom.js') }}"></script>
 
-<!-- H I D E  I N S P E C T  A R E A -->
-<!-- <script>
-    $(document).bind("contextmenu", function(e) {
-        e.preventDefault();
-    });
-    document.onkeydown = function(e) {
-        if (event.keyCode == 123) {
-            return false;
-        }
-        if (e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) {
-            return false;
-        }
-        if (e.ctrlKey && e.keyCode == 'E'.charCodeAt(0)) {
-            return false;
-        }
-        if (e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) {
-            return false;
-        }
-        if (e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) {
-            return false;
-        }
-        if (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) {
-            return false;
-        }
-        if (e.ctrlKey && e.keyCode == 'S'.charCodeAt(0)) {
-            return false;
-        }
-        if (e.ctrlKey && e.keyCode == 'H'.charCodeAt(0)) {
-            return false;
-        }
-        if (e.ctrlKey && e.keyCode == 'A'.charCodeAt(0)) {
-            return false;
-        }
-        if (e.ctrlKey && e.keyCode == 'F'.charCodeAt(0)) {
-            return false;
-        }
-        if (e.ctrlKey && e.keyCode == 'E'.charCodeAt(0)) {
-            return false;
-        }
-    }
-</script> -->
+@stack('js')
 </body>
 
 </html>

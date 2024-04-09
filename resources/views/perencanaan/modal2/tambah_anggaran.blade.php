@@ -1,4 +1,4 @@
-<div class="modal fade" role="dialog" id="tambah_anggaran<?= $rab[$r]->id ?>" style="overflow:hidden;">
+<div class="modal fade" role="dialog" id="tambah_anggaran<?= $rab->id ?>" style="overflow:hidden;">
 
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl" role="document">
         <div class="modal-content">
@@ -17,7 +17,7 @@
                     <div class="form-group">
                         <label>RAB {{"Rp. ".number_format($totalAnggaranRab,2,',',',')}}</label>
                         <select name="id_rab" id="id_rab" class="form-control">
-                            <option value="{{$rab[$r]->id}}">{{$rab[$r]->masukan}}</option>
+                            <option value="{{$rab->id}}">{{$rab->masukan}}</option>
                         </select>
                     </div>
                     <div class="form-group">

@@ -70,8 +70,18 @@ class Tor extends Model
         return $this->belongsTo('App\Models\Triwulan', 'id_tw', 'id');
     }
 
+    public function rab()
+    {
+        return $this->hasOne(Rab::class, 'id_tor', 'id');
+    }
+
     public function pic()
     {
         return $this->belongsTo(PIC::class, 'nama_pic', 'id');
+    }
+
+    public function unit()
+    {
+        return $this->belongsTo(Unit::class, 'id_unit', 'id');
     }
 }

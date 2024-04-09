@@ -164,11 +164,6 @@ use Illuminate\Support\Facades\Auth;
                                                 }
                                             }
                                             ?>
-                                            <?php
-                                            // echo $hitungNotif;
-                                            if ($hitungNotif > 3) { ?>
-                                            <?php }
-                                            ?>
                                         </div>
                                     </div>
                                 </div>

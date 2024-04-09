@@ -38,8 +38,17 @@
                                                             <input name="name" id="name" type="text" class="form-control">
                                                         </div>
                                                         <div class="form-group">
+                                                            <label>Email PIC</label>
+                                                            <input name="email" id="email" type="email" class="form-control">
+                                                        </div>
+                                                        <div class="form-group">
                                                             <label>NIP</label>
                                                             <input name="nip" id="nip" type="text" class="form-control">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>Nomor WhatsApp</label>
+                                                            <input name="telepon" id="telepon" type="text" class="form-control">
+                                                            <small>contoh: 08123456789</small>
                                                         </div>
                                                         <button class="btn btn-primary mr-1" type="submit">Submit</button>
                                                     </form>
@@ -55,8 +64,9 @@
                                                 <tr>
                                                     <th width="5%">No.</th>
                                                     <th>Nama</th>
+                                                    <th>Email</th>
                                                     <th>NIP</th>
-                                                    {{-- <th>Email</th> --}}
+                                                    <th>No Whatsapp</th>
                                                     <th width="10%">Aksi</th>
                                                 </tr>
                                             </thead>
@@ -93,8 +103,17 @@
                             <input name="name" id="name-pic" type="text" class="form-control">
                         </div>
                         <div class="form-group">
+                            <label>Email PIC</label>
+                            <input name="email" id="email-pic" type="email" class="form-control">
+                        </div>
+                        <div class="form-group">
                             <label>NIP</label>
-                            <input name="nip" type="text" id="nip-pic" class="form-control">
+                            <input name="nip" id="nip-pic" type="text" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label>Nomor WhatsApp</label>
+                            <input name="telepon" id="telepon-pic" type="text" class="form-control">
+                            <small>contoh: 08123456789</small>
                         </div>
                         <button class="btn btn-primary mr-1" type="submit">Submit</button>
                     </form>
@@ -119,8 +138,9 @@
             columns: [
                 { data: "DT_RowIndex" },
                 { data: "name" },
+                { data: "email" },
                 { data: "nip" },
-                // { data: "email" },
+                { data: "telepon" },
                 { data: "action" },
             ],
             columnDefs: [
@@ -146,6 +166,8 @@
                     $('#form-edit').attr('action', action);
                     $('#name-pic').val(res.name);
                     $('#nip-pic').val(res.nip);
+                    $('#email-pic').val(res.email);
+                    $('#telepon-pic').val(res.telepon);
                     $('#editpic').modal('show');
                 },
             });

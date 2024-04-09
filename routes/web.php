@@ -42,6 +42,7 @@ use App\Http\Controllers\MonitoringUsulanController;
 use App\Http\Controllers\MonitoringIKUController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\KaprodiController;
 use App\Http\Controllers\PICController;
 
 /*
@@ -156,6 +157,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/getdetailHargaMak/{id}', [AnggaranController::class, 'getDetailHargaMak']);
 
     Route::get('/validasi', [ValidasiController::class, 'index']);
+    Route::get('/validasi/data', [ValidasiController::class, 'listTor'])->name('validasi.data');
+    Route::get('/validasi/detailStatus/{id}', [ValidasiController::class, 'detailStatus'])->name('validasi.detail.status');
     Route::get('/validasi/ajuan/{prodi}', [ValidasiController::class, 'ajuan']);
     Route::get('/validasi/filter', [ValidasiController::class, 'filter_tahun']);
     Route::post('/validasi/pengajuanProdi', [ValidasiController::class, 'pengajuanProdi']);
@@ -253,7 +256,14 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/pic/edit/{id}', [PICController::class, 'edit'])->name('pic.edit');
     Route::post('/pic/update/{id}', [PICController::class, 'update'])->name('pic.update');
     Route::delete('/pic/delete/{id}', [PICController::class, 'delete'])->name('pic.delete');
-
+    
+    Route::get('/kaprodi', [KaprodiController::class, 'index'])->name('kaprodi');
+    Route::get('/kaprodi/list', [KaprodiController::class, 'list'])->name('kaprodi.list');
+    Route::post('/kaprodi/store', [KaprodiController::class, 'store'])->name('kaprodi.store');
+    Route::get('/kaprodi/edit/{id}', [KaprodiController::class, 'edit'])->name('kaprodi.edit');
+    Route::post('/kaprodi/update/{id}', [KaprodiController::class, 'update'])->name('kaprodi.update');
+    Route::delete('/kaprodi/delete/{id}', [KaprodiController::class, 'delete'])->name('kaprodi.delete');
+    
     Route::get('/mak', [MakController::class, 'index']);
     Route::post('/mak/create', [MakController::class, 'processAdd']);
     Route::post('/mak/update/{id}', [MakController::class, 'processUpdate']);

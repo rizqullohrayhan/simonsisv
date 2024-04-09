@@ -1,16 +1,16 @@
 <!-- <h1>{{$pengajuan}}</h1> -->
 <?php if ($pengajuan == 0 || $dalamRevisi == 1) { ?>
     @can('anggaran_update')
-    <button style="border:none;" class="iq-bg-primary rounded" style="padding: 1%;" data-toggle="modal" data-placement="top" title="Update Anggaran" data-original-title="Update Anggaran" href="" data-target="#update_anggaran<?= $anggaran[$i]->id ?>">
+    <button style="border:none;" class="iq-bg-primary rounded" style="padding: 1%;" data-toggle="modal" data-placement="top" title="Update Anggaran" data-original-title="Update Anggaran" href="" data-target="#update_anggaran<?= $item->id ?>">
         <i class="ri-pencil-line"> </i>
     </button>
     @endcan
     @can('anggaran_delete')
-    <form class="form-horizontal" method="get" action="{{ url('/anggaran/delete/'.base64_encode($anggaran[$i]->id)) }}">
+    <form class="form-horizontal" method="get" action="{{ url('/anggaran/delete/'.base64_encode($item->id)) }}">
         @csrf
-        <input type="hidden" name="totalAnggaranTor" value="{{$tor[$t]->jumlah_anggaran}}">
-        <input type="hidden" name="anggaranDiHapus" value="{{$anggaran[$i]->anggaran}}">
-        <input type="hidden" name="id_tor" value="{{$tor[$t]->id}}">
+        <input type="hidden" name="totalAnggaranTor" value="{{$tor->jumlah_anggaran}}">
+        <input type="hidden" name="anggaranDiHapus" value="{{$item->anggaran}}">
+        <input type="hidden" name="id_tor" value="{{$tor->id}}">
         <button style="border:none;" class="ang-confirm iq-bg-danger rounded" type="submit" style="padding: 1%;margin:2%" data-toggle="tooltip" title="Delete" onclick="return confirm('Are you sure you want to delete this item?');">
             <i class="ri-delete-bin-line"></i>
         </button>

@@ -32,6 +32,8 @@ class CreateTorTable extends Migration
             $table->date('tgl_mulai_pelaksanaan');
             $table->date('tgl_akhir_pelaksanaan');
             $table->integer('jumlah_anggaran');
+            $table->unsignedBigInteger("validator")->nullable();
+            $table->foreign('validator')->references('id')->on('roles');
             $table->integer('create_by')->nullable();
             $table->integer('update_by')->nullable();
             $table->timestamps();

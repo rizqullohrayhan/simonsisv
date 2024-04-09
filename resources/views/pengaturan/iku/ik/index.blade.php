@@ -123,26 +123,24 @@ use Illuminate\Support\Facades\Auth;
 
                                 <div class="iq-card-body">
                                     @can('ik_create')
-                                    <button class="btn btn-primary" data-toggle="modal" title="Tambah IK" data-original-title="Tambah IK" data-target="#tambahik">
-                                        <i class="fa fa-plus me-1"></i> Tambah Data
-                                    </button>
-                                    <button class="btn btn-primary" data-toggle="modal" title="Tambah IK" data-original-title="Tambah IK" data-target="#importiku">
-                                        <i class="fa fa-plus me-1"></i> Import Data
-                                    </button>
+                                        <button class="btn btn-primary" data-toggle="modal" title="Tambah IK" data-original-title="Tambah IK" data-target="#tambahik">
+                                            <i class="fa fa-plus me-1"></i> Tambah Data
+                                        </button>
+                                        <button class="btn btn-primary" data-toggle="modal" title="Tambah IK" data-original-title="Tambah IK" data-target="#importiku">
+                                            <i class="fa fa-plus me-1"></i> Import Data
+                                        </button>
                                     @endcan
                                     @if (session('success'))
-                                    <script>
-                                        Swal.fire({
-                                            icon: 'success',
-                                            title: "{{session('success')}}",
-                                            showConfirmButton: false,
-                                            timer: 1500
-                                        })
-                                    </script>
+                                        <script>
+                                            Swal.fire({
+                                                icon: 'success',
+                                                title: "{{session('success')}}",
+                                                showConfirmButton: false,
+                                                timer: 1500
+                                            })
+                                        </script>
                                     @endif
                                     <div class="table-responsive">
-                                        <div class="form-group row float-right mb-3 mr-2">
-                                        </div>
                                         <table id="myik" class="table mb-0 table table-striped table-bordered">
                                             <thead class="thead-light">
                                                 <tr>
@@ -154,13 +152,9 @@ use Illuminate\Support\Facades\Auth;
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <?php $num = 1; ?>
-                                                <?php foreach ($ik as $indexIK => $indikatorIK) { ?>
-                                                    <?php
-                                                    // $num =  $ik->firstItem() + $indexIK 
-                                                    ?>
+                                                @foreach ($ik as $indexIK => $indikatorIK)
                                                     <tr>
-                                                        <td><a href="#">{{$num}}</a></td>
+                                                        <td><a href="#">{{$indexIK + 1}}</a></td>
                                                         <td>{{ $indikatorIK->IKU }}</td>
                                                         <td>{{$indikatorIK->IK}}</td>
                                                         <td>{{$indikatorIK->deskripsi}}</td>
@@ -212,11 +206,10 @@ use Illuminate\Support\Facades\Auth;
                                                             </div>
                                                         </div>
                                                     </div>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
                                     </div>
-                                    <?php $num += 1; ?>
-                                <?php } ?>
-                                </tbody>
-                                </table>
                                 </div>
                             </div>
                         </div>

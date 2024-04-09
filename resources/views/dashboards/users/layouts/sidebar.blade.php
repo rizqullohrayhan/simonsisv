@@ -158,6 +158,14 @@
                                 </a>
                             </li>
                         @endcan
+                        @can('kaprodi_show')
+                            <li class="{{ Request::is('kaprodi') ? 'active' : '' }}">
+                                <a href="{{ url('/kaprodi') }}"><i class="las la-stream" data-toggle="tooltip"
+                                        data-placement="right" title="Kaprodi"></i>Kaprodi
+                                    
+                                </a>
+                            </li>
+                        @endcan
                         @can('spjkategori_show')
                             <li class="{{ Request::is('spj_kategori') ? 'active' : '' }}">
                                 <a href="{{ url('/spj_kategori') }}"><i class="las la-stream" data-toggle="tooltip"

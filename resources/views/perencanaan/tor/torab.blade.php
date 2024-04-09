@@ -127,8 +127,9 @@ use Illuminate\Support\Facades\Auth;
                 <div id="table" class="">
                   <span class="table-add float-left ml-3 mr-2">
                     @can('tor_create')
-                    <a href="http://127.0.0.1:8000/steppengajuantor"><button class="btn btn-sm btn-primary"><i class="las la-plus"></i><span class="pl-1">Tambah TOR</span>
-                      </button></a>
+                    <a href="{{url('/steppengajuantor')}}" class="btn btn-sm btn-primary">
+                      <i class="las la-plus"></i><span class="pl-1">Tambah TOR</span>
+                    </a>
                     @endcan
                   </span>
                   <span class="table-add float-right mb-3 mr-2">
@@ -145,17 +146,6 @@ use Illuminate\Support\Facades\Auth;
                               } ?>
                             </select>
                           </div>
-                          <?php if (Auth()->user()->role != 2) { ?>
-                            <!-- <div class="col mr-1">
-                              <select class="form-control filter sm-8" name="prodi" id="prodi">
-                                <option value="0">All</option>
-                                <?php
-                                for ($pr = 0; $pr < count($unit); $pr++) { ?>
-                                  <option value="{{$unit[$pr]->id}}" {{$filterprodi==$unit[$pr]->id ? 'selected':''}}>{{$unit[$pr]->nama_unit}}</option>
-                                <?php } ?>
-                              </select>
-                            </div> -->
-                          <?php } ?>
                           <input type="submit" class="btn btn-sm btn-primary" value="Filter">
                         </div>
                       </form>
@@ -211,256 +201,149 @@ use Illuminate\Support\Facades\Auth;
                         <th>Kegiatan</th>
                         <th colspan="2">Anggaran</th>
                       </tr>
-                      <tr>
                         <!-- awal perulangan tor -->
-                        <?php for ($t = 0; $t < count($tor); $t++) { ?>
-                      <tr>
-                        <th style="background-color: #cacfd1;" colspan="13">
-                          <h6 id="tornya" style="color: #000102b5;"><b>{{$tor[$t]->nama_kegiatan}}</b>
-                            <!-- AKSI TOR  -->
-                            @include('perencanaan/aksi/aksi_tor')
-
-                          </h6>
-                        </th>
-                      </tr>
-                      <!-- TAMBAH RAB -->
-                      @include('perencanaan/modal2/tambah_rab')
-                      <!-- button untuk prodi mengajukan tor -->
-                      @include('perencanaan/modal2/status')
-                      @include('perencanaan/modal2/ajukan')
-                      <!-- NAMA RAB JADI 1 BARIS  -->
-                      <?php
-                          // awal perulangan rab
-                          for ($r = 0; $r < count($rab); $r++) {
-                            if ($rab[$r]->id_tor == $tor[$t]->id) {
-
-                      ?>
+                        @foreach ($tor as $tItem)
+                          @php
+                              $tw = 0;
+                              foreach ($tw2 as $twItem) {
+                                  if ($tItem->id_tw == $twItem->id) {
+                                      $tw = substr($twItem->triwulan, 14, 1);
+                                      break;
+                                  }
+                              }
+                          @endphp
                           <tr>
-                            <?php
-                              for ($tr = 0; $tr < count($tw2); $tr++) {
-                                if ($tor[$t]->id_tw == $tw2[$tr]->id) {
-                                  $tw = $tw2[$tr]->triwulan;
-                                  $tw = substr($tw, 14, 1);
-                                }
-                              }
-                              if ($tw == 1) {
-                              } elseif ($tw == 2) {
-                                for ($a2 = 0; $a2 < 3; $a2++) { ?>
-                                <td align="center" bgcolor=" white"></td>
-                              <?php }
-                              } elseif ($tw == 3) {
-                                for ($a2 = 0; $a2 < 6; $a2++) { ?>
-                                <td align="center" bgcolor=" white"></td>
-                              <?php }
-                              } elseif ($tw == 4) {
-                                for ($a2 = 0; $a2 < 9; $a2++) { ?>
-                                <td align="center" bgcolor=" white"></td>
-                            <?php }
-                              } ?>
-                            <!-- NAMA KEGIATAN JADI 1 BARIS  -->
-                            <!-- AKSI -->
-                            <!-- for status -->
-                            <td style="background-color: #efefef;color:black" align="left" colspan="3">RAB : {{$rab[$r]->masukan}}
-                              <!-- AKSI KEGIATAN -->
-                              @include('perencanaan/aksi/aksi_rab')
-                            </td>
-
-                            <?php
-                              if ($tw == 1) {
-                                for ($e = 1; $e < 10; $e++) { ?>
-                                <td align="center" bgcolor=" white"></td>
-                            <?php }
-                              } ?>
-                            <?php
-                              if ($tw == 2) {
-                                for ($e = 1; $e < 7; $e++) { ?>
-                                <td align="center" bgcolor=" white"></td>
-                            <?php }
-                              } ?>
-                            <?php
-                              if ($tw == 3) {
-                                for ($e = 1; $e < 4; $e++) { ?>
-                                <td bgcolor="white"></td>
-                            <?php
-                                }
-                              }
-                            ?>
+                            @if ($tw == 2)
+                              @for ($i = 0; $i < 3; $i++)
+                                <th align="center" bgcolor=" white"></th>
+                              @endfor
+                            @elseif ($tw == 3)
+                              @for ($i = 0; $i < 6; $i++)
+                                <th align="center" bgcolor=" white"></th>
+                              @endfor
+                            @elseif ($tw == 4)
+                              @for ($i = 0; $i < 9; $i++)
+                                <th align="center" bgcolor=" white"></th>
+                              @endfor
+                            @endif
+                              <th style="background-color: #cacfd1;" colspan="3">
+                                  <h6 id="tornya" style="color: #000102b5;"><b>{{ $tItem->nama_kegiatan }}</b>
+                                      <!-- AKSI TOR  -->
+                                      @include('perencanaan/aksi/aksi_tor')
+                                  </h6>
+                              </th>
                           </tr>
+                          <!-- TAMBAH RAB -->
+                          @include('perencanaan/modal2/tambah_rab')
+                          <!-- button untuk prodi mengajukan tor -->
+                          @include('perencanaan/modal2/status')
+                          @include('perencanaan/modal2/ajukan')
 
-                          <tr bgcolor="white">
-                            <?php
-                              if ($tw == 2) {
-                                for ($e = 1; $e < 4; $e++) { ?>
-                                <td align="center" bgcolor=" white"></td>
-                            <?php }
-                              } ?>
+                          @foreach ($rab as $rabrev)
+                              @if ($rabrev->id_tor == $tItem->id)
+                                  <tr>
+                                      @if ($tw == 2)
+                                        @for ($i = 0; $i < 3; $i++)
+                                          <td align="center" bgcolor=" white"></td>
+                                        @endfor
+                                      @elseif ($tw == 3)
+                                        @for ($i = 0; $i < 6; $i++)
+                                          <td align="center" bgcolor=" white"></td>
+                                        @endfor
+                                      @elseif ($tw == 4)
+                                        @for ($i = 0; $i < 9; $i++)
+                                          <td align="center" bgcolor=" white"></td>
+                                        @endfor
+                                      @endif
+                                      <!-- NAMA KEGIATAN JADI 1 BARIS  -->
+                                      <!-- AKSI -->
+                                      <!-- for status -->
+                                      <td style="background-color: #efefef;color:black" align="left" colspan="3"> RAB : {{ $rabrev->masukan }}
+                                          <!-- AKSI KEGIATAN -->
+                                          @include('perencanaan/aksi/aksi_rab')
+                                      </td>
+                                      <!-- ANGGARAN -->
+                                    </tr>
+                                    <tr>
+                                      @if ($tw == 2)
+                                        @for ($i = 0; $i < 3; $i++)
+                                          <td align="center" bgcolor=" white"></td>
+                                        @endfor
+                                      @elseif ($tw == 3)
+                                        @for ($i = 0; $i < 6; $i++)
+                                          <td align="center" bgcolor=" white"></td>
+                                        @endfor
+                                      @elseif ($tw == 4)
+                                        @for ($i = 0; $i < 9; $i++)
+                                          <td align="center" bgcolor=" white"></td>
+                                        @endfor
+                                      @endif
+                                      <td colspan="3" style="background-color: #efefef;">
+                                          @php
+                                              $totanggaran1 = 0;
+                                          @endphp
+                                          @foreach ($anggaran as $anggaranItem)
+                                              @if ($anggaranItem->anggaran != 0 && $anggaranItem->id_rab == $rabrev->id)
+                                                  @php
+                                                      $totanggaran1 += $anggaranItem->anggaran;
+                                                  @endphp
+                                                  @foreach ($detail_mak as $detailMak)
+                                                      @if ($anggaranItem->id_detail_mak == $detailMak->id)
+                                                          <h6 align="left" style="font-size: smaller;">
+                                                              {{ $detailMak->detail . " - " ." Rp. " .  number_format($anggaranItem->anggaran, 2, ',', '.') }}
+                                                          </h6>
+                                                      @endif
+                                                  @endforeach
+                                              @endif
+                                          @endforeach
+                                          <!-- TAMBAH ANGGARAN DI RAB  {{" [".$tw."] "}}-->
+                                          <a href="#" class="badge iq-bg-primary">Total di RAB = <?= " Rp. " .  number_format($totanggaran1, 2, ',', '.'); ?></a>
+                                      </td>
+                                    </tr>
+                              @endif
+                          @endforeach
 
-                            <?php
-                              if ($tw == 3) {
-                                for ($e = 1; $e < 7; $e++) { ?>
-                                <td bgcolor="white"></td>
-                            <?php }
-                              } ?>
+                          <!-- MODAL DETAIL TOR -->
+                          @include('perencanaan/modal2/detail_tor')
+                          <!-- MODAL UPDATE TOR -->
+                          @include('perencanaan/modal2/update_tor')
+                        @endforeach
 
-                            <?php
-                              if ($tw == 4) {
-                                for ($e = 1; $e < 10; $e++) { ?>
-                                <td bgcolor="white"></td>
-                            <?php }
-                              } ?>
-
-
-                            <!-- ANGGARAN -->
-                            <td colspan="3" style="background-color: #efefef;">
-                              <?php
-                              $totaltw1 = 0;
-                              $totanggaran1 = 0;
-                              $nomer_anggaran = 1;
-                              $anggaranBerstatus = [];
-                              $no = 0;
-                              for ($i = 0; $i < count($anggaran); $i++) {
-                                if ($anggaran[$i]->anggaran != 0) {
-                                  if ($anggaran[$i]->id_rab == $rab[$r]->id) {
-                                    $totanggaran1 += $anggaran[$i]->anggaran;
-                                    for ($j = 0; $j < count($detail_mak); $j++) {
-                                      if ($anggaran[$i]->id_detail_mak == $detail_mak[$j]->id) {
-                              ?>
-                                        <h6 align="left" style="font-size: smaller;">
-                                          {{$detail_mak[$j]->detail . " - " ." Rp. " .  number_format($anggaran[$i]->anggaran, 2, ',', '.')}}
-                                          <!-- include('perencanaan/aksi/aksi_anggaran') -->
-                                          <!-- MODAL UPDATE DI ANGGARAN -->
-                                          </span>
-                                        </h6>
-                              <?php
+                        @php 
+                          $semuaanggaran = [0, 0, 0, 0];
+                          foreach ($totalpertw as $totaltw) {
+                            if (auth()->user()->id_unit != 1) {
+                              for ($an = 0; $an < 4; $an++) {
+                                if (substr($totaltw->triwulan, 14, 1) == $an + 1) {
+                                  if ($totaltw->id_unit_tor == auth()->user()->id_unit) {
+                                    if ($filtertahun != 0) {
+                                      if (substr($totaltw->tgl_mulai_pelaksanaan, 0, 4) == $filtertahun) {
+                                        $semuaanggaran[$an] += $totaltw->anggaran;
                                       }
-                                    }
-                                  }
-                                }
-                              } ?>
-                              <?php
-                              $pengajuan = 0;
-                              $detail = "Lengkapi Data";
-                              $name;
-                              for ($trx1 = 0; $trx1 < count($trx_status_tor); $trx1++) {
-                                if ($trx_status_tor[$trx1]->id_tor == $tor[$t]->id) {
-                                  for ($st1 = 0; $st1 < count($status); $st1++) {
-                                    if ($trx_status_tor[$trx1]->id_status == $status[$st1]->id) {
-                                      $name = $status[$st1]->nama_status;
-                                      if ($status[$st1]->nama_status == "Proses Pengajuan") {
-                                        $pengajuan = 1;
-                                        $detail = "Detail";
-                                      }
+                                    } else {
+                                      $semuaanggaran[$an] += $totaltw->anggaran;
                                     }
                                   }
                                 }
                               }
-                              ?>
-                              <!-- TAMBAH ANGGARAN DI RAB  {{" [".$tw."] "}}-->
-                              <a href="#" class="badge iq-bg-primary">Total di RAB = <?= " Rp. " .  number_format($totanggaran1, 2, ',', '.'); ?></a>
-
-                              <?php if ($pengajuan == 0) { ?>
-                                @can('anggaran_create')
-                                <!-- <a class="iq-bg-primary rounded" style="padding: 1%;" data-toggle="modal" data-placement="top" title="Tambah Anggaran" data-original-title="Tambah Anggaran" data-target="#tambah_anggaran<?= $rab[$r]->id ?>" href=""><i class="ri-user-add-line"></i></a> -->
-                                @endcan
-                              <?php } ?>
-                            </td>
-                            <!-- MODAL RAB -->
-                            @include('perencanaan/modal2/update_rab')
-                            <!-- TAMBAH ANGGARAN DI RAB -->
-                            <!-- include('perencanaan/modal2/tambah_anggaran') -->
-
-                            <?php
-                              if ($tw == 1) {
-                                for ($e = 1; $e < 9; $e++) { ?>
-                                <td align="center" bgcolor=" white"></td>
-                            <?php }
-                              } ?>
-                            <?php
-                              if ($tw == 2) {
-                                for ($e = 1; $e < 7; $e++) { ?>
-                                <td align="center" bgcolor=" white"></td>
-                            <?php }
-                              } ?>
-                            <?php
-                              if ($tw == 3) {
-                                for ($e = 1; $e < 4; $e++) { ?>
-                                <td bgcolor="white"></td>
-                            <?php
-                                }
-                              }
-                            ?>
-                          </tr>
-                          <!-- akhir perulangan rab -->
-                      <?php }
-                          } ?>
-                      <!-- MODAL DETAIL TOR -->
-                      @include('perencanaan/modal2/detail_tor')
-                      <!-- MODAL UPDATE TOR -->
-                      @include('perencanaan/modal2/update_tor')
-                      <!-- akhir perulangan tor -->
-                    <?php
-                        } ?>
-                    <?php
-                    $semuaanggaran = [0, 0, 0, 0];
-                    for ($u = 0; $u < count($totalpertw); $u++) {
-                      // echo substr($totalpertw[$u]->triwulan, 14, 1);
-                      if (auth()->user()->id_unit != 1) {
-                        for ($an = 0; $an < 4; $an++) {
-                          if (substr($totalpertw[$u]->triwulan, 14, 1) == $an + 1) {
-                            if ($totalpertw[$u]->id_unit_tor == auth()->user()->id_unit) {
-                              if ($filtertahun != 0) {
-                                if (substr($totalpertw[$u]->tgl_mulai_pelaksanaan, 0, 4) == $filtertahun) {
-                                  $semuaanggaran[$an] += $totalpertw[$u]->anggaran;
-                                }
-                              } else {
-                                $semuaanggaran[$an] += $totalpertw[$u]->anggaran;
-                              }
                             }
                           }
-                        }
-                      }
+                        @endphp
 
-                      // <!-- jika yang dashboard ADMIN -->
-
-                      if (auth()->user()->id_unit == 1) {
-                        for ($an = 0; $an < 4; $an++) {
-                          if (substr($totalpertw[$u]->triwulan, 14, 1) == $an + 1) {
-                            if ($filtertahun != 0 && $filterprodi == 0) {
-                              if (substr($totalpertw[$u]->tgl_mulai_pelaksanaan, 0, 4) == $filtertahun) {
-                                $semuaanggaran[$an] += $totalpertw[$u]->anggaran;
-                              }
-                            } elseif ($filterprodi != 0 && $filtertahun == 0) {
-                              if ($totalpertw[$u]->id_unit_tor == $filterprodi) {
-                                $semuaanggaran[$an] += $totalpertw[$u]->anggaran;
-                              }
-                            } elseif ($filterprodi != 0 && $filtertahun != 0) {
-                              if ($totalpertw[$u]->id_unit_tor == $filterprodi && substr($totalpertw[$u]->tgl_mulai_pelaksanaan, 0, 4) == $filtertahun) {
-                                $semuaanggaran[$an] += $totalpertw[$u]->anggaran;
-                              }
-                            } else {
-                              $semuaanggaran[$an] += $totalpertw[$u]->anggaran;
-                            }
-                          }
-                        }
-                      }
-                    }
-                    ?>
-                    </tr>
-
-                    <tr>
-                      <td class="bg-primary" colspan="3" style="font-size: medium;">
-                        <i class="fa fa-calculator"></i><b> <?= "Rp. " .  number_format($semuaanggaran[0], 2, ',', '.') ?></b>
-                      </td>
-                      <td class="bg-primary" colspan="3" style="font-size: medium;">
-                        <i class="fa fa-calculator"></i><b> <?= "Rp. " .  number_format($semuaanggaran[1], 2, ',', '.') ?></b>
-                      </td>
-                      <td class="bg-primary" colspan="3" style="font-size: medium;">
-                        <i class="fa fa-calculator"></i><b> <?= "Rp. " .  number_format($semuaanggaran[2], 2, ',', '.') ?></b>
-                      </td>
-                      <td class="bg-primary" colspan="3" style="font-size: medium;">
-                        <i class="fa fa-calculator"></i><b> <?= "Rp. " .  number_format($semuaanggaran[3], 2, ',', '.') ?></b>
-                      </td>
-                    </tr>
+                      <tr>
+                        <td class="bg-primary" colspan="3" style="font-size: medium;">
+                          <i class="fa fa-calculator"></i><b> <?= "Rp. " .  number_format($semuaanggaran[0], 2, ',', '.') ?></b>
+                        </td>
+                        <td class="bg-primary" colspan="3" style="font-size: medium;">
+                          <i class="fa fa-calculator"></i><b> <?= "Rp. " .  number_format($semuaanggaran[1], 2, ',', '.') ?></b>
+                        </td>
+                        <td class="bg-primary" colspan="3" style="font-size: medium;">
+                          <i class="fa fa-calculator"></i><b> <?= "Rp. " .  number_format($semuaanggaran[2], 2, ',', '.') ?></b>
+                        </td>
+                        <td class="bg-primary" colspan="3" style="font-size: medium;">
+                          <i class="fa fa-calculator"></i><b> <?= "Rp. " .  number_format($semuaanggaran[3], 2, ',', '.') ?></b>
+                        </td>
+                      </tr>
                     </tbody>
                   </table>
                   {{ $tor->links() }}

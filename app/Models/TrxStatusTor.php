@@ -10,6 +10,7 @@ class TrxStatusTor extends Model
 {
     use HasFactory;
     protected $table = 'trx_status_tor';
+    protected $guarded = ['id'];
     public function TrxStatus($id)
     {
         $trx = DB::table('trx_status_tor')
@@ -47,5 +48,24 @@ class TrxStatusTor extends Model
             ->where('status.nama_status', "Revisi")
             ->get('*');
         return $trx;
+    }
+
+    /**
+     * Get the status that owns the TrxStatusTor
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function status()
+    {
+        return $this->belongsTo(Status::class, 'id_status', 'id');
+    }
+    /**
+     * Get the user that owns the TrxStatusTor
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'create_by', 'id');
     }
 }

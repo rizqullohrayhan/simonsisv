@@ -71,7 +71,7 @@ use Illuminate\Support\Facades\Auth;
                                                     <div class="form-group">
                                                         <label><b>Jenis Ajuan</b></label><br />
                                                         <div class="custom-control custom-radio custom-control-inline">
-                                                            <input type="radio" id="customRadio6" name="jenis_ajuan" id="jenis_ajuan" value="Baru" class="custom-control-input">
+                                                            <input type="radio" id="customRadio6" name="jenis_ajuan" id="jenis_ajuan" value="Baru" class="custom-control-input" checked>
                                                             <label class="custom-control-label" for="customRadio6"> Baru </label>
                                                         </div>
                                                     </div>
@@ -108,11 +108,11 @@ use Illuminate\Support\Facades\Auth;
                                                         @enderror
                                                     </div>
                                                     <div class="form-group">
-                                                        <label><b>Kode Peningkatan</b></label>
+                                                        <label><b>Kode Program</b></label>
                                                         <select name="id_p" id="id_p" class="form-control @error('id_p') is-invalid @enderror">
-                                                            <?php for ($s = 0; $s < count($indikator_p); $s++) { ?>
-                                                                <option value="<?= $indikator_p[$s]->id ?>"><?= $indikator_p[$s]->P . " - " . substr($indikator_p[$s]->deskripsi, 0, 100) ?></option>
-                                                            <?php } ?>
+                                                            @foreach ($indikator_p as $item)
+                                                                <option value="{{ $item->id }}" @if (old('id_p') == $item->id) selected @endif><?= $item->P . " - " . substr($item->deskripsi, 0, 100) ?></option>
+                                                            @endforeach
                                                         </select>
                                                         @error('id_P')
                                                         <div class="alert alert-danger">{{ $message }}</div>
@@ -126,14 +126,14 @@ use Illuminate\Support\Facades\Auth;
                                                                 </b>
                                                                 <div class="form-group">
                                                                     <label>Realisasi IKU {{date('Y')-1}} (%)</label>
-                                                                    <input name="realisasi_IKU" id="realisasi_IKU" type="text" class="form-control @error('realisasi_IKU') is-invalid @enderror">
+                                                                    <input name="realisasi_IKU" value="{{old('realisasi_IKU')}}" id="realisasi_IKU" type="text" class="form-control @error('realisasi_IKU') is-invalid @enderror">
                                                                 </div>
                                                                 @error('realisasi_IKU')
                                                                 <div class="alert alert-danger">{{ $message }}</div>
                                                                 @enderror
                                                                 <div class="form-group">
                                                                     <label>Target IKU {{date('Y')}} (%)</label>
-                                                                    <input name="target_IKU" id="target_IKU" type="text" class="form-control @error('target_IKU') is-invalid @enderror">
+                                                                    <input name="target_IKU" value="{{old('target_IKU')}}" id="target_IKU" type="text" class="form-control @error('target_IKU') is-invalid @enderror">
                                                                 </div>
                                                                 @error('target_IKU')
                                                                 <div class="alert alert-danger">{{ $message }}</div>
@@ -147,14 +147,14 @@ use Illuminate\Support\Facades\Auth;
                                                                 </b>
                                                                 <div class="form-group">
                                                                     <label>Realisasi IK {{date('Y')-1}} (%)</label>
-                                                                    <input name="realisasi_IK" id="realisasi_IK" type="text" class="form-control @error('realisasi_IK') is-invalid @enderror">
+                                                                    <input name="realisasi_IK" value="{{old('realisasi_IK')}}" id="realisasi_IK" type="text" class="form-control @error('realisasi_IK') is-invalid @enderror">
                                                                 </div>
                                                                 @error('realisasi_IK')
                                                                 <div class="alert alert-danger">{{ $message }}</div>
                                                                 @enderror
                                                                 <div class="form-group">
                                                                     <label>Target IK {{date('Y')}} (%)</label>
-                                                                    <input name="target_IK" id="target_IK" type="text" class="form-control @error('target_IK') is-invalid @enderror">
+                                                                    <input name="target_IK" value="{{old('target_IK')}}" id="target_IK" type="text" class="form-control @error('target_IK') is-invalid @enderror">
                                                                 </div>
                                                                 @error('target_IK')
                                                                 <div class="alert alert-danger">{{ $message }}</div>
@@ -164,7 +164,7 @@ use Illuminate\Support\Facades\Auth;
                                                     </div><br />
                                                     <div class="form-group">
                                                         <label><b>Nama Kegiatan</b></label>
-                                                        <input name="nama_kegiatan" id="nama_kegiatan" type="text" class="form-control @error('nama_kegiatan') is-invalid @enderror" style="border: 1px solid #aaaaaa7d;">
+                                                        <input name="nama_kegiatan" value="{{old('nama_kegiatan')}}" id="nama_kegiatan" type="text" class="form-control @error('nama_kegiatan') is-invalid @enderror" style="border: 1px solid #aaaaaa7d;">
                                                     </div>
                                                     @error('nama_kegiatan')
                                                     <div class="alert alert-danger">{{ $message }}</div>
@@ -180,35 +180,35 @@ use Illuminate\Support\Facades\Auth;
                                             <div class="container mt-3">
                                                 <div class="form-group">
                                                     <label><b>Latar Belakang</b></label>
-                                                    <textarea class="ckeditor form-control @error('latar_belakang') is-invalid @enderror" id="latar_belakang" name="latar_belakang"></textarea>
+                                                    <textarea class="ckeditor form-control @error('latar_belakang') is-invalid @enderror" id="latar_belakang" name="latar_belakang">{{old('latar_belakang')}}</textarea>
                                                 </div>
                                                 @error('latar_belakang')
                                                 <div class="alert alert-danger">{{ $message }}</div>
                                                 @enderror
                                                 <div class="form-group">
                                                     <label><b>Rasionalisasi</b></label>
-                                                    <textarea class="ckeditor form-control @error('rasionalisasi') is-invalid @enderror" id="rasionalisasi" name="rasionalisasi" rows="2"></textarea>
+                                                    <textarea class="ckeditor form-control @error('rasionalisasi') is-invalid @enderror" id="rasionalisasi" name="rasionalisasi" rows="2">{{old('rasionalisasi')}}</textarea>
                                                 </div>
                                                 @error('rasionalisasi')
                                                 <div class="alert alert-danger">{{ $message }}</div>
                                                 @enderror
                                                 <div class="form-group">
                                                     <label><b>Tujuan</b></label>
-                                                    <textarea class="ckeditor form-control @error('tujuan') is-invalid @enderror" id="tujuan" name="tujuan" rows="2"></textarea>
+                                                    <textarea class="ckeditor form-control @error('tujuan') is-invalid @enderror" id="tujuan" name="tujuan" rows="2">{{old('tujuan')}}</textarea>
                                                 </div>
                                                 @error('tujuan')
                                                 <div class="alert alert-danger">{{ $message }}</div>
                                                 @enderror
                                                 <div class="form-group">
                                                     <label><b>Mekanisme</b></label>
-                                                    <textarea class="ckeditor form-control @error('mekanisme') is-invalid @enderror" id="mekanisme" name="mekanisme" rows="2"></textarea>
+                                                    <textarea class="ckeditor form-control @error('mekanisme') is-invalid @enderror" id="mekanisme" name="mekanisme" rows="2">{{old('mekanisme')}}</textarea>
                                                 </div>
                                                 @error('mekanisme')
                                                 <div class="alert alert-danger">{{ $message }}</div>
                                                 @enderror
                                                 <div class="form-group">
                                                     <label><b>Keberlanjutan</b></label>
-                                                    <textarea class="ckeditor form-control @error('keberlanjutan') is-invalid @enderror" id="keberlanjutan" name="keberlanjutan" rows="2"></textarea>
+                                                    <textarea class="ckeditor form-control @error('keberlanjutan') is-invalid @enderror" id="keberlanjutan" name="keberlanjutan" rows="2">{{old('keberlanjutan')}}</textarea>
                                                 </div>
                                                 @error('keberlanjutan')
                                                 <div class="alert alert-danger">{{ $message }}</div>
@@ -234,17 +234,13 @@ use Illuminate\Support\Facades\Auth;
                                                     <div class="alert alert-danger">{{ $message }}</div>
                                                     @enderror
                                                 </div>
-                                                {{-- <div class="form-group">
+                                                <div class="form-group">
                                                     <label><b>Email PIC Kegiatan</b></label>
-                                                    <input name="email_pic" id="email_pic" type="email" class="form-control @error('email_pic') is-invalid @enderror" value="" placeholder="">
-                                                </div> --}}
+                                                    <input name="email_pic" id="email_pic" type="email" class="form-control @error('email_pic') is-invalid @enderror" value="{{old('email_pic')}}" placeholder="">
+                                                </div>
 
                                                 <!-- J A V A S C R I P T   O T O M A T I S   S H O W   E M A I L -->
-                                                <?php
-                                                // $emailpic = Auth()->user()->email;
-                                                // $telppic = Auth()->user()->telepon;
-                                                ?>
-                                                {{-- <script>
+                                                <script>
                                                     $(document).ready(function() {
                                                         $('#selectnya').select2();
                                                     });
@@ -267,19 +263,19 @@ use Illuminate\Support\Facades\Auth;
                                                             }
                                                         });
                                                     }
-                                                </script> --}}
+                                                </script>
                                                 <!-- -------------------------------------------------------------------------- -->
 
-                                                {{-- @error('email_pic')
+                                                @error('email_pic')
                                                 <div class="alert alert-danger">{{ $message }}</div>
-                                                @enderror --}}
-                                                {{-- <div class="form-group">
+                                                @enderror
+                                                <div class="form-group">
                                                     <label><b>Kontak PIC Kegiatan</b></label>
-                                                    <input name="kontak_pic" id="kontak_pic" type="text" class="form-control @error('kontak_pic') is-invalid @enderror" value="" placeholder="">
-                                                </div> --}}
-                                                {{-- @error('kontak_pic')
+                                                    <input name="kontak_pic" value="{{old('kontak_pic')}}" id="kontak_pic" type="text" class="form-control @error('kontak_pic') is-invalid @enderror" placeholder="">
+                                                </div>
+                                                @error('kontak_pic')
                                                 <div class="alert alert-danger">{{ $message }}</div>
-                                                @enderror --}}
+                                                @enderror
                                             </div>
                                         </div>
                                         <button type="button" class="btn btn-primary next action-button float-right" value="Next">Next</button>
@@ -292,14 +288,14 @@ use Illuminate\Support\Facades\Auth;
                                             <div class="container mt-3">
                                                 <div class="form-group">
                                                     <label><b>Tanggal Mulai Pelaksanaan</b></label>
-                                                    <input name="tgl_mulai_pelaksanaan" id="tgl_mulai_pelaksanaan" value="" type="date" class="form-control @error('tgl_mulai_pelaksanaan') is-invalid @enderror">
+                                                    <input name="tgl_mulai_pelaksanaan" id="tgl_mulai_pelaksanaan" value="{{old('tgl_mulai_pelaksanaan')}}" type="date" class="form-control @error('tgl_mulai_pelaksanaan') is-invalid @enderror">
                                                 </div>
                                                 @error('tgl_mulai_pelaksanaan')
                                                 <div class="alert alert-danger">{{ $message }}</div>
                                                 @enderror
                                                 <div class="form-group">
                                                     <label><b>Tanggal Selesai Pelaksanaan</b></label>
-                                                    <input name="tgl_akhir_pelaksanaan" id="tgl_akhir_pelaksanaan" value="" type="date" class="form-control @error('tgl_akhir_pelaksanaan') is-invalid @enderror">
+                                                    <input name="tgl_akhir_pelaksanaan" id="tgl_akhir_pelaksanaan" value="{{old('tgl_akhir_pelaksanaan')}}" type="date" class="form-control @error('tgl_akhir_pelaksanaan') is-invalid @enderror">
                                                 </div>
                                                 @error('tgl_akhir_pelaksanaan')
                                                 <div class="alert alert-danger">{{ $message }}</div>
@@ -317,7 +313,7 @@ use Illuminate\Support\Facades\Auth;
                                                             foreach ($tabeltahun as $thn) {
                                                                 if ($thn->is_aktif == 1) {
                                                                     if ($thn->tahun == substr($tw[$t2]->triwulan, 0, 4)) { ?>
-                                                                        <option value="{{$tw[$t2]->id}}"><?= $tw[$t2]->triwulan ?></option>
+                                                                        <option value="{{$tw[$t2]->id}}" @if (old('id_tw') == $tw[$t2]->id) selected @endif><?= $tw[$t2]->triwulan ?></option>
                                                         <?php }
                                                                 }
                                                             }
@@ -371,10 +367,14 @@ use Illuminate\Support\Facades\Auth;
             });
         </script>
 </body>
-<script src="//cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
+<script src="https://cdn.ckeditor.com/4.24.0-lts/standard/ckeditor.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
-        $('.ckeditor').ckeditor();
+        // CKEDITOR.replace( 'latar_belakang' );
+        // CKEDITOR.replace( 'rasionalisasi' );
+        // CKEDITOR.replace( 'tujuan' );
+        // CKEDITOR.replace( 'mekanisme' );
+        // CKEDITOR.replace( 'keberlanjutan' );
     });
 </script>
 

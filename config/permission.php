@@ -210,17 +210,14 @@ return [
             'pic_detail',
             'pic_delete',
         ],
+        'manage_kaprodi' => [
+            'kaprodi_show',
+            'kaprodi_create',
+            'kaprodi_update',
+            'kaprodi_detail',
+            'kaprodi_delete',
+        ],
     ],
-
-    // 'picAuthorities' => [
-    //     'manage_pic' => [
-    //         'pic_show',
-    //         'pic_create',
-    //         'pic_update',
-    //         'pic_detail',
-    //         'pic_delete',
-    //     ]
-    // ],
 
     'models' => [
 

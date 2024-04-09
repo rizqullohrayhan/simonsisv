@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Anggaran;
+use App\Models\Kaprodi;
 use App\Models\Pagu;
 use App\Models\Pedoman;
 use App\Models\PIC;
@@ -17,6 +18,7 @@ use App\Models\TrxStatusTor;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 use TrxStatusKeu;
 use Spatie\Permission\Models\Role;
 
@@ -168,8 +170,8 @@ class TorController extends Controller
         // $tor = Tor::all();
         $tor = Tor::findOrFail($id);
         $unit = Unit::all();
-        $unit2 = Unit::all();
-        $rab = DB::table('rab')->get();
+        $namaunit = Unit::findOrFail($tor->id_unit);
+        $rab = DB::table('rab')->where('id_tor', $id)->first();
         $mak = DB::table('mak')->get();
         $userrole = $userStatic->join();
         $tw = Triwulan::all();
@@ -178,12 +180,12 @@ class TorController extends Controller
         $kelompok_mak = DB::table('kelompok_mak')->get();
         $status = DB::table('status')->get();
         $roles = DB::table('roles')->get();
-        $trx_status_tor = DB::table('trx_status_tor')->get();
+        $trx_status_tor = DB::table('trx_status_tor')->where('id_tor', $id)->get();
         $tabeltahun = DB::table('tahun')->get();
         $pagu = DB::table('pagu')->get();
         // $subkeg = DB::table('indikator_subK')->get();
         // $kategori_subK =  $subKegiatanStatic->Kategori_Sub();
-        $komponen_jadwal = DB::table('komponen_jadwal')->get();
+        $komponen_jadwal = DB::table('komponen_jadwal')->where('id_tor', $id)->get();
         $indikator_p = DB::table('indikator_p')
             ->select(
                 'tor.id as id_tor',
@@ -203,8 +205,12 @@ class TorController extends Controller
         // dd($indikator_p);
         $indikator_iku = DB::table('indikator_iku')->get();
         $users = User::all();
-        $anggaran = DB::table('anggaran')->get();
+        $anggaran = DB::table('anggaran')->where('id_rab', $rab->id ?? '0')->get();
+        // dd($anggaran);
         $tabelRole =  Role::all();
+        $wd1 = User::where('role', '3')->first();
+        $wd2 = User::where('role', '4')->first();
+        $wd3 = User::where('role', '5')->first();
 
         return view(
             "perencanaan.tor.lengkapitor",
@@ -226,13 +232,16 @@ class TorController extends Controller
                 'id',
                 'trx_status_tor',
                 'roles',
-                'unit2',
+                'namaunit',
                 'anggaran',
                 'mak',
                 'kelompok_mak',
                 'belanja_mak',
                 'detail_mak',
-                'tabelRole'
+                'tabelRole',
+                'wd1',
+                'wd2',
+                'wd3',
             )
         );
     }
@@ -294,6 +303,7 @@ class TorController extends Controller
                 'update_by' => $request->update_by,
             ]
         );
+
 
         $data = 1;
         if ($inserting) {
@@ -413,12 +423,14 @@ class TorController extends Controller
         $tabeltahun = DB::table('tahun')->get();
         $trx_status_tor = DB::table('trx_status_tor')->get();
         $pagu = DB::table('pagu')->get();
-        // $subkeg = DB::table('indikator_subK')->get();
-        $users = DB::table('users')->get();
+        $indikator_p = DB::table('indikator_p')->get();
+        $users = User::all();
         $roles = DB::table('roles')->get();
         $roles2 = DB::table('roles')->get();
         $status = DB::table('status')->get();
+        $PIC = DB::table('pics')->where('id_unit', Auth::user()->id_unit)->get();
         $tabelRole =  Role::all();
+        // dd($tor);
 
         return view(
             "perencanaan.tor.revisi",
@@ -427,7 +439,8 @@ class TorController extends Controller
                 'tahun' => $tahun,  'filtertahun' => $filtertahun, 'data' => $data, 'id' => $id,
                 'filterprodi' => $filterprodi, 'tabeltahun' => $tabeltahun, 'pagu' => $pagu,
                 'users' => $users, 'roles' => $roles, 'roles2' => $roles2, 'trx_status_tor' => $trx_status_tor,
-                'status' => $status, 'tabelRole' => $tabelRole
+                'status' => $status, 'tabelRole' => $tabelRole, 'indikator_p' => $indikator_p,
+                'pics' => $PIC
             ]
         );
         // return ($perbaikan);
@@ -619,8 +632,9 @@ class TorController extends Controller
         $totalpertw = $anggaranStatic->total_anggaran_tw();
         $status = DB::table('status')->get();
         // $subkeg = DB::table('indikator_subK')->get();
-        $kategori_subK =  $subKegiatanStatic->Kategori_Sub();
+        // $kategori_subK =  $subKegiatanStatic->Kategori_Sub();
         $komponen_jadwal = DB::table('komponen_jadwal')->get();
+        $indikator_p = DB::table('indikator_p')->get();
         $indikator_iku = DB::table('indikator_iku')->get();
         $trx_status_tor = DB::table('trx_status_tor')->get();
         $pedoman = Pedoman::all();
@@ -640,8 +654,9 @@ class TorController extends Controller
                 'tahun' => $tahun,  'filtertahun' => $filtertahun, 'rab' => $rab, 'mak' => $mak, 'anggaran' => $anggaran,
                 'filterprodi' => $filterprodi, 'tabeltahun' => $tabeltahun, 'pagu' => $pagu,
                 'rab_ang' => $rab_ang, 'totalpertw' => $totalpertw, 'user' => $user, 'status' => $status,
-                'kategori_subK' => $kategori_subK, 'komponen_jadwal' => $komponen_jadwal, 'filterpagu' => $filterpagu,
-                'indikator_iku' => $indikator_iku, 'trx_status_tor' => $trx_status_tor, 'role' => $role, 'pedoman' => $pedoman,
+                'komponen_jadwal' => $komponen_jadwal, 'filterpagu' => $filterpagu,
+                'indikator_iku' => $indikator_iku, 'trx_status_tor' => $trx_status_tor, 'role' => $role,
+                'indikator_p' => $indikator_p, 'pedoman' => $pedoman,
                 'tabelRole' => $tabelRole
             ]
         );
@@ -698,7 +713,7 @@ class TorController extends Controller
 
     public function getEmailPIC($namapic)
     {
-        $pic = DB::table('users')->where('name', $namapic)->get();
-        return response()->json($pic);
+        $pic = DB::table('pics')->where('id', $namapic)->get();
+        return response()->json($pic, 200);
     }
 }

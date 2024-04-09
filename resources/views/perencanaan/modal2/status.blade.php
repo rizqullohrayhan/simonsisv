@@ -1,5 +1,5 @@
 <!-- MODAL AJUKAN TOR -->
-<div class="modal fade" tabindex="-1" role="dialog" id="status{{ $tor[$t]->id }}">
+<div class="modal fade" tabindex="-1" role="dialog" id="status{{ $tItem->id }}">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header" style="background-color: #ffc107;color:white">
@@ -20,24 +20,20 @@
                         $ada = 0;
                         if (!empty($trx_status_tor)) {
                             for ($q = 0; $q < count($trx_status_tor); $q++) {
-                                if ($trx_status_tor[$q]->id_tor == $tor[$t]->id) {
+                                if ($trx_status_tor[$q]->id_tor == $tItem->id) {
                                     $ada =   $trx_status_tor[$q]->id_status ?>
                                     <li>
                                         <?php for ($st = 0; $st < count($status); $st++) {
                                             if ($status[$st]->id == $trx_status_tor[$q]->id_status) {
                                                 $wstatus = $status[$st]->nama_status;
-                                                if ($wstatus == 'Proses Pengajuan') {
+                                                if ($wstatus == 'Belum Dinilai') {
                                                     $warnaLingkar = 'timeline-dots';
-                                                } elseif ($wstatus == 'Verifikasi') {
-                                                    $warnaLingkar = 'timeline-dots border-warning';
-                                                } elseif ($wstatus == 'Review') {
-                                                    $warnaLingkar = 'timeline-dots  border-info';
                                                 } elseif ($wstatus == 'Revisi') {
                                                     $warnaLingkar = 'timeline-dots  border-danger';
-                                                } elseif ($wstatus == 'Validasi') {
-                                                    $warnaLingkar = 'timeline-dots  border-success';
-                                                } elseif ($wstatus == 'Pengajuan Perbaikan') {
+                                                } elseif ($wstatus == 'Sudah Revisi') {
                                                     $warnaLingkar = 'timeline-dots';
+                                                } elseif ($wstatus == 'Sudah Dinilai') {
+                                                    $warnaLingkar = 'timeline-dots border-success';
                                                 }
                                         ?>
 
@@ -67,82 +63,8 @@
                         <?php }
                             }
                         } ?>
-
                     </ul>
-
                 </div>
-
-                <!-- <div class="iq-card">
-                    <div class="iq-card-header d-flex justify-content-between">
-                        <div class="iq-header-title">
-                            <h4 class="card-title">Status Pertanggungjawaban TOR</h4>
-                        </div>
-                    </div>
-                    <div class="iq-card-body">
-                        <ul class="iq-timeline">
-
-                            <?php
-                            $statusMemo = 0;
-                            $indexwarna2 = 0;
-                            $warnaLingkar2 = [
-                                'timeline-dots',
-                                'timeline-dots border-success',
-                                'timeline-dots border-secondary',
-                                'timeline-dots border-info',
-                            ];
-                            $ada2 = 0;
-                            // if (!empty($trx_status_keu)) {
-                            //     foreach ($trx_status_keu as $tsk) {
-                            //         if ($tsk->id_tor == $tor[$t]->id) {
-                            ?>
-                                        <li>
-                                            <div class="{{ $warnaLingkar2[$indexwarna2] }}"><i class="ri-check-fill" style="color:black"></i></div>
-                                            <?php
-                                            // $indexwarna2 += 1;
-                                            // if ($indexwarna2 > 3) {
-                                            //     $indexwarna2 = 0;
-                                            // }
-                                            ?>
-                                            <div class="row">
-                                                <div class="col-lg-7">
-                                                    <h6 style="text-align:left;">
-                                                        <?php
-                                                        // foreach ($status_keu as $statusKeu) {
-                                                        //     if ($statusKeu->id == $tsk->id_status) {
-                                                        //         $statusMemo = 1;
-                                                        //         echo $statusKeu->nama_status . ' ' . $statusKeu->kategori;
-                                                        //         foreach ($user as $us) {
-                                                        //             if ($us->id == $tsk->create_by) {
-                                                        //                 foreach ($role as $rl2) {
-                                                        //                     if ($rl2->id == $us->role) {
-                                                        //                         echo '<br/>' . ' - create by : ' . $us->name . ' - ' . $tsk->role_by;
-                                                        // $pengvalidasi = $rl2->id;
-                                                        //                     }
-                                                        //                 }
-                                                        //             }
-                                                        //         }
-                                                        //     }
-                                                        // }
-                                                        ?>
-                                                    </h6>
-                                                </div>
-                                                <div class="col">
-                                                    <small style="font-size: smaller;color:grey" class="float-right mt-1"> $tsk->created_at }}</small>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <br />
-                            <?php
-                            // }
-                            //     }
-                            // }
-                            ?>
-
-                        </ul>
-                    </div>
-                </div> -->
-
-
             </div>
         </div>
     </div>

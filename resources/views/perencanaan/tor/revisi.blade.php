@@ -64,11 +64,11 @@ use Illuminate\Support\Facades\Auth;
                                                 </div>
                                             </div>
 
-                                            <?php
+                                            @php
                                             $komentar = [
                                                 'sub' => [],
                                                 'judul' => [],
-                                                'latarbelakang' => [],
+                                                'latar_belakang' => [],
                                                 'rasionalisasi' => [],
                                                 'tujuan' => [],
                                                 'mekanisme' => [],
@@ -77,78 +77,23 @@ use Illuminate\Support\Facades\Auth;
                                                 'ik' => [],
                                                 'keberlanjutan' => [],
                                                 'penanggung' => [],
-                                                'komentar_rab' => [],
-
+                                                'rab' => [],
                                             ];
-                                            $judul = [];
-                                            foreach ($trx_status_tor as $trx) {
-                                                if ($trx->id_tor == $id) {
-                                                    foreach ($users as $us) {
-                                                        if ($trx->create_by == $us->id) {
-                                                            if (!empty($trx->k_sub)) {
-                                                                if ($trx->k_sub != '-') {
-                                                                    $komentar['sub'][] = $trx->k_sub . "\n (" . $us->name . ")";
-                                                                }
-                                                            }
-                                                            if (!empty($trx->k_judul)) {
-                                                                if ($trx->k_judul != '-') {
-                                                                    $komentar['judul'][] = $trx->k_judul . "\n (" . $us->name . ")";
-                                                                }
-                                                            }
-                                                            if (!empty($trx->k_latar_belakang)) {
-                                                                if ($trx->k_latar_belakang != '-') {
-                                                                    $komentar['latarbelakang'][] = $trx->k_latar_belakang . "\n (" . $us->name . ")";
-                                                                }
-                                                            }
-                                                            if (!empty($trx->k_rasionalisasi)) {
-                                                                if ($trx->k_rasionalisasi != '-') {
-                                                                    $komentar['rasionalisasi'][] = $trx->k_rasionalisasi . "\n (" . $us->name . ")";
-                                                                }
-                                                            }
-                                                            if (!empty($trx->k_tujuan)) {
-                                                                if ($trx->k_tujuan != '-') {
-                                                                    $komentar['tujuan'][] = $trx->k_tujuan . "\n (" . $us->name . ")";
-                                                                }
-                                                            }
-                                                            if (!empty($trx->k_mekanisme)) {
-                                                                if ($trx->k_mekanisme != '-') {
-                                                                    $komentar['mekanisme'][] = $trx->k_mekanisme . "\n (" . $us->name . ")";
-                                                                }
-                                                            }
-                                                            if (!empty($trx->k_jadwal)) {
-                                                                if ($trx->k_jadwal != '-') {
-                                                                    $komentar['jadwal'][] = $trx->k_jadwal . "\n (" . $us->name . ")";
-                                                                }
-                                                            }
-                                                            if (!empty($trx->k_iku)) {
-                                                                if ($trx->k_iku != '-') {
-                                                                    $komentar['iku'][] = $trx->k_iku . "\n (" . $us->name . ")";
-                                                                }
-                                                            }
-                                                            if (!empty($trx->k_ik)) {
-                                                                if ($trx->k_ik != '-') {
-                                                                    $komentar['ik'][] = $trx->k_ik . "\n (" . $us->name . ")";
-                                                                }
-                                                            }
-                                                            if (!empty($trx->k_keberlanjutan)) {
-                                                                if ($trx->k_keberlanjutan != '-') {
-                                                                    $komentar['keberlanjutan'][] = $trx->k_keberlanjutan . "\n (" . $us->name . ")";
-                                                                }
-                                                            }
-                                                            if (!empty($trx->k_penanggung)) {
-                                                                if ($trx->k_penanggung != '-') {
-                                                                    $komentar['penanggung'][] = $trx->k_penanggung . "\n (" . $us->name . ")";
-                                                                }
-                                                            }
-                                                            if (!empty($trx->k_rab)) {
-                                                                if ($trx->k_rab != '-') {
-                                                                    $komentar['komentar_rab'][] = $trx->k_rab . "\n (" . $us->name . ")";
+                                            
+                                            foreach ($trx_status_tor as $trx_item) {
+                                                foreach ($users as $user) {
+                                                    if ($trx_item->create_by == $user->id) {
+                                                        foreach (['sub', 'judul', 'latar_belakang', 'rasionalisasi', 'tujuan', 'mekanisme', 'jadwal', 'iku', 'ik', 'keberlanjutan', 'penanggung', 'rab'] as $field) {
+                                                            if (!empty($trx_item->{'k_' . $field})) {
+                                                                if ($trx_item->{'k_' . $field} != '-') {
+                                                                    $komentar[$field][] = " \"" . $trx_item->{'k_' . $field} . "\"\n (" . $user->name . " - " . $user->toRole->name . ")";
                                                                 }
                                                             }
                                                         }
                                                     }
                                                 }
-                                            } ?>
+                                            }
+                                            @endphp
 
 
                                             <div class="row">
@@ -219,21 +164,24 @@ use Illuminate\Support\Facades\Auth;
                                                         @enderror
                                                     </div>
                                                     <div class="form-group">
-                                                        <label>Kode Sub Kegiatan</label>
+                                                        <label><b>Kode Program</b></label>
                                                         @foreach($komentar['sub'] as $subs)
                                                         <h6 style="color: #dc3545;">{{$subs}}</h6>
                                                         <hr class="mt-3">
                                                         @endforeach
-                                                        <select name="id_subK" id="id_subK" class="form-control">
-                                                            <?php for ($s = 0; $s < count($subkeg); $s++) { ?>
-                                                                <option value="{{old('id_subK',$subkeg[$s]->id)}}" {{$subkeg[$s]->id == $tor['id_subK'] ? 'selected' : '' }}>{{$subkeg[$s]->subK . " - " . substr($subkeg[$s]->deskripsi, 0, 100) }}</option>
-                                                            <?php } ?>
+                                                        <select name="id_p" id="id_p" class="form-control @error('id_p') is-invalid @enderror">
+                                                            @foreach ($indikator_p as $item)
+                                                                <option value="{{ $item->id }}" @if (old('id_p', $tor['id_p']) == $item->id) selected @endif><?= $item->P . " - " . substr($item->deskripsi, 0, 100) ?></option>
+                                                            @endforeach
                                                         </select>
-                                                    </div>
+                                                        @error('id_P')
+                                                        <div class="alert alert-danger">{{ $message }}</div>
+                                                        @enderror
+                                                    </div><br />
 
                                                     <div class="col-sm-8">
                                                         <div class="card iq-mb-3 shadow">
-                                                            <img width="700" src="../../assets/contoh/contohiku.png" class="card-img-top">
+                                                            <img width="700" src="{{ asset('assets/contoh/contohiku.png') }}" class="card-img-top">
                                                             <div class="card-body">
                                                                 <b>
                                                                     <h6 class="card-title">Indikator Kinerja Utama (IKU)</h6>
@@ -294,7 +242,7 @@ use Illuminate\Support\Facades\Auth;
                                             <div class="container mt-3">
                                                 <div class="form-group">
                                                     <label>Latar Belakang</label>
-                                                    @foreach($komentar['latarbelakang'] as $latarbelakangs)
+                                                    @foreach($komentar['latar_belakang'] as $latarbelakangs)
                                                     <h6 style="color: #dc3545;">{{$latarbelakangs}}</h6>
                                                     <hr class="mt-3">
                                                     @endforeach
@@ -303,8 +251,8 @@ use Illuminate\Support\Facades\Auth;
                                                 <div class="form-group">
                                                     <label>Rasionalisasi</label>
                                                     @foreach($komentar['rasionalisasi'] as $rasionalisasis)
-                                                    <h6 style="color: #dc3545;">{{$rasionalisasis}}</h6>
-                                                    <hr class="mt-3">
+                                                        <h6 style="color: #dc3545;">{{$rasionalisasis}}</h6>
+                                                        <hr class="mt-3">
                                                     @endforeach
                                                     <textarea class="ckeditor form-control" id="rasionalisasi" name="rasionalisasi" rows="2">{{$tor['rasionalisasi']}}</textarea>
                                                 </div>
@@ -347,28 +295,10 @@ use Illuminate\Support\Facades\Auth;
                                                     <h6 style="color: #dc3545;">{{$penanggungs}}</h6>
                                                     <hr class="mt-3">
                                                     @endforeach
-                                                    <select name="nama_pic" id="nama_pic" class="form-control @error('nama_pic') is-invalid @enderror">
-                                                        <?php
-                                                        for ($pi2 = 0; $pi2 < count($roles); $pi2++) {
-                                                            if (Auth::user()->role == $roles[$pi2]->id) {
-                                                                if ($roles[$pi2]->name == "PIC") { ?>
-                                                                    <option value="<?= $tor['nama_pic'] ?>"><?= $tor['nama_pic'] ?></option>
-                                                                    <?php }
-                                                                if ($roles[$pi2]->name == "Prodi") {
-                                                                    for ($pi1 = 0; $pi1 < count($users); $pi1++) {
-                                                                        for ($pi3 = 0; $pi3 < count($roles2); $pi3++) {
-                                                                            if ($users[$pi1]->role == $roles2[$pi3]->id) {
-                                                                                if ($roles2[$pi3]->name == "PIC") { ?>
-                                                                                    <option value="<?= $users[$pi1]->name ?>"><?= $users[$pi1]->name ?></option>
-                                                                <?php }
-                                                                            }
-                                                                        }
-                                                                    }
-                                                                } ?>
-                                                        <?php
-                                                            }
-                                                        }
-                                                        ?>
+                                                    <select name="nama_pic" id="nama_pic" onchange="Ganti()" class="form-control @error('nama_pic') is-invalid @enderror" style="width: 100%;height:50px;line-height:45px;color:#a09e9e;background:#00000000;border:1px solid #f1f1f1;border-radius:5px">
+                                                        @foreach ($pics as $pic)
+                                                            <option value="{{$pic->id}}" @if (old('nama_pic',$tor['nama_pic']) == $pic->id) selected @endif>{{$pic->name}}</option>
+                                                        @endforeach
                                                     </select>
                                                 </div>
                                                 <div class="form-group">
@@ -495,6 +425,33 @@ use Illuminate\Support\Facades\Auth;
         $('.ckeditor').ckeditor();
     });
 </script>
+
+<!-- J A V A S C R I P T   O T O M A T I S   S H O W   E M A I L -->
+<script>
+    $(document).ready(function() {
+        $('#nama_pic').select2();
+    });
+
+    function Ganti() {
+        var namapic = document.getElementById('nama_pic').value;
+        $.ajax({
+            url: '/getEmailPIC/' + namapic,
+            type: "GET",
+            data: {
+                "_token": "{{ csrf_token() }}",
+            },
+            dataType: "json",
+            success: function(data) {
+                $.each(data, function(key, pic) {
+                    document.getElementById("email_pic").value = pic.email;
+                    document.getElementById("kontak_pic").value = pic.telepon;
+                });
+
+            }
+        });
+    }
+</script>
+<!-- -------------------------------------------------------------------------- -->
 
 </html>
 @endcan

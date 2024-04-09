@@ -564,6 +564,7 @@ function ngecekWulan($awal, $akhir)
                                                                                     <ul class="iq-timeline">
                                                                                         <?php
                                                                                         $indexwarna = 0;
+                                                                                        $warnaLingkar = '';
                                                                                         $ada = 0;
                                                                                         if (!empty($trx_status_tor)) {
                                                                                             foreach ($trx_status_tor as $q3) {

@@ -15,4 +15,14 @@ class Rab extends Model
     public $keyType = 'string';
     protected $table = 'rab';
     protected $guarded = [];
+
+    /**
+     * Get the tor that owns the Rab
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function tor()
+    {
+        return $this->belongsTo(Tor::class, 'id_tor', 'id');
+    }
 }

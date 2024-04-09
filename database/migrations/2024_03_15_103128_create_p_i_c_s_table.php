@@ -18,6 +18,7 @@ class CreatePICSTable extends Migration
             $table->unsignedBigInteger('id_unit');
             $table->string('name');
             $table->string('email')->nullable();
+            $table->string('telepon')->nullable();
             $table->string('nip')->nullable();
             $table->foreign('id_unit')->references('id')->on('unit')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();

@@ -61,20 +61,26 @@ class PICController extends Controller
     {
         $request->validate([
             'name' => ['required'],
+            'email' => ['required'],
             'nip' => ['required', 'numeric'],
+            'telepon' => ['required', 'numeric'],
         ], [
             'required' => ':attribute wajib diisi!',
             'numeric' => ':attribute tidak Valid!',
         ], [
             'name' => 'Nama PIC',
+            'email' => 'Email PIC',
             'nip' => 'NIP',
+            'telepon' => 'Nomor Whatsapp',
         ]);
 
         try {
             PIC::create([
                 'id_unit' => Auth::user()->id_unit,
                 'name' => $request->name,
+                'email' => $request->email,
                 'nip' => $request->nip,
+                'telepon' => $request->telepon,
             ]);
             return response()->json(['status' => true, 'message' => 'PIC Berhasil Ditambahkan'], 200);
         } catch (\Throwable $th) {
@@ -104,23 +110,28 @@ class PICController extends Controller
      */
     public function update(Request $request, $id)
     {
-
         $request->validate([
             'name' => ['required'],
+            'email' => ['required'],
             'nip' => ['required', 'numeric'],
+            'telepon' => ['required', 'numeric'],
         ], [
             'required' => ':attribute wajib diisi!',
             'numeric' => ':attribute tidak Valid!',
         ], [
             'name' => 'Nama PIC',
+            'email' => 'Email PIC',
             'nip' => 'NIP',
+            'telepon' => 'Nomor Whatsapp',
         ]);
 
         try {
             PIC::findOrFail($id)->update([
                 'id_unit' => Auth::user()->id_unit,
                 'name' => $request->name,
+                'email' => $request->email,
                 'nip' => $request->nip,
+                'telepon' => $request->telepon,
             ]);
             return response()->json(['status' => true, 'message' => 'Data PIC Berhasil Diupdate'], 200);
         } catch (\Throwable $th) {

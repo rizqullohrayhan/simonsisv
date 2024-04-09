@@ -127,11 +127,7 @@ use Illuminate\Support\Facades\Auth;
                                     </span>
                                 </div>
                                 <div class="table-responsive">
-                                    <table id="monitoring" class="table table-striped responsive" style="display: block;
-    overflow-y: auto;
-    white-space: nowrap;
-  max-height:500px;">
-
+                                    <table id="monitoring" class="table table-striped responsive" style="overflow-y: auto; white-space: nowrap; max-height:500px;">
                                         <thead class="bg-primary" style="color: white;">
                                             <tr>
                                                 <th>No.</th>
@@ -240,11 +236,7 @@ use Illuminate\Support\Facades\Auth;
                                                                         $badge = 'badge-success';
                                                                     } ?>
                                                                     <div class="badge badge-pill {{$badge}}">
-                                                                        <?php if ($statuskeg != 'Verifikasi Kaprodi') { ?>
-                                                                            {{ $statuskeg . ' ' . $pengvalidasi }}
-                                                                        <?php } elseif ($statuskeg == 'Verifikasi Kaprodi') { ?>
-                                                                            {{ $statuskeg }}
-                                                                        <?php } ?>
+                                                                        {{ $statuskeg }}
                                                                     </div>
                                                                     <button class="badge badge-info" data-toggle="modal" data-placement="top" data-target="#detail_tor{{ $x }}">
                                                                         <i class="fa fa-tasks"></i>

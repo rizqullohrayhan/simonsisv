@@ -12,6 +12,7 @@
     <link href="{{ asset('assets/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="{{ asset('findash/assets/css/bootstrap.min.css') }}">
+    {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"> --}}
     <!-- Typography CSS -->
     <link rel="stylesheet" href="{{ asset('findash/assets/css/typography.css') }}">
     <!-- Style CSS -->
@@ -24,16 +25,14 @@
     <link href='{{ asset('findash/assets/fullcalendar/timegrid/main.css') }}' rel='stylesheet' />
     <link href='{{ asset('findash/assets/fullcalendar/list/main.css') }}' rel='stylesheet' />
     <link rel="stylesheet" href="{{ asset('findash/assets/css/flatpickr.min.css') }}">
-    <link rel="" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="//cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
-    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-    <link rel="stylesheet" href="//cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="//cdn.datatables.net/2.0.3/css/dataTables.dataTables.min.css">
     <link rel="stylesheet" href="//cdn.datatables.net/buttons/2.2.3/css/buttons.dataTables.min.css">
     <!-- page html to pdf -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
@@ -87,7 +86,11 @@
             background-color: rgba(0, 0, 0, 0.1);
             background: linear-gradient(to bottom, rgb(72 131 149) 0%, rgb(124 203 196) 100%);
         }
+
+        a {
+            text-decoration: none;
+        }
     </style>
 </head>
 
-<body class="sidebar-main" style="background-image: url('findash/assets/images/wave.svg');background-repeat:no-repeat">
+{{-- <body class="sidebar-main" style="background-image: url('findash/assets/images/wave.svg');background-repeat:no-repeat"> --}}

@@ -1,5 +1,5 @@
  <!-- Modal Tambah TOR -->
- <div class="modal fade bd-example-modal-lg show" tabindex="-1" role="dialog" id="update_tor<?= $tor[$t]->id ?>">
+ <div class="modal fade bd-example-modal-lg show" tabindex="-1" role="dialog" id="update_tor<?= $tItem->id ?>">
      <div class="modal-dialog modal-lg" role="document">
          <div class="modal-content">
              <div class="modal-header">
@@ -9,7 +9,7 @@
                  </button>
              </div>
              <div class="modal-body">
-                 <form class="form-horizontal" method="post" action="{{ url('/tor/update/'.$tor[$t]->id) }}">
+                 <form class="form-horizontal" method="post" action="{{ url('/tor/update/'.$tItem->id) }}">
                      @csrf
                      <div class="form-group">
                          <label>Jenis Ajuan</label><br />
@@ -49,39 +49,39 @@
                      </div>
                      <div class="form-group">
                          <label>Nama Kegiatan</label>
-                         <input name="nama_kegiatan" value="{{old('nama_kegiatan',$tor[$t]->nama_kegiatan)}}" id="nama_kegiatan" type="text" class="form-control">
+                         <input name="nama_kegiatan" value="{{old('nama_kegiatan',$tItem->nama_kegiatan)}}" id="nama_kegiatan" type="text" class="form-control">
                      </div>
                      <div class="form-group">
                          <label>Latar Belakang</label>
-                         <input name="latar_belakang" value="{{old('latar_belakang',$tor[$t]->latar_belakang)}}" id="latar_belakang" type="text" class="form-control">
+                         <input name="latar_belakang" value="{{old('latar_belakang',$tItem->latar_belakang)}}" id="latar_belakang" type="text" class="form-control">
                      </div>
                      <div class="form-group">
                          <label>Rasionalisasi</label>
-                         <input name="rasionalisasi" value="{{old('rasionalisasi',$tor[$t]->rasionalisasi)}}" id="rasionalisasi" type="text" class="form-control">
+                         <input name="rasionalisasi" value="{{old('rasionalisasi',$tItem->rasionalisasi)}}" id="rasionalisasi" type="text" class="form-control">
                      </div>
                      <div class="form-group">
                          <label>Tujuan</label>
-                         <input name="tujuan" value="{{old('tujuan',$tor[$t]->tujuan)}}" id="tujuan" type="text" class="form-control">
+                         <input name="tujuan" value="{{old('tujuan',$tItem->tujuan)}}" id="tujuan" type="text" class="form-control">
                      </div>
                      <div class="form-group">
                          <label>mekanisme</label>
-                         <input name="mekanisme" value="{{old('mekanisme',$tor[$t]->mekanisme)}}" id="mekanisme" type="text" class="form-control">
+                         <input name="mekanisme" value="{{old('mekanisme',$tItem->mekanisme)}}" id="mekanisme" type="text" class="form-control">
                      </div>
                      <div class="form-group">
                          <label>keberlanjutan</label>
-                         <input name="keberlanjutan" value="{{old('keberlanjutan',$tor[$t]->keberlanjutan)}}" id="keberlanjutan" type="text" class="form-control">
+                         <input name="keberlanjutan" value="{{old('keberlanjutan',$tItem->keberlanjutan)}}" id="keberlanjutan" type="text" class="form-control">
                      </div>
                      <div class="form-group">
                          <label>Nama PIC Kegiatan</label>
-                         <input name="nama_pic" value="{{old('nama_pic',$tor[$t]->nama_pic)}}" id="nama_pic" type="text" class="form-control" value="">
+                         <input name="nama_pic" value="{{old('nama_pic',$tItem->nama_pic)}}" id="nama_pic" type="text" class="form-control" value="">
                      </div>
                      <div class="form-group">
                          <label>Email PIC Kegiatan</label>
-                         <input name="email_pic" value="{{old('email_pic',$tor[$t]->email_pic)}}" id="email_pic" type="text" class="form-control" value="">
+                         <input name="email_pic" value="{{old('email_pic',$tItem->email_pic)}}" id="email_pic" type="text" class="form-control" value="">
                      </div>
                      <div class="form-group">
                          <label>Kontak PIC Kegiatan</label>
-                         <input name="kontak_pic" value="{{old('kontak_pic',$tor[$t]->kontak_pic)}}" id="kontak_pic" type="text" class="form-control" value="">
+                         <input name="kontak_pic" value="{{old('kontak_pic',$tItem->kontak_pic)}}" id="kontak_pic" type="text" class="form-control" value="">
                      </div>
                      <div class="form-group">
                          <label>Tanggal Mulai Pelaksanaan</label>
@@ -93,7 +93,7 @@
                      </div>
                      <div class="form-group">
                          <label>Jumlah Anggaran</label>
-                         <input name="jumlah_anggaran" value="{{old('jumlah_anggaran',$tor[$t]->nama_kegiatan)}}" id="jumlah_anggaran" value="" type="text" class="form-control">
+                         <input name="jumlah_anggaran" value="{{old('jumlah_anggaran',$tItem->nama_kegiatan)}}" id="jumlah_anggaran" value="" type="text" class="form-control">
                      </div>
                      <div class="form-group">
                          <label>Rencana Penarikan Dana</label>

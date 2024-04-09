@@ -1,4 +1,4 @@
-<div class="modal fade" tabindex="-1" role="dialog" id="tambah_rab<?= $tor[$t]->id ?>">
+<div class="modal fade" tabindex="-1" role="dialog" id="tambah_rab<?= $tItem->id ?>">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -22,7 +22,7 @@
                         <div class="form-group">
                             <label>TOR</label>
                             <select name="id_tor" id="id_tor" class="form-control">
-                                <option value="{{$tor[$t]->id}}">{{$tor[$t]->nama_kegiatan}}</option>
+                                <option value="{{$tItem->id}}">{{$tItem->nama_kegiatan}}</option>
                             </select>
                         </div>
                         <input name="created_at" id="created_at" type="hidden" value="<?= date('Y-m-d') ?>">
