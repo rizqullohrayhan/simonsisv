@@ -3,11 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Models\SPJ;
+use App\Models\Tahun;
 use App\Models\Tor;
+use App\Models\Triwulan;
+use App\Models\TrxStatusTor;
 use App\Models\Unit;
 use App\Models\User as Usernya;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
+use Yajra\DataTables\Facades\DataTables;
 
 class HomeController extends Controller
 {
@@ -44,54 +51,120 @@ class HomeController extends Controller
         $userrole = $usernya->join();
         $tor = Tor::limit(1)->get();
         $torAll = Tor::all();
+
+        $idTorDiSetujui = TrxStatusTor::where('id_status', '4')->get();
+        $ajuans = [];
+        foreach ($idTorDiSetujui as $id) {
+            $ajuans[] = $id['id_tor'];
+        }
+        $torDiSetujui = Tor::whereIn('id', $ajuans)->get();
+
+        $ajuan = Tor::where('validator', Auth::user()->role)->get();
+        $ajuans = [];
+        foreach ($ajuan as $id) {
+            $ajuans[] = $id['id'];
+        }
+        // dd($ajuan);
+        $filter = TrxStatusTor::selectRaw('id_tor, MAX(id_status) AS status')->whereIn('id_tor', $ajuans)->groupBy('id_tor')->get();
+        $ajuan_belum_dinilai = $filter->where('status', '1')->count();
+        $ajuan_revisi = $filter->where('status', '2')->count();
+        $ajuan_sudah_revisi = $filter->where('status', '3')->count();
+        $ajuan_sudah_dinilai = $filter->where('status', '4')->count();
+        // $status = DB::table('status')->where('id', $id_status)->first()->nama_status;
+
         return view(
             "dashboards.users.index",
             [
                 'userrole' => $userrole, 'tor' => $tor, 'trx_status_tor' => $trx_status_tor, 'prodi' => $prodi,
                 'status' => $status, 'unit' => $unit, 'users' => $users, 'role' => $role, 'torAll' => $torAll,
                 'dokMemo' => $dokMemo, 'trx_status_keu' => $trx_status_keu, 'status_keu' => $status_keu,
-                'tw' => $tw, 'filtertw' => $filtertw, 'tahun' => $tahun, 'spj' => $spj, 'tabelRole' => $tabelRole
+                'tw' => $tw, 'filtertw' => $filtertw, 'tahun' => $tahun, 'spj' => $spj, 'tabelRole' => $tabelRole,
+                // ''
+                'belum_dinilai' => $ajuan_belum_dinilai, 'revisi' => $ajuan_revisi, 'sudah_revisi' => $ajuan_sudah_revisi,
+                'sudah_dinilai' => $ajuan_sudah_dinilai, 'torDiSetujui' => $torDiSetujui,
             ]
         );
     }
 
-    public function datatable()
+    public function getTriwulan(Request $request) {
+        $idTahun = base64_decode($request->id);
+        $triwulan = Triwulan::where('id_tahun', $idTahun)->orderBy('triwulan')->get();
+
+        return response()->json($triwulan, 200);
+    }
+
+    public function getData(Request $request) {
+        $idTahun = base64_decode($request->id_tahun);
+        $idTriwulan = $request->id_triwulan;
+
+        $tahun = Tahun::find($idTahun)->tahun;
+
+        $ajuan = Tor::where('validator', Auth::user()->role)->get();
+        $ajuans = [];
+        foreach ($ajuan as $id) {
+            $ajuans[] = $id['id'];
+        }
+        // dd($ajuan);
+        $filter = TrxStatusTor::selectRaw('id_tor, MAX(id_status) AS status')->whereIn('id_tor', $ajuans)->groupBy('id_tor')->get();
+        $ajuan_belum_dinilai = $filter->where('status', '1')->count();
+        $ajuan_revisi = $filter->where('status', '2')->count();
+        $ajuan_sudah_revisi = $filter->where('status', '3')->count();
+        $ajuan_sudah_dinilai = $filter->where('status', '4')->count();
+
+        $data = [
+            'belum_dinilai' => $ajuan_belum_dinilai,
+            'revisi' => $ajuan_revisi,
+            'sudah_revisi' => $ajuan_sudah_revisi,
+            'sudah_dinilai' => $ajuan_sudah_dinilai,
+        ];
+
+        return response()->json($data, 200);
+    }
+
+    public function datatable(Request $request)
     {
-        $data = [];
-        $spj = SPJ::all();
-        $prodi = DB::table('unit')->get();
-        $start = $_REQUEST['start'];
-        $length = $_REQUEST['length'];
-        $tor = Tor::offset($start)->limit($length)->get();
-        $totalRecord = Tor::all()->count();
+        $idTahun = base64_decode($request->tahun);
+        $idTriwulan = $request->triwulan;
+        $tahun = Tahun::find($idTahun)->tahun;
 
-        $no = $start + 1;
-        for ($m = 0; $m < count($tor); $m++) {
-            $realisasi = 0;
-            $sisa = 0;
-            $anggaran = $tor[$m]->jumlah_anggaran;
-
-            $data[$m]['no'] = $no++;
-            $data[$m]['nama_kegiatan'] = $tor[$m]->nama_kegiatan;
-            for ($v = 0; $v < count($prodi); $v++) {
-                if ($prodi[$v]->id == $tor[$m]->id_unit) {
-                    $namaprodi = $prodi[$v]->nama_unit;
-                    $data[$m]['namaprodi'] = $namaprodi;
-                }
-            }
-            $data[$m]['nama_pic'] = $tor[$m]->nama_pic;
-            $data[$m]['anggaran'] = 'Rp ' . number_format($anggaran);
-            list($realisasi, $sisa) = 0;
-            foreach ($spj as $nominal) :
-                if ($tor[$m]->id == $nominal->id_tor) :
-                    $realisasi = $nominal->nilai_total;
-                    $sisa = $anggaran - $realisasi;
-                endif;
-            endforeach;
-            $data[$m]['realisasi'] = 'Rp ' . number_format($realisasi);
-            $data[$m]['sisa'] = 'Rp ' . number_format($sisa);
+        if (Auth::user()->role == '2') {
+            $tor = Tor::with('unit', 'pic', 'statusMany', 'validator')->where('id_unit', Auth::user()->id_unit)->whereYear('tgl_mulai_pelaksanaan', $tahun);
+        } else {
+            $tor = Tor::with('unit', 'pic', 'statusMany', 'validator')->whereYear('tgl_mulai_pelaksanaan', $tahun);
         }
 
-        return datatables()::of($data)->skipPaging()->setTotalRecords($totalRecord)->tojson();
+        if ($idTriwulan != '0') {
+            $tor = $tor->where('id_tw', $idTriwulan);
+        }
+        $tor = $tor->get();
+
+        return DataTables::of($tor)
+        ->addIndexColumn()
+        ->editColumn('nama_kegiatan', function ($row){
+            return wordwrap($row->nama_kegiatan,20,"<br>");
+        })
+        ->addColumn('nama_unit', function ($row){
+            return wordwrap($row->unit->nama_unit,20,"<br>");
+        })
+        ->addColumn('tgl_ajuan', function ($row){
+            return Carbon::parse($row->created_at)->translatedFormat('d F Y');
+        })
+        ->addColumn('nama_pic', function ($row){
+            return wordwrap($row->pic->name,20,"<br>");
+        })
+        ->addColumn('current_status', function ($row) {
+            $jumlahstatus = count($row->statusMany);
+            $current_status = $row->statusMany[$jumlahstatus-1]->nama_status;
+            return $current_status .
+                    '<button class="badge badge-info btn-detail" data-id="' . base64_encode($row->id) . '">
+                    <i class="fa fa-tasks"></i>
+                </button>';
+        })
+        ->addColumn('id_status', function ($row) {
+            $jumlahstatus = count($row->statusMany);
+            return $row->statusMany[$jumlahstatus-1]->id;
+        })
+        ->rawColumns(['nama_kegiatan', 'nama_unit', 'tgl_ajuan', 'nama_pic', 'current_status'])
+        ->toJson();
     }
 }

@@ -55,6 +55,7 @@ class ProfilController extends Controller
             'email'  => $request->email,
             'role'  => Auth()->user()->role,
             'nip'  => $request->nip,
+            'jabatan'  => $request->jabatan,
             'image'  => $nama_file,
         ]);
         if ($process) {

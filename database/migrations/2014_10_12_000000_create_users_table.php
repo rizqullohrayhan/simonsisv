@@ -19,6 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('multirole')->nullable();
             $table->string('nip')->nullable();
+            $table->string('jabatan')->nullable();
             $table->string('image')->nullable();
             $table->integer('is_aktif')->default(0);
             $table->timestamp('email_verified_at')->nullable();

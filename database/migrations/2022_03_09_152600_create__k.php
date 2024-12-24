@@ -18,8 +18,10 @@ class CreateK extends Migration
             $table->unsignedBigInteger('id_ik');
             $table->string("P");
             $table->string("deskripsi", 255);
+            $table->unsignedBigInteger("verifikator");
             $table->timestamps();
             $table->foreign('id_ik')->references('id')->on('indikator_IK')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('verifikator')->references('id')->on('roles')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

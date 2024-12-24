@@ -209,27 +209,19 @@ use Illuminate\Support\Facades\Auth;
             <ul class="navbar-nav ml-auto navbar-list">
                 <li class="line-height">
                     <a href="#" class="search-toggle iq-waves-effect d-flex align-items-center">
-                        <?php if (empty(Auth::user()->image) || Auth::user()->image == 'NULL') { ?>
+                        {{-- <?php if (empty(Auth::user()->image) || Auth::user()->image == 'NULL') { ?>
                             <img src="{{ asset('findash/assets/images/user/1.jpg') }}" class="img-fluid rounded mr-3" alt="user">
                         <?php } ?>
                         <?php if (!empty(Auth::user()->image)) { ?>
                             <img src="{{ asset('imageprofil/'.Auth::user()->image) }}" class="img-fluid rounded mr-3" alt="user">
-                        <?php } ?>
+                        <?php } ?> --}}
                         <div class="caption">
                             <?php if (!empty(Auth::user()->name)) { ?>
                                 <h6 class="mb-0 line-height" style="color:white"><?= Auth::user()->name ?></h6>
                             <?php } ?>
                             <p class="mb-0 text" style="color:white">
                                 <?= !empty(Auth::user()->getroleNames()) ? Auth::user()->getroleNames() : '' ?> <br />
-                                <?php
-                                if (!empty($unit)) {
-                                    for ($u = 0; $u < count($unit); $u++) {
-                                        if ($unit[$u]->id == Auth::user()->id_unit) {
-                                            echo $unit[$u]->nama_unit;
-                                        }
-                                    }
-                                }
-                                ?>
+                                {{Auth::user()->unit->nama_unit}}
                             </p>
                         </div>
                     </a>

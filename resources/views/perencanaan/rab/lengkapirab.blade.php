@@ -103,51 +103,32 @@ $totanggaran1 = 0;
                 
                 @foreach($anggaran as $item)
                     @if ($item->anggaran != 0)
+                        <tr>
+                            <td colspan="2" style="text-align: justify;">
+                                <b>{{$item->nomor_mak}} | {{$item->nama_belanja}}</b><br />
+                                {{$item->detail}}
+                                {{$item->catatan}}
+                                <!-- MODAL UPDATE DI ANGGARAN -->
+                                @include('perencanaan/modal2/update_anggaran')
+                            </td>
+                            <td>{{$item->kebutuhan_vol}}</td>
+                            <td>{{$item->kebutuhan_sat}}</td>
+                            <td>{{$item->frek}}</td>
+                            <td>{{$item->perhitungan_vol}}</td>
+                            <td>{{$item->perhitungan_sat}}</td>
+                            <td>{{"Rp. ".number_format($item->harga_satuan,2,',',',')}}</td>
+                            <td>{{"Rp. ".number_format($item->anggaran,2,',',',')}}</td>
+                            <td>
+                                @if ($tor->nama_pic == Auth::user()->name ||   $unitLoginLengkapi == "Admin"  ||   $unitLoginLengkapi == "Prodi")
+                                    @include('perencanaan/aksi/aksi_anggaran')
+                                @endif
+                                @include('perencanaan/modal2/update_anggaran')
+                            </td>
+                        </tr>
                         @php
-                        $totanggaran1 += $item->anggaran;
+                        $totalAnggaranRab += $item->anggaran;
+                        $urut += 1;
                         @endphp
-                        @foreach($detail_mak as $detail)
-                            @if ($item->id_detail_mak == $detail->id)
-                                @php
-                                $kodeKelompok = '';
-                                foreach ($belanja_mak as $belanja) {
-                                    if ($belanja->id == $detail->id_belanja) {
-                                        foreach ($kelompok_mak as $kelompoks) {
-                                            if ($belanja->id_kelompok == $kelompoks->id) {
-                                                $kodeKelompok = $kelompoks->kelompok;
-                                            }
-                                        }
-                                    }
-                                }
-                                @endphp
-                                <tr>
-                                    <td colspan="2" style="text-align: justify;">
-                                        <b>{{$kodeKelompok}} </b><br />
-                                        {{$detail->detail}}
-                                        <?= $item->catatan ?>
-                                        <!-- MODAL UPDATE DI ANGGARAN -->
-                                        @include('perencanaan/modal2/update_anggaran')
-                                    </td>
-                                    <td>{{$item->kebutuhan_vol}}</td>
-                                    <td>{{$item->kebutuhan_sat}}</td>
-                                    <td>{{$item->frek}}</td>
-                                    <td>{{$item->perhitungan_vol}}</td>
-                                    <td>{{$item->perhitungan_sat}}</td>
-                                    <td>{{"Rp. ".number_format($item->harga_satuan,2,',',',')}}</td>
-                                    <td>{{"Rp. ".number_format($item->anggaran,2,',',',')}}</td>
-                                    <td>
-                                        @if ($tor->nama_pic == Auth::user()->name ||   $unitLoginLengkapi == "Admin"  ||   $unitLoginLengkapi == "Prodi")
-                                            @include('perencanaan/aksi/aksi_anggaran')
-                                        @endif
-                                        @include('perencanaan/modal2/update_anggaran')
-                                    </td>
-                                </tr>
-                                @php
-                                $totalAnggaranRab += $item->anggaran;
-                                $urut += 1;
-                                @endphp
-                            @endif
-                        @endforeach
                     @endif
                 @endforeach
 
@@ -162,20 +143,21 @@ $totanggaran1 = 0;
                     <td colspan="10"></td>
                 </tr>
                 <tr>
-                    <td colspan="5"></td>
-                    <td colspan="5" style="text-align: center; padding-bottom: 0;">Surakarta</td>
+                    <td colspan="4"></td>
+                    <td colspan="6" style="text-align: center; padding-bottom: 0;">Surakarta</td>
                 </tr>
                 <tr>
-                    <td colspan="5" style="text-align: center;" width="50%">Kepala Program Studi
+                    <td colspan="4" style="text-align: center;" width="50%">{{ $tor->unit->user->jabatan}}
                         <br />
                         <br />
                         <br />
                         <br />
-                        <b>{{ $tor->unit->kaprodi->name ?? 'Silahkan menambah data Kaprodi' }}</b>
+                        <b>{{ $tor->unit->user->name}}</b>
                         <br/>
-                        NIP. {{ $tor->unit->kaprodi->nip ?? 'Silahkan menambah data Kaprodi' }}
+                        NIP. {{ $tor->unit->user->nip}}
                     </td>
-                    <td colspan="5" style="text-align: center;" width="50%">Perencana/Penanggungjawab
+                    {{-- <td></td> --}}
+                    <td colspan="6" style="text-align: center;" width="50%">Perencana/Penanggungjawab
                         <br />
                         <br />
                         <br />
@@ -188,35 +170,22 @@ $totanggaran1 = 0;
                     <td colspan="10"></td>
                 </tr>
                 <tr>
-                    <td colspan="10" style="text-align: center;">Menyetujui</td>
+                    {{-- <td colspan="5"></td> --}}
+                    <td colspan="10" style="text-align: center; padding-bottom: 0;">Menyetujui</td>
                 </tr>
-                <tr>
+                {{-- <tr>
                     <td colspan="10"></td>
-                </tr>
-                <tr>
-                    <td colspan="3" width="30%">Wakil Dekan Akademik, Riset, dan Kemahasiswaan
+                </tr> --}}
+                <tr >
+                    {{-- <td colspan="5"></td> --}}
+                    <td colspan="10" style="text-align: center;">{{ $verifikator->jabatan }}
                         <br />
                         <br />
                         <br />
                         <br />
-                        <b>{{ $wd1->name }}</b><br />
-                        NIP. {{ $wd1->nip }}
-                    </td>
-                    <td colspan="4">Wakil Dekan Perencanaan, Kerjasama, Bisnis dan Informasi
                         <br />
-                        <br />
-                        <br />
-                        <br />
-                        <b>{{ $wd3->name }}</b><br />
-                        NIP. {{ $wd3->nip }}
-                    </td>
-                    <td colspan="3">Wakil Dekan SDM, Keuangan, dan Logistik
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <b>{{ $wd2->name }}</b><br />
-                        NIP. {{ $wd2->nip }}
+                        <b>{{ $verifikator->name }}</b><br />
+                        NIP. {{ $verifikator->nip }}
                     </td>
                 </tr>
                 <!-- TANDA TANGAN -->

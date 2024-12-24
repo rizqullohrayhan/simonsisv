@@ -13,7 +13,7 @@
           @csrf
           <input type="hidden" name="total_anggaran_tor" value="{{$tor->jumlah_anggaran}}">
           <input type="hidden" name="anggaran_sebelum_rev" value="{{$item->anggaran}}"> <!-- anggaran sebelum direvisi berapa? -->
-          <input type="hidden" name="id_detail_mak" value="{{$item->id_detail_mak}}"> <!-- anggaran sebelum direvisi berapa? -->
+          {{-- <input type="hidden" name="id_detail_mak" value="{{$item->id_detail_mak}}"> <!-- anggaran sebelum direvisi berapa? --> --}}
           <input type="hidden" name="id_tor" value="<?= $tor->id ?>">
           <div class="form-group">
             <label>RAB </label>
@@ -22,81 +22,19 @@
             </select>
           </div>
           <div class="form-group">
-            <label>Kategori MAK</label><br />
-            <select class="js-example-basic-single1b" name="id_mak" style="width: 100%;height:50px;line-height:45px;color:#a09e9e;background:#00000000;border:1px solid #f1f1f1;border-radius:5px">
-              <?php
-              foreach ($detail_mak as $detailMak) {
-                if ($item->id_detail_mak == $detailMak->id) {
-                  foreach ($belanja_mak as $belanjaMak) {
-                    if ($detailMak->id_belanja == $belanjaMak->id) {
-                      foreach ($kelompok_mak as $kelompokMak) {
-                        if ($kelompokMak->id == $belanjaMak->id_kelompok) {
-                          foreach ($mak as $Mak) {
-                            if ($kelompokMak->id_mak == $Mak->id) {
-                              $MakPilih = $Mak->id;
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              } ?>
-              <?php for ($e = 0; $e < count($mak); $e++) { ?>
-                <option value="{{$mak[$e]->id}}" style="color:1px solid #f1f1f1;" {{$mak[$e]->id == $MakPilih ? 'selected' : ''}}>{{$mak[$e]->jenis_belanja}}</option>
-              <?php } ?>
-            </select>
+            <label>Nomor MAK</label>
+            <input name="nomor_mak" id="nomor_mak" value="{{$item->nomor_mak}}" type="text" class="form-control" required>
+            <span>Contoh: 51040101</span>
           </div>
-          <div class="container ml-2 mr-2">
-            <div class="form-group">
-              <label>Nama Kelompok</label>
-              <select class="js-example-basic-single2b" name="id_kelompok" aria-hidden="true" data-select2-id="select2-data-58-6f8l" style="width: 100%;height:50px;line-height:45px;color:#a09e9e;background:#00000000;border:1px solid #f1f1f1;border-radius:5px">
-                <?php
-                foreach ($detail_mak as $detailMak) {
-                  if ($item->id_detail_mak == $detailMak->id) {
-                    foreach ($belanja_mak as $belanjaMak) {
-                      if ($detailMak->id_belanja == $belanjaMak->id) {
-                        foreach ($kelompok_mak as $kelompokMak) {
-                          if ($kelompokMak->id == $belanjaMak->id_kelompok) {
-                ?>
-                            <option value="{{$kelompokMak->id}}" style="color:1px solid #f1f1f1;">{{$kelompokMak->kelompok}}</option>
-                <?php }
-                        }
-                      }
-                    }
-                  }
-                } ?>
-              </select>
-            </div>
-          </div>
-          <div class="container ml-2 mr-2">
-            <div class="form-group">
+          <div class="form-group">
               <label>Nama Belanja</label>
-              <select class="js-example-basic-single3b" name="id_belanja" aria-hidden="true" data-select2-id="select2-data-58-6f8l" style="width: 100%;height:50px;line-height:45px;color:#a09e9e;background:#00000000;border:1px solid #f1f1f1;border-radius:5px">
-                <?php
-                foreach ($belanja_mak as $belanjaMak) {
-                  foreach ($detail_mak as $detailMak) {
-                    if ($item->id_detail_mak == $detailMak->id) {
-                      if ($detailMak->id_belanja == $belanjaMak->id) { ?>
-                        <option value="{{$belanjaMak->id}}" style="color:1px solid #f1f1f1;">{{$belanjaMak->belanja}}</option>
-                <?php }
-                    }
-                  }
-                } ?>
-              </select>
-            </div>
+              <input name="nama_belanja" id="nama_belanja" value="{{$item->nama_belanja}}" type="text" class="form-control" required>
+              <span>Contoh: Beban Perjalanan Dinas Pegawai-DN</span>
           </div>
-          <div class="container ml-2 mr-2">
-            <div class="form-group">
-              <label>Nama Detail</label>
-              <select class="js-example-basic-single4b" name="id_detail_mak" aria-hidden="true" data-select2-id="select2-data-58-6f8l" style="width: 100%;height:50px;line-height:45px;color:#a09e9e;background:#00000000;border:1px solid #f1f1f1;border-radius:5px">
-                <?php foreach ($detail_mak as $detailMak) {
-                  if ($item->id_detail_mak == $detailMak->id) { ?>
-                    <option value="{{old('id_detail',$detailMak->id)}}" style="color:1px solid #f1f1f1;">{{$detailMak->detail}}</option>
-                <?php }
-                } ?>
-              </select>
-            </div>
+          <div class="form-group">
+              <label>Detail</label>
+              <input name="detail" id="detail" value="{{$item->detail}}" type="text" class="form-control">
+              <span>Contoh: 124266 | Transportasi Kegiatan Dalam Kota (PP) - Pegawai UNS</span>
           </div>
           <div class="form-group">
             <label for="exampleFormControlTextarea1">Catatan</label>

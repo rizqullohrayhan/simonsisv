@@ -183,9 +183,12 @@ use Illuminate\Support\Facades\Auth;
                                                         <div class="card iq-mb-3 shadow">
                                                             <img width="700" src="{{ asset('assets/contoh/contohiku.png') }}" class="card-img-top">
                                                             <div class="card-body">
-                                                                <b>
-                                                                    <h6 class="card-title">Indikator Kinerja Utama (IKU)</h6>
-                                                                </b>
+                                                                <h6 class="card-title"><b>Indikator Kinerja Utama (IKU)</b></h6>
+                                                                <span>
+                                                                    - Indikator Kinerja dimaksudkan sebagai alat ukur pencapaian tujuan <br>
+                                                                    - Sebutkan target langsung dari setiap kegiatan pada akhir tahun <br>
+                                                                    - Sajikan baik Indikator Kinerja Utama, dan Output
+                                                                </span>
                                                                 @foreach($komentar['iku'] as $ikus)
                                                                 <h6 style="color: #dc3545;">{{$ikus}}</h6>
                                                                 <hr class="mt-3">
@@ -203,11 +206,14 @@ use Illuminate\Support\Facades\Auth;
                                                     </div>
                                                     <div class="col-sm-8">
                                                         <div class="card iq-mb-3 shadow">
-                                                            <img width="700" src="../../assets/contoh/contohik.png" class="card-img-top">
+                                                            <img width="700" src="{{ asset('assets/contoh/contohik.png') }}" class="card-img-top">
                                                             <div class="card-body">
-                                                                <b>
-                                                                    <h6 class="card-title">Indikator Kinerja Kegiatan (IK)</h6>
-                                                                </b>
+                                                                <h6 class="card-title"><b>Indikator Kinerja Kegiatan (IK)</b></h6>
+                                                                <span>
+                                                                    - Indikator Kinerja dimaksudkan sebagai alat ukur pencapaian tujuan <br>
+                                                                    - Sebutkan target langsung dari setiap kegiatan pada akhir tahun <br>
+                                                                    - Sajikan baik Indikator Kinerja Utama, dan Output
+                                                                </span>
                                                                 @foreach($komentar['ik'] as $iks)
                                                                 <h6 style="color: #dc3545;">{{$iks}}</h6>
                                                                 <hr class="mt-3">
@@ -241,7 +247,13 @@ use Illuminate\Support\Facades\Auth;
                                         <div class="form-card text-left">
                                             <div class="container mt-3">
                                                 <div class="form-group">
-                                                    <label>Latar Belakang</label>
+                                                    <label><b>Latar Belakang</b></label>
+                                                    <br>
+                                                    <span>
+                                                        Jelaskan : <br>
+                                                        - Argumentasi tentang mengapa usulan Komponen Input ini adalah pilihan tepat untuk menyelesaikan permasalahan <br>
+                                                        - Keterkaitan antara program Renstra dan Kegiatan
+                                                    </span>
                                                     @foreach($komentar['latar_belakang'] as $latarbelakangs)
                                                     <h6 style="color: #dc3545;">{{$latarbelakangs}}</h6>
                                                     <hr class="mt-3">
@@ -249,7 +261,12 @@ use Illuminate\Support\Facades\Auth;
                                                     <textarea class="ckeditor form-control" id="latar_belakang" name="latar_belakang" value="{!!old('latar_belakang',$tor['latar_belakang'])!!}">{{$tor['latar_belakang']}}</textarea>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label>Rasionalisasi</label>
+                                                    <label><b>Rasionalisasi</b></label>
+                                                    <br>
+                                                    <span>
+                                                        Jelaskan keterkaitan/ akibat logis antara kegiatan yang dilaksanakan dengan KPI/IKK yang akan dicapai.
+                                                        (Jika ... Maka ... / dengan ... Maka ...)
+                                                    </span>
                                                     @foreach($komentar['rasionalisasi'] as $rasionalisasis)
                                                         <h6 style="color: #dc3545;">{{$rasionalisasis}}</h6>
                                                         <hr class="mt-3">
@@ -257,7 +274,11 @@ use Illuminate\Support\Facades\Auth;
                                                     <textarea class="ckeditor form-control" id="rasionalisasi" name="rasionalisasi" rows="2">{{$tor['rasionalisasi']}}</textarea>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label>Tujuan</label>
+                                                    <label><b>Tujuan</b></label>
+                                                    <br>
+                                                    <span>
+                                                        Uraikan tujuan yang ingin dicapai oleh kegiatan ini
+                                                    </span>
                                                     @foreach($komentar['tujuan'] as $tujuans)
                                                     <h6 style="color: #dc3545;">{{$tujuans}}</h6>
                                                     <hr class="mt-3">
@@ -265,7 +286,12 @@ use Illuminate\Support\Facades\Auth;
                                                     <textarea class="ckeditor form-control" id="tujuan" name="tujuan" rows="2">{{$tor['tujuan']}}</textarea>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label>mekanisme</label>
+                                                    <label><b>Mekanisme</b></label>
+                                                    <br>
+                                                    <span>
+                                                        - Jelaskan rincian, tahapan dan langkah-langkah kegiatan yang akan dilaksanakan untuk menghasilkan output <br>
+                                                        - Fokuskan pada pencapaian indikator kinerja terkait
+                                                    </span>
                                                     @foreach($komentar['mekanisme'] as $mekanismes)
                                                     <h6 style="color: #dc3545;">{{$mekanismes}}</h6>
                                                     <hr class="mt-3">
@@ -273,7 +299,12 @@ use Illuminate\Support\Facades\Auth;
                                                     <textarea class="ckeditor form-control" id="mekanisme" name="mekanisme" rows="2">{{$tor['mekanisme']}}</textarea>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label>keberlanjutan</label>
+                                                    <label><b>Keberlanjutan</b></label>
+                                                    <br>
+                                                    <span>
+                                                        - Jelaskan bagaimana kegiatan ini dapat terus berlanjut setelah investasi selesai <br>
+                                                        - Implikasi finansial, alokasi Sumber daya dan komitmen manajemen
+                                                    </span>
                                                     @foreach($komentar['keberlanjutan'] as $keberlanjutans)
                                                     <h6 style="color: #dc3545;">{{$keberlanjutans}}</h6>
                                                     <hr class="mt-3">
@@ -291,6 +322,11 @@ use Illuminate\Support\Facades\Auth;
                                             <div class="container mt-3">
                                                 <div class="form-group">
                                                     <label>Nama PIC Kegiatan</label>
+                                                    <br>
+                                                    <span>
+                                                        - Siapa yang bertanggung jawab terhadap pelaksanaan program ini. (TTD)
+                                                    </span>
+                                                    <br>
                                                     @foreach($komentar['penanggung'] as $penanggungs)
                                                     <h6 style="color: #dc3545;">{{$penanggungs}}</h6>
                                                     <hr class="mt-3">
@@ -408,7 +444,7 @@ use Illuminate\Support\Facades\Auth;
         <script src="{{ asset('findash/assets/js/chart-custom.js')}}"></script>
         <!-- Custom JavaScript -->
         <script src="{{ asset('findash/assets/js/custom.js')}}"></script>
-        <script type="text/javascript">
+        {{-- <script type="text/javascript">
             var i = 0;
             $("#dynamic-ar").click(function() {
                 ++i;
@@ -417,12 +453,19 @@ use Illuminate\Support\Facades\Auth;
             $(document).on('click', '.remove-input-field', function() {
                 $(this).parents('<div class="col-md-8">').remove();
             });
-        </script>
+        </script> --}}
 </body>
-<script src="//cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
+{{-- <script src="//cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script> --}}
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
-        $('.ckeditor').ckeditor();
+        $('.ckeditor').summernote({
+            toolbar: [
+                ['style', ['bold', 'italic', 'underline']],
+                ['font', ['strikethrough', 'superscript', 'subscript']],
+                ['para', ['ul', 'ol']],
+            ]
+        });
     });
 </script>
 

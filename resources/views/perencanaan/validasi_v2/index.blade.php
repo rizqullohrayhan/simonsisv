@@ -78,7 +78,7 @@ use Illuminate\Support\Facades\Auth;
                                         <a class="nav-link status" style="cursor: pointer;" data-status="3" aria-controls="pills-home" aria-selected="false">Sudah Revisi</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link status" style="cursor: pointer;" data-status="4" aria-controls="pills-home" aria-selected="false">Sudah Dinilai</a>
+                                        <a class="nav-link status" style="cursor: pointer;" data-status="4" aria-controls="pills-home" aria-selected="false">Sudah Disetujui</a>
                                     </li>
                                 </ul>
                                 <hr style="margin-top: 0">
@@ -99,37 +99,8 @@ use Illuminate\Support\Facades\Auth;
                                     </thead>
 
                                     <tbody id="show_data">
-                                        {{-- @foreach ($tors as $tor)
-                                            <tr>
-                                                <td>{{ $loop->iteration }}</td>
-                                                <td>{{ $tor->triwulan->triwulan }}</td>
-                                                <td>{{ $tor->unit->nama_unit }}</td>
-                                                <td>{{ $tor->nama_kegiatan }}</td>
-                                                <td>{{ $tor->jenis_ajuan }}</td>
-                                                <td>{{ \Carbon\Carbon:: }}</td>
-                                                <td>{{ $tor->pic->name }}</td>
-                                                <td>{{ 'Rp. ' . number_format($tor->jumlah_anggaran, 2, ',', ',') }}</td>
-                                                @php
-                                                    $TrxStatusTor = \App\Models\TrxStatusTor::where('id_tor', $tor->id)->latest()->first();
-                                                    $nama_status = DB::table('status')->where('id', $TrxStatusTor->id_status)->first()->nama_status;
-                                                @endphp
-                                                <td>
-                                                    {{ $nama_status }}
-                                                    <button class="badge badge-info" data-toggle="modal" data-placement="top" data-target="#detail_tor{{ $tor->id }}">
-                                                        <i class="fa fa-tasks"></i>
-                                                    </button>
-                                                    @include('perencanaan/validasi_v2/modal/tor/detail')
-                                                </td>
-                                                <td>
-                                                    <a href="{{ url('/detailtor/' . base64_encode($tor->id)) }}"><button class="badge badge-warning rounded">Detail
-                                                        </button></a>
-                                                </td>
-                                            </tr>
-                                        @endforeach --}}
                                     </tbody>
                                 </table>
-                                <div class="table-responsive">
-                                </div>
                             </div>
                         </div>
                     </div>

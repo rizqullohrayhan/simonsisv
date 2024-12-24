@@ -119,11 +119,14 @@ use Illuminate\Support\Facades\Auth;
                                                         @enderror
                                                     </div><br />
                                                     <div class="row" style="border: 1cm;">
-                                                        <div class="col-sm-4">
+                                                        <div class="col-sm-6">
                                                             <div class="card">
-                                                                <b>
-                                                                    <h6 class="card-title"><b>Indikator Kinerja Utama (IKU)</b></h6>
-                                                                </b>
+                                                                <h6 class="card-title"><b>Indikator Kinerja Utama (IKU)</b></h6>
+                                                                <span>
+                                                                    - Indikator Kinerja dimaksudkan sebagai alat ukur pencapaian tujuan <br>
+                                                                    - Sebutkan target langsung dari setiap kegiatan pada akhir tahun <br>
+                                                                    - Sajikan baik Indikator Kinerja Utama, dan Output
+                                                                </span>
                                                                 <div class="form-group">
                                                                     <label>Realisasi IKU {{date('Y')-1}} (%)</label>
                                                                     <input name="realisasi_IKU" value="{{old('realisasi_IKU')}}" id="realisasi_IKU" type="text" class="form-control @error('realisasi_IKU') is-invalid @enderror">
@@ -140,11 +143,14 @@ use Illuminate\Support\Facades\Auth;
                                                                 @enderror
                                                             </div>
                                                         </div>
-                                                        <div class="col-sm-4">
+                                                        <div class="col-sm-6">
                                                             <div class="card">
-                                                                <b>
-                                                                    <h6 class="card-title"><b>Indikator Kinerja Kegiatan (IK)</b></h6>
-                                                                </b>
+                                                                <h6 class="card-title"><b>Indikator Kinerja Kegiatan (IK)</b></h6>
+                                                                <span>
+                                                                    - Indikator Kinerja dimaksudkan sebagai alat ukur pencapaian tujuan <br>
+                                                                    - Sebutkan target langsung dari setiap kegiatan pada akhir tahun <br>
+                                                                    - Sajikan baik Indikator Kinerja Utama, dan Output
+                                                                </span>
                                                                 <div class="form-group">
                                                                     <label>Realisasi IK {{date('Y')-1}} (%)</label>
                                                                     <input name="realisasi_IK" value="{{old('realisasi_IK')}}" id="realisasi_IK" type="text" class="form-control @error('realisasi_IK') is-invalid @enderror">
@@ -180,6 +186,12 @@ use Illuminate\Support\Facades\Auth;
                                             <div class="container mt-3">
                                                 <div class="form-group">
                                                     <label><b>Latar Belakang</b></label>
+                                                    <br>
+                                                    <span>
+                                                        Jelaskan : <br>
+                                                        - Argumentasi tentang mengapa usulan Komponen Input ini adalah pilihan tepat untuk menyelesaikan permasalahan <br>
+                                                        - Keterkaitan antara program Renstra dan Kegiatan
+                                                    </span>
                                                     <textarea class="ckeditor form-control @error('latar_belakang') is-invalid @enderror" id="latar_belakang" name="latar_belakang">{{old('latar_belakang')}}</textarea>
                                                 </div>
                                                 @error('latar_belakang')
@@ -187,6 +199,11 @@ use Illuminate\Support\Facades\Auth;
                                                 @enderror
                                                 <div class="form-group">
                                                     <label><b>Rasionalisasi</b></label>
+                                                    <br>
+                                                    <span>
+                                                        Jelaskan keterkaitan/ akibat logis antara kegiatan yang dilaksanakan dengan KPI/IKK yang akan dicapai.
+                                                        (Jika ... Maka ... / dengan ... Maka ...)
+                                                    </span>
                                                     <textarea class="ckeditor form-control @error('rasionalisasi') is-invalid @enderror" id="rasionalisasi" name="rasionalisasi" rows="2">{{old('rasionalisasi')}}</textarea>
                                                 </div>
                                                 @error('rasionalisasi')
@@ -194,6 +211,10 @@ use Illuminate\Support\Facades\Auth;
                                                 @enderror
                                                 <div class="form-group">
                                                     <label><b>Tujuan</b></label>
+                                                    <br>
+                                                    <span>
+                                                        Uraikan tujuan yang ingin dicapai oleh kegiatan ini
+                                                    </span>
                                                     <textarea class="ckeditor form-control @error('tujuan') is-invalid @enderror" id="tujuan" name="tujuan" rows="2">{{old('tujuan')}}</textarea>
                                                 </div>
                                                 @error('tujuan')
@@ -201,6 +222,11 @@ use Illuminate\Support\Facades\Auth;
                                                 @enderror
                                                 <div class="form-group">
                                                     <label><b>Mekanisme</b></label>
+                                                    <br>
+                                                    <span>
+                                                        - Jelaskan rincian, tahapan dan langkah-langkah kegiatan yang akan dilaksanakan untuk menghasilkan output <br>
+                                                        - Fokuskan pada pencapaian indikator kinerja terkait
+                                                    </span>
                                                     <textarea class="ckeditor form-control @error('mekanisme') is-invalid @enderror" id="mekanisme" name="mekanisme" rows="2">{{old('mekanisme')}}</textarea>
                                                 </div>
                                                 @error('mekanisme')
@@ -208,6 +234,11 @@ use Illuminate\Support\Facades\Auth;
                                                 @enderror
                                                 <div class="form-group">
                                                     <label><b>Keberlanjutan</b></label>
+                                                    <br>
+                                                    <span>
+                                                        - Jelaskan bagaimana kegiatan ini dapat terus berlanjut setelah investasi selesai <br>
+                                                        - Implikasi finansial, alokasi Sumber daya dan komitmen manajemen
+                                                    </span>
                                                     <textarea class="ckeditor form-control @error('keberlanjutan') is-invalid @enderror" id="keberlanjutan" name="keberlanjutan" rows="2">{{old('keberlanjutan')}}</textarea>
                                                 </div>
                                                 @error('keberlanjutan')
@@ -224,8 +255,15 @@ use Illuminate\Support\Facades\Auth;
                                         <div class="form-card text-left">
                                             <div class="container mt-3">
                                                 <div class="form-group">
-                                                    <label><b>Nama Perancana / Penanggungjawab Kegiatan</b></label><br />
+                                                    <label><b>Nama PIC Kegiatan</b></label>
+                                                    <br>
+                                                    <span>
+                                                        - Siapa yang bertanggung jawab terhadap pelaksanaan program ini. (TTD)
+                                                    </span>
+                                                    <br>
+                                                    
                                                     <select name="nama_pic" id="selectnya" onchange="Ganti()" class="form-control @error('nama_pic') is-invalid @enderror" style="width: 100%;height:50px;line-height:45px;color:#a09e9e;background:#00000000;border:1px solid #f1f1f1;border-radius:5px">
+                                                        <option>-</option>
                                                         @foreach ($pics as $pic)
                                                             <option value="{{$pic->id}}" @if (old('nama_pic') == $pic->id) selected @endif>{{$pic->name}}</option>
                                                         @endforeach
@@ -247,8 +285,10 @@ use Illuminate\Support\Facades\Auth;
 
                                                     function Ganti() {
                                                         var namapic = document.getElementById('selectnya').value;
+                                                        let url = "{{route('getEmailPIC', ':namapic')}}";
+                                                        url = url.replace(':namapic', namapic);
                                                         $.ajax({
-                                                            url: '/getEmailPIC/' + namapic,
+                                                            url: url,
                                                             type: "GET",
                                                             data: {
                                                                 "_token": "{{ csrf_token() }}",
@@ -367,14 +407,19 @@ use Illuminate\Support\Facades\Auth;
             });
         </script>
 </body>
-<script src="https://cdn.ckeditor.com/4.24.0-lts/standard/ckeditor.js"></script>
+{{-- <script src="https://cdn.ckeditor.com/4.24.0-lts/standard/ckeditor.js"></script> --}}
+{{-- <script src="https://cdn.ckbox.io/ckbox/2.5.1/ckbox.js"></script> --}}
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
-        // CKEDITOR.replace( 'latar_belakang' );
-        // CKEDITOR.replace( 'rasionalisasi' );
-        // CKEDITOR.replace( 'tujuan' );
-        // CKEDITOR.replace( 'mekanisme' );
-        // CKEDITOR.replace( 'keberlanjutan' );
+        $('.ckeditor').summernote({
+            toolbar: [
+                ['style', ['bold', 'italic', 'underline']],
+                ['font', ['strikethrough', 'superscript', 'subscript']],
+                ['para', ['ul', 'ol']],
+            ],
+        });
+        $('.ckeditor').summernote('lineHeight', 20);
     });
 </script>
 

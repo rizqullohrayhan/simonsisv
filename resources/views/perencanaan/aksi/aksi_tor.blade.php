@@ -28,8 +28,8 @@
                                         $pengajuan++;
                                         $detail = 'Detail';
                                     }
-                                    if ($status_item->nama_status == 'Sudah Dinilai') {
-                                        $final = 'Sudah Dinilai';
+                                    if ($status_item->nama_status == 'Sudah Disetujui') {
+                                        $final = 'Sudah Disetujui';
                                     }
                                     if ($status_item->nama_status == 'Sudah Revisi') {
                                         $pengajuanPerbaikan++;
@@ -73,7 +73,7 @@
     }
 @endphp
 
-@if ($pengajuan == 0 && ($tItem->nama_pic == Auth::user()->name || $RoleLogin == 'Prodi' || $RoleLogin == 'Admin'))
+@if ($pengajuan == 0 && ($tItem->id_unit == Auth::user()->id_unit || $RoleLogin == 'Prodi' || $RoleLogin == 'Admin'))
     @can('tor_update')
         <a href="{{ url('/tor/update/' . base64_encode($tItem->id)) }}" data-toggle="tooltip" title="Update">
             <button class="badge badge-primary rounded">
@@ -142,6 +142,7 @@
     @endif
 @endcan
 
-@if ($final == 'Sudah Dinilai')
+@if ($final == 'Sudah Disetujui')
     <badge class="badge badge-info rounded" data-toggle="modal"> SELESAI</badge>
+    <a href="{{url('exportPdf/' . base64_encode($tItem->id) )}}" class="badge badge-info rounded" target="_blank"> Print</a>
 @endif

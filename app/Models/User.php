@@ -24,12 +24,16 @@ class User extends Authenticatable
     protected $primaryKey = 'id';
     public $keyType = 'string';
     protected $table = 'users';
-    protected $guarded = [];
+    // protected $guarded = ['id'];
     protected $fillable = [
         'id_unit',
         'name',
         'email',
         'role',
+        'multirole',
+        'nip',
+        'jabatan',
+        'image',
         'is_aktif',
         'email_verified_at',
         'password',
@@ -101,5 +105,10 @@ class User extends Authenticatable
     public function trxStatusTor()
     {
         return $this->hasMany(TrxStatusTor::class, 'create_by', 'id');
+    }
+
+    public function unit()
+    {
+        return $this->belongsTo(Unit::class, 'id_unit', 'id');
     }
 }

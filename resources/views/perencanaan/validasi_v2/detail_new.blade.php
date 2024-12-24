@@ -50,7 +50,7 @@ use Spatie\Permission\Contracts\Role;
                 foreach ($status as $status_item) {
                     if ($trx_item->id_status == $status_item->id) {
                         $current_status = $status_item->nama_status;
-                        if ($status_item->nama_status == "Sudah Dinilai") {
+                        if ($status_item->nama_status == "Sudah Disetujui") {
                             $disetujui = 1;
                         }
                         if ($status_item->nama_status == "Sudah Revisi") {
@@ -71,7 +71,7 @@ use Spatie\Permission\Contracts\Role;
             function buttonPlus($Href)
             {
                 echo ' <a id="validasiplus" class="badge badge-danger btn-sm shadow" data-toggle="collapse" href="' . $Href . '" role="button" aria-expanded="false" aria-controls="' . $Href . '">
-                <i class="las la-plus"></i> Tambah
+                <i class="las la-plus"></i> Tambah Komentar
             </a>';
             }
 
@@ -94,18 +94,22 @@ use Spatie\Permission\Contracts\Role;
 
         @endphp
         
-        <form method="post" action="/validasi/createValTor">
+        <form method="post" action="/validasi/createValTor" enctype="multipart/form-data">
             @csrf
+            <input type="hidden" name="id_tor" value="{{$tor->id}}">
+            <input type="hidden" name="judul" value="{{$tor->nama_kegiatan}}">
+            <input type="hidden" name="create_by" value="{{Auth::user()->id}}">
+            <input type="hidden" name="role_by" value="{{Auth::user()->toRole->name}}">
             <!-- Page Content  -->
             <div id="content-page" class="content-page">
                 <div class="container-fluid">
                     <div class="iq-card">
                         <div class="container mt-2 mb-2 mr-2 ml-2">
                             <?php if (Auth::user()->getroleNames()[0] != 'Admin') { ?>
-                                <a href="{{url('/validasi')}}"><button type="button" class="btn btn-primary btn-sm mr-2">Back</button></a>
+                                <a href="{{url('/validasi')}}"><button type="button" class="btn btn-primary btn-sm mr-2 mt-2">Back</button></a>
                             <?php }
                             if (Auth::user()->getroleNames()[0] == 'Admin') { ?>
-                                <a href="{{url('/monitoringUsulan')}}"><button type="button" class="btn btn-primary btn-sm mr-2">Back</button></a>
+                                <a href="{{url('/monitoringUsulan')}}"><button type="button" class="btn btn-primary btn-sm mr-2 mt-1">Back</button></a>
                             <?php } ?>
                         </div>
                         <div class="container mx-auto" style="max-width: 1000px">
@@ -142,23 +146,23 @@ use Spatie\Permission\Contracts\Role;
                                     </tr>
                                     <tr>
                                         <td>Jumlah Anggaran yang Diajukan</td>
-                                        <td>: {{ $tor->jumlah_anggaran }}</td>
+                                        <td>: {{"Rp. ".number_format($tor->jumlah_anggaran,2,',',',')}}</td>
                                     </tr>
-                                    <tr>
+                                    {{-- <tr>
                                         <td>Lihat File Scan TOR dan RAB</td>
-                                        <td>: <a href="#" target="_blank" class="btn btn-info btn-sm">Lihat File</a></td>
-                                    </tr>
-                                    @if ($disetujui == 0)
+                                        <td>: <a href="{{asset('storage/fileScan/'. $tor->file)}}" target="_blank" class="btn btn-info btn-sm">Lihat File</a></td>
+                                    </tr> --}}
+                                    @if ($current_status == 'Belum Dinilai' || $current_status == 'Sudah Revisi')
                                     <tr>
                                         <td>Status Validasi</td>
                                         <td>
                                             <div class="form-group">:
                                                 <div class="custom-control custom-radio custom-control-inline">
-                                                    <input type="radio" id="statusRevisi" name="status" value="2" class="custom-control-input">
+                                                    <input type="radio" id="statusRevisi" name="id_status" value="2" class="custom-control-input" required>
                                                     <label class="custom-control-label" for="statusRevisi"> Revisi</label>
                                                 </div>
                                                 <div class="custom-control custom-radio custom-control-inline">
-                                                    <input type="radio" id="statusSelesai" name="status" value="4" class="custom-control-input">
+                                                    <input type="radio" id="statusSelesai" name="id_status" value="4" class="custom-control-input">
                                                     <label class="custom-control-label" for="statusSelesai"> Selesai</label>
                                                 </div>
                                             </div>
@@ -171,13 +175,9 @@ use Spatie\Permission\Contracts\Role;
                                             @include('perencanaan.validasi_v2.modal.tor.komentar')
                                         </td>
                                     </tr>
-                                    <tr id="columnSuratHasil" class="invisible">
-                                        <td>Upload Surat Hasil</td>
-                                        <td><input type="file" class="form-control-file" id="file" name="file"></td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td><button class="btn btn-primary btn-sm" type="submit" hidden>Validasi</button></td>
+                                    <tr><td></td></tr>
+                                    <tr class="text-center">
+                                        <td colspan="2"><button class="btn btn-primary btn-sm" type="submit">Validasi TOR & RAB</button></td>
                                     </tr>
                                     @endif
                                 </tbody>
@@ -190,7 +190,7 @@ use Spatie\Permission\Contracts\Role;
     </div>
 <!-- Wrapper END -->
 
-@if($current_status == 'Revisi' || $current_status == 'Sudah Dinilai')
+@if($current_status == 'Revisi' || $current_status == 'Sudah Disetujui')
     <script>
         var n = document.getElementById("validasiplus");
         while (n) {
@@ -199,16 +199,25 @@ use Spatie\Permission\Contracts\Role;
         }
     </script>
 @endif
+<script>
+    document.querySelector('.custom-file-input').addEventListener('change',function(e){
+        var fileName = document.getElementById("file").files[0].name;
+        var nextSibling = e.target.nextElementSibling
+        nextSibling.innerText = fileName
+    })
+</script>
 
 <script>
-    $('input[name="status"]').change(function(){
+    $('input[name="id_status"]').change(function(){
         $('button[type="submit"]').removeAttr('hidden');
     })
-    $('input[name="status"]').on("click", function(){
+    $('input[name="id_status"]').on("click", function(){
         let status = $('input[type="radio"]:checked').val();
         if (status == '4') {
             $('#columnSuratHasil').removeClass('invisible');
+            $('#file').attr('required', true);
         } else {
+            $('#file').removeAttr('required');
             $('#columnSuratHasil').addClass('invisible');
             $('#file').val('');
         }

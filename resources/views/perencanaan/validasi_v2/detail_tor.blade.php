@@ -106,7 +106,7 @@ use Spatie\Permission\Contracts\Role;
                                             foreach ($status as $status_item) {
                                                 if ($trx_item->id_status == $status_item->id) {
                                                     $current_status = $status_item->nama_status;
-                                                    if ($status_item->nama_status == "Sudah Dinilai") {
+                                                    if ($status_item->nama_status == "Sudah Disetujui") {
                                                         $disetujui = 1;
                                                     }
                                                     if ($status_item->nama_status == "Sudah Revisi") {
@@ -170,7 +170,7 @@ use Spatie\Permission\Contracts\Role;
                                                 </tr>
                                                 <tr>
                                                     <td><b>2.</b></td>
-                                                    <td><b>Indikator Kegiatan (IK)</b></td>
+                                                    <td><b>Indikator Kinerja Kegiatan (IK)</b></td>
                                                     <td>:</td>
                                                     <td><b>{{$ik}}</b></td>
                                                     <td colspan="4">{{$deskripsi_ik}}</td>
@@ -629,14 +629,14 @@ use Spatie\Permission\Contracts\Role;
                                                 </tr>
                                                 <!-- TANDA TANGAN -->
                                                 <tr>
-                                                    <td colspan="4" style="text-align: center;" width="50%">Kepala Program Studi
+                                                    <td colspan="4" style="text-align: center;" width="50%">{{ $tor->unit->user->jabatan }}
                                                         <br />
                                                         <br />
                                                         <br />
                                                         <br />
-                                                        <b>{{ $tor->unit->kaprodi->name }}</b>
+                                                        <b>{{ $tor->unit->user->name }}</b>
                                                         <br/>
-                                                        NIP. {{ $tor->unit->kaprodi->nip }}
+                                                        NIP. {{ $tor->unit->user->nip }}
                                                     </td>
                                                     <td colspan="4" style="text-align: center;">Perencana/Penanggungjawab
                                                         <br />
@@ -657,23 +657,15 @@ use Spatie\Permission\Contracts\Role;
                                                     <td colspan="8"></td>
                                                 </tr>
                                                 <tr>
-                                                    <td colspan="2" width="30%">Wakil Dekan Akademik, Riset, dan Kemahasiswaan
+                                                    <td colspan="8">{{ $verifikator->jabatan }}
                                                         <br />
                                                         <br />
                                                         <br />
                                                         <br />
-                                                        <b>{{ $wd1->name }}</b><br />
-                                                        NIP. {{ $wd1->nip }}
+                                                        <b>{{ $verifikator->name }}</b><br />
+                                                        NIP. {{ $verifikator->nip }}
                                                     </td>
-                                                    <td colspan="3" width="30%">Wakil Dekan Perencanaan, Kerjasama, Bisnis dan Informasi
-                                                        <br />
-                                                        <br />
-                                                        <br />
-                                                        <br />
-                                                        <b>{{ $wd2->name }}</b><br />
-                                                        NIP. {{ $wd2->nip }}
-                                                    </td>
-                                                    <td colspan="3">Wakil Dekan SDM, Keuangan, dan Logistik
+                                                    {{-- <td colspan="3" width="30%">{{ $wd3->jabatan }}
                                                         <br />
                                                         <br />
                                                         <br />
@@ -681,6 +673,14 @@ use Spatie\Permission\Contracts\Role;
                                                         <b>{{ $wd3->name }}</b><br />
                                                         NIP. {{ $wd3->nip }}
                                                     </td>
+                                                    <td colspan="3">{{ $wd2->jabatan }}
+                                                        <br />
+                                                        <br />
+                                                        <br />
+                                                        <br />
+                                                        <b>{{ $wd2->name }}</b><br />
+                                                        NIP. {{ $wd2->nip }}
+                                                    </td> --}}
                                                 </tr>
                                             <!-- TANDA TANGAN -->
                                             </tbody>
@@ -786,7 +786,7 @@ use Spatie\Permission\Contracts\Role;
     </div>
 <!-- Wrapper END -->
 
-@if($current_status == 'Revisi' || $current_status == 'Sudah Dinilai')
+@if($current_status == 'Revisi' || $current_status == 'Sudah Disetujui')
     <script>
         var n = document.getElementById("validasiplus");
         while (n) {

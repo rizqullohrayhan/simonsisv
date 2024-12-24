@@ -10,48 +10,79 @@
     <!-- Favicon -->
     <link href="{{ asset('assets/img/logo.png') }}" rel="icon">
     <link href="{{ asset('assets/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="{{ asset('findash/assets/css/bootstrap.min.css') }}">
-    <!-- Typography CSS -->
-    <link rel="stylesheet" href="{{ asset('findash/assets/css/typography.css') }}">
-    <!-- Style CSS -->
-    <link rel="stylesheet" href="{{ asset('findash/assets/css/style.css') }}">
-    <!-- Responsive CSS -->
-    <link rel="stylesheet" href="{{ asset('findash/assets/css/responsive.css') }}">
-    <!-- Full calendar -->
-    <link href='{{ asset('findash/assets/fullcalendar/core/main.css') }}' rel='stylesheet' />
-    <link href='{{ asset('findash/assets/fullcalendar/daygrid/main.css') }}' rel='stylesheet' />
-    <link href='{{ asset('findash/assets/fullcalendar/timegrid/main.css') }}' rel='stylesheet' />
-    <link href='{{ asset('findash/assets/fullcalendar/list/main.css') }}' rel='stylesheet' />
-    <link rel="stylesheet" href="{{ asset('findash/assets/css/flatpickr.min.css') }}">
-    <link rel="" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js">
-    <script src="//cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
-    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-    <link rel="stylesheet" href="//cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
-    <link rel="stylesheet" href="//cdn.datatables.net/buttons/2.2.3/css/buttons.dataTables.min.css">
-    <!-- page html to pdf -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.min.js"></script>
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    {{-- <style>
-        table,
-        th,
-        td {
-            border: 1px solid black;
-            border-collapse: collapse;
-            word-wrap: break-word;
-            justify-content: center;
+    <style>
+        {!! file_get_contents(public_path('bootstrap-3.3.7-dist/css/bootstrap.min.css')) !!}
+    </style>
+
+    <style>
+        /* .container class */
+        .container {
+            width: 100%;
         }
 
-        th,
-        td {
-            padding: 5px;
+        .table-borderless > tbody > tr > td,
+        .table-borderless > tbody > tr > th,
+        .table-borderless > tfoot > tr > td,
+        .table-borderless > tfoot > tr > th {
+            border: none;
         }
-    </style> --}}
+
+        .table-bordered > tbody > tr > td,
+        .table-bordered > tbody > tr > th,
+        .table-bordered > tfoot > tr > td,
+        .table-bordered > tfoot > tr > th {
+            border: 1px solid #343a40;
+        }
+
+        /* .border class */
+        .table > tbody > tr > td > .border,
+        .table > tbody > tr > td > .border,
+        .table > tfoot > tr > td > .border,
+        .table > tfoot > tr > th > .border {
+            border: 1px solid #343a40;
+        }
+
+        /* .border-dark class */
+        .table > tbody > tr > td > .border-dark,
+        .table > tbody > tr > td > .border-dark,
+        .table > tfoot > tr > td > .border-dark,
+        .table > tfoot > tr > th > .border-dark {
+            border-color: #343a40!important;
+        }
+
+        /* .border-top class */
+        .table > tbody > tr > td > .border-top,
+        .table > tbody > tr > td > .border-top,
+        .table > tfoot > tr > td > .border-top,
+        .table > tfoot > tr > th > .border-top {
+            border-top: 1px solid #343a40;
+        }
+
+        /* .border-right class */
+        .table > tbody > tr > td > .border-right,
+        .table > tbody > tr > td > .border-right,
+        .table > tfoot > tr > td > .border-right,
+        .table > tfoot > tr > th > .border-right {
+            border-right: 1px solid #343a40;
+        }
+
+        /* .border-left class */
+        .table > tbody > tr > td > .border-left,
+        .table > tbody > tr > td > .border-left,
+        .table > tfoot > tr > td > .border-left,
+        .table > tfoot > tr > th > .border-left {
+            border-left: 1px solid #343a40;
+        }
+
+        /* .border-bottom class */
+        .table > tbody > tr > td > .border-bottom,
+        .table > tbody > tr > td > .border-bottom,
+        .table > tfoot > tr > td > .border-bottom,
+        .table > tfoot > tr > th > .border-bottom {
+            border-bottom: 1px solid #343a40;
+        }
+    </style>
 </head>
 
 <?php
@@ -68,91 +99,92 @@
     <table id="datatable" class="table table-borderless">
         <tbody>
             <tr>
-                <td colspan="10">
-                    <h5 style="text-align: center;"><b>RINCIAN ANGGARAN BELANJA</b></h5>
+                <td colspan="10" style="padding: 0; text-align: center;">
+                    <b>RINCIAN ANGGARAN BELANJA</b>
                 </td>
             </tr>
             <tr>
-                <td style="127px"></td>
-                <td style="13px"></td>
-                <td style="52px"></td>
-                <td style="50px"></td>
-                <td style="50px"></td>
-                <td style="50px"></td>
-                <td style="50px"></td>
-                <td style="50px"></td>
-                <td style="83px"></td>
-                <td style="83px"></td>
+                <td width="20%" style="border-bottom: solid;"></td>
+                <td style="padding-left: 0; padding-right: 0; width: 1%; border-bottom: solid;"></td>
+                <td width="8%" style="border-bottom: solid;"></td>
+                <td style="border-bottom: solid;"></td>
+                <td style="border-bottom: solid;"></td>
+                <td style="border-bottom: solid;"></td>
+                <td style="border-bottom: solid;"></td>
+                <td style="border-bottom: solid;"></td>
+                <td style="border-bottom: solid;"></td>
+                <td style="border-bottom: solid;"></td>
             </tr>
             <tr>
-                <td class="border-top border-bottom border-left"><b>Unit Kerja</b> </td>
-                <td class="border-top border-bottom">:</td>
-                <td colspan="7" class="border-top border-bottom">{{$prodi}}</td>
-                <td class="border"><b>Tahun</b></td>
+                <td style="padding-left: 0; border-style: solid none solid solid;"><b>Unit Kerja</b> </td>
+                <td style="padding-left: 0; border-style: solid none;">:</td>
+                <td colspan="7" style="padding-left: 0; border-style: solid solid solid none;">{{$prodi}}</td>
+                <td style="text-align: center; border: solid;"><b>Tahun</b></td>
             </tr>
             <tr>
-                <td class="align-middle border-top border-bottom border-left"><b>Kegiatan</b> </td>
-                <td class="align-middle border-top border-bottom">:</td>
-                <td colspan="7" class="align-middle border-top border-bottom">{{ $indikator_p->IK." : ".$indikator_p->deskripsi_ik}}</td>
-                <td rowspan="3" class="align-middle border" style="text-align: center;">{{substr($tor->tgl_mulai_pelaksanaan,0,4)}}</td>
+                <td style="padding: 0; border-style: solid none solid solid;"><b>Kegiatan</b> </td>
+                <td style="padding: 0; border-style: solid none;">:</td>
+                <td colspan="7" style="padding: 0; border-style: solid solid solid none;">{{ $indikator_p->IK." - ".$indikator_p->deskripsi_ik}}</td>
+                <td rowspan="3" style="padding: 0; text-align: center; vertical-align: middle; border: solid;">{{substr($tor->tgl_mulai_pelaksanaan,0,4)}}</td>
             </tr>
             <tr>
-                <td class="align-middle border-top border-bottom border-left"><b>Program</b></td>
-                <td class="align-middle border-top border-bottom">:</td>
-                <td colspan="7" class="align-middle border-top border-bottom">{{$indikator_p->P." : ".  $indikator_p->deskripsi}}</td>
+                <td style="padding: 0; border-style: solid none solid solid;"><b>Program</b></td>
+                <td style="padding: 0; border-style: solid none;">:</td>
+                <td colspan="7" style="padding: 0; border-style: solid solid solid none;">{{$indikator_p->P." - ".  $indikator_p->deskripsi}}</td>
             </tr>
             <tr>
-                <td class="align-middle border-top border-bottom border-left"><b>Judul Kegiatan</b></td>
-                <td class="align-middle border-top border-bottom">:</td>
-                <td colspan="7" class="align-middle border-top border-bottom">{{$tor->nama_kegiatan}}</td>
+                <td style="padding: 0; border-style: solid none solid solid;"><b>Judul Kegiatan</b></td>
+                <td style="padding: 0; border-style: solid none;">:</td>
+                <td colspan="7" style="padding: 0; border-style: solid solid solid none;">{{$tor->nama_kegiatan}}</td>
             </tr>
             <tr>
-                <td colspan="9" class="border" style="text-align: center;"><b>Indikator</b></td>
-                <td class="border"><b>Target</b></td>
+                <td style="border-left: solid;"></td>
+                <td colspan="8" class="border" style="padding: 0; text-align: center; border-style: solid solid solid none;"><b>Indikator</b></td>
+                <td class="border" style="padding: 0; text-align: center; border: solid;"><b>Target</b></td>
             </tr>
             <tr>
-                <td class="align-middle border-top border-bottom border-left"><b>Input (Masukan)</b></td>
-                <td class="align-middle border-top border-bottom">:</td>
-                <td colspan="7" class="align-middle border-top border-bottom">{{$rab->masukan }}</td>
-                <td rowspan="2" class="align-middle border" style="text-align: center;">{{$tor->target_IKU}}</td>
+                <td style="padding: 0; border-style: none none solid solid;"><b>Input (Masukan)</b></td>
+                <td style="padding: 0; border-style: solid none;">:</td>
+                <td colspan="7" style="padding: 0; border-style: solid solid solid none;">{{$rab->masukan }}</td>
+                <td rowspan="2" class="align-middle border" style="padding: 0; text-align: center; vertical-align: middle; border: solid;">{{$tor->target_IKU}}</td>
             </tr>
             <tr>
-                <td class="align-middle border-top border-bottom border-left"><b>Output (Keluaran)</b></td>
-                <td class="align-middle border-top border-bottom">:</td>
-                <td colspan="7" class="align-middle border-top border-bottom">{{$rab->keluaran}}</td>
+                <td style="padding: 0; border-style: solid none solid solid;"><b>Output (Keluaran)</b></td>
+                <td style="padding: 0; border-style: solid none;">:</td>
+                <td colspan="7" style="padding: 0; border-style: solid solid solid none;">{{$rab->keluaran}}</td>
             </tr>
             <tr>
-                <td colspan="10" class="border"></td>
+                <td colspan="10" style="border: solid;"></td>
             </tr>
             <tr>
-                <th colspan="10" class="border" style="text-align: center;"><b>Anggaran Belanja</b></th>
+                <th colspan="10" style="padding: 0; text-align: center; border: solid;"><b>Anggaran Belanja</b></th>
             </tr>
             <tr>
-                <th rowspan="3" colspan="3" class="align-middle border" style="text-align: center;">Jenis Belanja</th>
-                <th colspan="6" class="border" style="text-align: center;">Rincian Biaya</th>
-                <th rowspan="3" class="align-middle border" style="text-align: center;">Jumlah Anggaran (Rp)</th>
+                <th rowspan="3" colspan="3" style="padding: 0; text-align: center; vertical-align: middle; border: solid;">Jenis Belanja</th>
+                <th colspan="6" style="padding: 0; text-align: center; border: solid;">Rincian Biaya</th>
+                <th rowspan="3" style="padding: 0; text-align: center; vertical-align: middle; border: solid;">Jumlah Anggaran (Rp)</th>
             </tr>
             <tr>
-                <th colspan="2" class="border" style="text-align: center;">Kebutuhan</th>
-                <th rowspan="2" class="align-middle border" style="text-align: center;">Frek</th>
-                <th colspan="2" class="border" style="text-align: center;">Perhitungan</th>
-                <th rowspan="2" class="align-middle border" style="text-align: center;">Harga Satuan</th>
+                <th colspan="2" style="padding: 0; text-align: center; border: solid;">Kebutuhan</th>
+                <th rowspan="2" style="padding: 0; text-align: center; border: solid;">Frek</th>
+                <th colspan="2" style="padding: 0; text-align: center; border: solid;">Perhitungan</th>
+                <th rowspan="2" style="padding: 0; text-align: center; border: solid;">Harga Satuan</th>
             </tr>
             <tr>
-                <th class="border">Vol.</th>
-                <th class="border">Sat.</th>
-                <th class="border">Vol.</th>
-                <th class="border">Sat.</th>
+                <th style="padding: 0; text-align: center; border: solid;">Vol.</th>
+                <th style="padding: 0; text-align: center; border: solid;">Sat.</th>
+                <th style="padding: 0; text-align: center; border: solid;">Vol.</th>
+                <th style="padding: 0; text-align: center; border: solid;">Sat.</th>
             </tr>
             <tr>
-                <td colspan="3" class="border" style="text-align: center;">1</td>
-                <td class="border" style="text-align: center;">2</td>
-                <td class="border" style="text-align: center;">3</td>
-                <td class="border" style="text-align: center;">4</td>
-                <td class="border" style="text-align: center;">5</td>
-                <td class="border" style="text-align: center;">6</td>
-                <td class="border" style="text-align: center;">7</td>
-                <td class="border" style="text-align: center;">8</td>
+                <td colspan="3" style="padding: 0; text-align: center; border: solid;">1</td>
+                <td style="padding: 0; text-align: center; border: solid;">2</td>
+                <td style="padding: 0; text-align: center; border: solid;">3</td>
+                <td style="padding: 0; text-align: center; border: solid;">4</td>
+                <td style="padding: 0; text-align: center; border: solid;">5</td>
+                <td style="padding: 0; text-align: center; border: solid;">6</td>
+                <td style="padding: 0; text-align: center; border: solid;">7</td>
+                <td style="padding: 0; text-align: center; border: solid;">8</td>
             </tr>
             @php
             $totalAnggaranRab = 0;
@@ -161,107 +193,121 @@
             
             @foreach($anggaran as $item)
                 @if ($item->anggaran != 0)
-                    @foreach($detail_mak as $detail)
-                        @if ($item->id_detail_mak == $detail->id)
-                            @php
-                            $kodeKelompok = '';
-                            foreach ($belanja_mak as $belanja) {
-                                if ($belanja->id == $detail->id_belanja) {
-                                    foreach ($kelompok_mak as $kelompoks) {
-                                        if ($belanja->id_kelompok == $kelompoks->id) {
-                                            $kodeKelompok = $kelompoks->kelompok;
-                                        }
-                                    }
-                                }
-                            }
-                            @endphp
-                            <tr>
-                                <td colspan="3" class="align-middle border" style="text-align: justify;">
-                                    <b>{{$kodeKelompok}} </b><br />
-                                    {{$detail->detail}}
-                                    {{ $item->catatan }}
-                                </td>
-                                <td class="align-middle border" style="text-align: center;">{{$item->kebutuhan_vol}}</td>
-                                <td class="align-middle border" style="text-align: center;">{{$item->kebutuhan_sat}}</td>
-                                <td class="align-middle border" style="text-align: center;">{{$item->frek}}</td>
-                                <td class="align-middle border" style="text-align: center;">{{$item->perhitungan_vol}}</td>
-                                <td class="align-middle border" style="text-align: center;">{{$item->perhitungan_sat}}</td>
-                                <td class="align-middle border" style="text-align: center;">{{"Rp. ".number_format($item->harga_satuan,2,',',',')}}</td>
-                                <td class="align-middle border" style="text-align: center;">{{"Rp. ".number_format($item->anggaran,2,',',',')}}</td>
-                            </tr>
-                            @php
-                            $totalAnggaranRab += $item->anggaran;
-                            $urut += 1;
-                            @endphp
-                        @endif
-                    @endforeach
+                    <tr>
+                        <td colspan="3" style="padding: 0; border: solid;">
+                            <b>{{$item->nomor_mak}} | {{$item->nama_belanja}}</b><br />
+                            {{$item->detail}}
+                            {{$item->catatan}}
+                        </td>
+                        <td style="padding: 0; text-align: center; border: solid;">{{$item->kebutuhan_vol}}</td>
+                        <td style="padding: 0; text-align: center; border: solid;">{{$item->kebutuhan_sat}}</td>
+                        <td style="padding: 0; text-align: center; border: solid;">{{$item->frek}}</td>
+                        <td style="padding: 0; text-align: center; border: solid;">{{$item->perhitungan_vol}}</td>
+                        <td style="padding: 0; text-align: center; border: solid;">{{$item->perhitungan_sat}}</td>
+                        <td style="padding: 0; text-align: center; border: solid;">{{number_format($item->harga_satuan,0,',','.')}}</td>
+                        <td style="padding: 0; text-align: center; border: solid;">{{number_format($item->anggaran,0,',','.')}}</td>
+                    </tr>
+                    @php
+                    $totalAnggaranRab += $item->anggaran;
+                    $urut += 1;
+                    @endphp
                 @endif
             @endforeach
         </tbody>
         <tfoot>
             <tr>
-                <th colspan="8" class="border">Total</th>
-                <th colspan="2" class="border" style="text-align: right;">{{"Rp. ".number_format($totalAnggaranRab,2,',',',')}}</th>
+                <th colspan="9" style="padding: 0; text-align: center; border: solid;">Total</th>
+                <th style="padding: 0; text-align: right; border: solid;">{{number_format($totalAnggaranRab,0,',','.')}}</th>
             </tr>
             <!-- TANDA TANGAN -->
             <tr>
-                <td colspan="10"></td>
+                <td colspan="10" style="padding: 0; "></td>
             </tr>
             <tr>
-                <td colspan="5"></td>
-                <td colspan="5" style="padding-left: 16.8rem; padding-bottom: 0;">Surakarta</td>
+                <td colspan="6" style="padding-bottom: 0; "></td>
+                <td colspan="4" style="padding-bottom: 0;">Surakarta, {{ $tanggal }}</td>
             </tr>
             <tr>
-                <td colspan="5" style="text-align: center;" width="50%">Kepala Program Studi
+                <td colspan="6" style="padding-top: 0;">{{ $tor->unit->user->jabatan }} <br> {{ $tor->unit->nama_unit }}</td>
+                <td colspan="4" style="padding-top: 0;">Perencana/Penanggungjawab</td>
+            </tr>
+            <tr>
+                <td colspan="6" style="padding-bottom: 0; vertical-align: bottom;" width="50%">
                     <br />
                     <br />
                     <br />
                     <br />
-                    <b>{{ $tor->unit->kaprodi->name }}</b>
-                    <br/>
-                    NIP. {{ $tor->unit->kaprodi->nip }}
+                    <b>{{ $tor->unit->user->name }}</b>
                 </td>
-                <td colspan="5" style="text-align: center;" width="50%">Perencana/Penanggungjawab
+                <td colspan="4" style="padding-bottom: 0; vertical-align: bottom;" width="50%">
                     <br />
                     <br />
                     <br />
                     <br />
-                    <b>{{$tor->pic->name}}</b><br />
-                    {{"NIP. ". $tor->pic->nip }}
+                    <b>{{$tor->pic->name}}</b>
                 </td>
             </tr>
             <tr>
-                <td colspan="10"></td>
+                <td colspan="6" style="padding-top: 0;">NIP. {{ $tor->unit->user->nip }}</td>
+                <td colspan="4" style="padding-top: 0;">NIP. {{ $tor->pic->nip }}</td>
             </tr>
             <tr>
-                <td colspan="10" style="text-align: center;">Menyetujui</td>
+                <td colspan="10" style="padding: 0; "></td>
             </tr>
             <tr>
-                <td colspan="10"></td>
+                <td colspan="10" style="padding: 0; text-align: center;">Menyetujui,</td>
             </tr>
             <tr>
-                <td colspan="3" class="border-top border-right border-left">Wakil Dekan Akademik, Riset, dan Kemahasiswaan</td>
-                <td colspan="4" class="border-top border-right border-left">Wakil Dekan Perencanaan, Kerjasama, Bisnis dan Informasi</td>
-                <td colspan="3" class="border-top border-right border-left">Wakil Dekan SDM, Keuangan, dan Logistik</td>
+                {{-- <td colspan="10" style="padding: 0; "></td> --}}
+                <td colspan="10" style="text-align: center;">{{ $verifikator->jabatan }}
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <b>{{ $verifikator->name }}</b><br />
+                    NIP. {{ $verifikator->nip }}
+                </td>
             </tr>
-            @for ($i = 0; $i < 10; $i++)
-                <tr>
-                    <td colspan="3" class="border-left border-right"></td>
-                    <td colspan="4" class="border-left border-right"></td>
-                    <td colspan="3" class="border-left border-right"></td>
-                </tr>
-            @endfor
-            <tr>
-                <td colspan="3" class="border-left border-right"><b>{{ $wd1->name }}</b></td>
-                <td colspan="4" class="border-left border-right"><b>{{ $wd3->name }}</b></td>
-                <td colspan="3" class="border-left border-right"><b>{{ $wd2->name }}</b></td>
-            </tr>
-            <tr>
-                <td colspan="3" class="border-left border-right border-bottom">NIP. {{ $wd1->nip }}</td>
-                <td colspan="4" class="border-left border-right border-bottom">NIP. {{ $wd3->nip }}</td>
-                <td colspan="3" class="border-left border-right border-bottom">NIP. {{ $wd2->nip }}</td>
-            </tr>
-            <!-- TANDA TANGAN -->
+            {{-- <tr>
+                <td colspan="10">
+                    <table class="table table-borderless">
+                        <tr>
+                            <td colspan="3" style="padding: 0; border: 1px solid #343a40; border-bottom: 0;">{{ $wd1->jabatan }}</td>
+                            <td colspan="4" style="padding: 0; border: 1px solid #343a40; border-bottom: 0;">{{ $wd3->jabatan }}</td>
+                            <td colspan="3" style="padding: 0; border: 1px solid #343a40; border-bottom: 0;">{{ $wd2->jabatan }}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" style="padding: 0; border-right: 1px solid #343a40; border-left: 1px solid #343a40; vertical-align: bottom; padding-bottom: 0">
+                                <br />
+                                <br />
+                                <br />
+                                <br />
+                                <b>{{ $wd1->name }}</b>
+                            </td>
+                            <td colspan="4" style="padding: 0; border-right: 1px solid #343a40; border-left: 1px solid #343a40; vertical-align: bottom; padding-bottom: 0">
+                                <br />
+                                <br />
+                                <br />
+                                <br />
+                                <b>{{ $wd3->name }}</b>
+                            </td>
+                            <td colspan="3" style="padding: 0; border-right: 1px solid #343a40; border-left: 1px solid #343a40; vertical-align: bottom; padding-bottom: 0">
+                                <br />
+                                <br />
+                                <br />
+                                <br />
+                                <b>{{ $wd2->name }}</b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" style="padding: 0; border: 1px solid #343a40; border-top: 0; padding-top: 0;">NIP. {{ $wd1->nip }}</td>
+                            <td colspan="4" style="padding: 0; border: 1px solid #343a40; border-top: 0; padding-top: 0;">NIP. {{ $wd3->nip }}</td>
+                            <td colspan="3" style="padding: 0; border: 1px solid #343a40; border-top: 0; padding-top: 0;">NIP. {{ $wd2->nip }}</td>
+                        </tr>
+                    </table>
+                </td>
+            </tr> --}}
         </tfoot>
     </table>
 

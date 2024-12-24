@@ -86,7 +86,7 @@ use Illuminate\Support\Facades\Auth;
                                         </div>
                                         <div class="iq-card-body">
 
-                                            <div class="form-group row align-items-center">
+                                            {{-- <div class="form-group row align-items-center">
                                                 <div class="col-md-12">
                                                     <div class="profile-img-edit">
                                                         <?php if (!empty(Auth::user()->image)) { ?>
@@ -97,10 +97,10 @@ use Illuminate\Support\Facades\Auth;
                                                         <?php } ?>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div> --}}
                                             <div class=" row align-items-center">
                                                 <div class="form-group col-sm-6">
-                                                    <label for="fname">Nama: {{Auth::user()->name}}</label>
+                                                    <label for="fname">Nama Kaprodi: {{Auth::user()->name}}</label>
                                                 </div>
                                                 <div class="form-group col-sm-6">
                                                     <label for="uname">Unit :
@@ -112,10 +112,13 @@ use Illuminate\Support\Facades\Auth;
                                                     </label>
                                                 </div>
                                                 <div class="form-group col-sm-6">
-                                                    <label for="cname">NIP/NIK/NIM : {{Auth::user()->nip}}</label>
+                                                    <label for="cname">NIP Kaprodi: {{Auth::user()->nip}}</label>
                                                 </div>
                                                 <div class="form-group col-sm-6">
-                                                    <label for="cname">Email : {{Auth::user()->email}}</label>
+                                                    <label for="cname">Email Prodi: {{Auth::user()->email}}</label>
+                                                </div>
+                                                <div class="form-group col-sm-6">
+                                                    <label for="cname">Jabatan Kaprodi: {{Auth::user()->jabatan}}</label>
                                                 </div>
                                                 <div class="form-group col-sm-6">
                                                     <label for="cname">Role :
@@ -142,7 +145,7 @@ use Illuminate\Support\Facades\Auth;
                                         <div class="iq-card-body">
                                             <form class="form-horizontal" method="post" action="{{ route('profil.update',['id'=>Auth::user()->id]) }}" enctype="multipart/form-data">
                                                 @csrf
-                                                <div class="form-group row align-items-center">
+                                                {{-- <div class="form-group row align-items-center">
                                                     <div class="col-md-12 ml-3">
                                                         <div class="profile-img-edit">
                                                             <?php if (!empty(Auth::user()->image)) { ?>
@@ -157,23 +160,23 @@ use Illuminate\Support\Facades\Auth;
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
+                                                </div> --}}
                                                 <div class="row align-items-center">
                                                     @error('file')
-                                                    <div class="alert text-white bg-success" role="alert">
+                                                    {{-- <div class="alert text-white bg-success" role="alert">
                                                         <div class="iq-alert-icon">
                                                             <i class="ri-alert-line"></i>
                                                         </div>
                                                         <div class="alert alert-danger mt-1 mb-1">
                                                             {{ $message }}
                                                         </div>
-                                                        {{-- <div class="invalid-feedback">
+                                                        <div class="invalid-feedback">
                                                             Tolong tambahkan file sebelum submit!
-                                                        </div> --}}
-                                                    </div>
+                                                        </div>
+                                                    </div> --}}
                                                     @enderror
                                                     <div class="form-group col-sm-6">
-                                                        <label for="fname">Nama:</label>
+                                                        <label for="name">Nama Kaprodi:</label>
                                                         <input type="text" class="form-control" id="name" name="name" value="{{old('name',Auth::user()->name)}}">
                                                     </div>
                                                     <!-- <div class="form-group col-sm-6">
@@ -181,12 +184,16 @@ use Illuminate\Support\Facades\Auth;
                                                         <input type="password" class="form-control" id="password" name="password" value="{{old('password')}}">
                                                     </div> -->
                                                     <div class="form-group col-sm-6">
-                                                        <label for="fname">NIP/NIK/NIM:</label>
+                                                        <label for="nip">NIP Kaprodi:</label>
                                                         <input type="text" class="form-control" id="nip" name="nip" value="{{old('nip',Auth::user()->nip)}}">
                                                     </div>
                                                     <div class="form-group col-sm-6">
-                                                        <label for="cname">Email:</label>
-                                                        <input type="text" class="form-control" id="email" name="email" value="{{old('email',Auth::user()->email)}}">
+                                                        <label for="jabatan">Jabatan Kaprodi:</label>
+                                                        <input type="text" class="form-control" id="jabatan" name="jabatan" value="{{old('jabatan',Auth::user()->jabatan)}}">
+                                                    </div>
+                                                    <div class="form-group col-sm-6">
+                                                        <label for="email">Email Prodi:</label>
+                                                        <input type="text" class="form-control" id="email" name="email" value="{{old('email',Auth::user()->email)}}" readonly>
                                                     </div>
                                                     <input type="hidden" id="id" value="{{Auth::user()->id}}">
                                                 </div>

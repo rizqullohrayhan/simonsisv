@@ -1,4 +1,4 @@
-<div class="modal fade" tabindex="-1" role="dialog" id="update_rab<?= $rab[$r]->id ?>">
+<div class="modal fade" tabindex="-1" role="dialog" id="update_rab<?= $rabrev->id ?>">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -8,20 +8,20 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal" method="post" action="{{ url('/rab/update/'.$rab[$r]->id) }}">
+                <form class="form-horizontal" method="post" action="{{ url('/rab/update/'.$rabrev->id) }}">
                     @csrf
                     <div class="form-group">
                         <label>Masukan</label>
-                        <textarea class="form-control" id="masukan" name="masukan" value="{{old('masukan',$rab[$r]->masukan)}}" rows="2" cols="50">{{$rab[$r]->masukan}}</textarea>
+                        <textarea class="form-control" id="masukan" name="masukan" value="{{old('masukan',$rabrev->masukan)}}" rows="2" cols="50">{{$rabrev->masukan}}</textarea>
                     </div>
                     <div class="form-group">
                         <label>Keluaran</label>
-                        <textarea class="form-control" id="keluaran" name="keluaran" value="{{old('keluaran',$rab[$r]->keluaran)}}" rows="2" cols="50">{{$rab[$r]->keluaran}}</textarea>
+                        <textarea class="form-control" id="keluaran" name="keluaran" value="{{old('keluaran',$rabrev->keluaran)}}" rows="2" cols="50">{{$rabrev->keluaran}}</textarea>
                     </div>
                     <div class="form-group">
                         <label>TOR</label>
                         <select name="id_tor" id="id_tor" class="form-control">
-                            <option value="{{$tor[$t]->id}}">{{$tor[$t]->nama_kegiatan}}</option>
+                            <option value="{{$tItem->id}}">{{$tItem->nama_kegiatan}}</option>
                         </select>
                     </div>
                     <input name="created_at" id="created_at" type="hidden" value="<?= date('Y-m-d') ?>">

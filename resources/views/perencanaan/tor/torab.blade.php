@@ -124,7 +124,7 @@ use Illuminate\Support\Facades\Auth;
               </div>
 
               <div class="iq-card-body">
-                <div id="table" class="">
+                <div id="table" class="d-flex justify-content-between">
                   <span class="table-add float-left ml-3 mr-2">
                     @can('tor_create')
                     <a href="{{url('/steppengajuantor')}}" class="btn btn-sm btn-primary">
@@ -134,7 +134,7 @@ use Illuminate\Support\Facades\Auth;
                   </span>
                   <span class="table-add float-right mb-3 mr-2">
                     <div class="form-group row">
-                      <form action="{{ url('/filtertahun') }}" method="GET">
+                      <form action="{{ url('/torab') }}" method="GET">
                         <div class="row mr-3">
                           <div class="col mr-1">
                             <select class="form-control filter sm-8" name="tahun" id="input">
@@ -152,7 +152,7 @@ use Illuminate\Support\Facades\Auth;
                     </div>
                   </span>
                 </div>
-                <div style="overflow-x:auto;" class="container mt-2 mr-5">
+                <div style="overflow-x:auto;">
                   @if (session('success'))
                   <script>
                     Swal.fire({
@@ -173,7 +173,7 @@ use Illuminate\Support\Facades\Auth;
                     </button>
                   </div>
 
-                  <table id="torab" class="table table-bordered table-responsive-md table-striped text-center" style="box-shadow:5px;">
+                  <table id="torab" class="table table-bordered table-striped text-center" style="box-shadow:5px;">
                     <thead class="bg-primary" style="color: white;">
                       <tr>
                         <th colspan="3">
@@ -264,6 +264,8 @@ use Illuminate\Support\Facades\Auth;
                                       </td>
                                       <!-- ANGGARAN -->
                                     </tr>
+                                    <!-- MODAL DETAIL TOR -->
+                                    @include('perencanaan/modal2/update_rab')
                                     <tr>
                                       @if ($tw == 2)
                                         @for ($i = 0; $i < 3; $i++)
@@ -287,13 +289,9 @@ use Illuminate\Support\Facades\Auth;
                                                   @php
                                                       $totanggaran1 += $anggaranItem->anggaran;
                                                   @endphp
-                                                  @foreach ($detail_mak as $detailMak)
-                                                      @if ($anggaranItem->id_detail_mak == $detailMak->id)
-                                                          <h6 align="left" style="font-size: smaller;">
-                                                              {{ $detailMak->detail . " - " ." Rp. " .  number_format($anggaranItem->anggaran, 2, ',', '.') }}
-                                                          </h6>
-                                                      @endif
-                                                  @endforeach
+                                                  <h6 align="left" style="font-size: smaller;">
+                                                      {{ $anggaranItem->detail . " - " ." Rp. " .  number_format($anggaranItem->anggaran, 2, ',', '.') }}
+                                                  </h6>
                                               @endif
                                           @endforeach
                                           <!-- TAMBAH ANGGARAN DI RAB  {{" [".$tw."] "}}-->
@@ -303,8 +301,6 @@ use Illuminate\Support\Facades\Auth;
                               @endif
                           @endforeach
 
-                          <!-- MODAL DETAIL TOR -->
-                          @include('perencanaan/modal2/detail_tor')
                           <!-- MODAL UPDATE TOR -->
                           @include('perencanaan/modal2/update_tor')
                         @endforeach

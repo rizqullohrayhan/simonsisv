@@ -18,62 +18,21 @@ use Spatie\Permission\Contracts\Role;
                     </a>
                 </div>
             </div>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-label="Toggle navigation">
-                <i class="ri-menu-3-line"></i>
-            </button>
-            <div class="collapse navbar-collapse show" id="navbarSupportedContent">
-                <ul class="navbar-nav ml-auto navbar-list">
-                    <li class="nav-item nav-icon">
-                        <a href="#" class="nav-link">
-
-
-                        </a>
-                        <div class="iq-sub-dropdown">
-                            <div class="iq-card shadow-none m-0">
-                                <div class="iq-card-body p-0 ">
-                                    <div class="bg-primary p-3">
-                                        <h5 class="mb-0 text-white">Pengajuan TOR<small class="badge  bg-light float-end pt-1">..</small></h5>
-                                    </div>
-                                    <a href="/validasi/ajuan/$unit[$u1]->id" class="iq-sub-card">
-                                        <div class="media align-items-center">
-                                            <div class="">
-                                            </div>
-                                            <div class="media-body ms-3">
-                                                <!-- <h6 class="mb-0 "> KAK1</h6> -->
-                                                <small class="float-end font-size-12"></small>
-                                                <p class="mb-0"></p>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
             <ul class="navbar-nav ml-auto navbar-list">
                 <li class="line-height">
                     <a href="#" class="search-toggle iq-waves-effect d-flex align-items-center">
-                        <?php if (empty(Auth::user()->image) || Auth::user()->image == 'NULL') { ?>
+                        {{-- <?php if (empty(Auth::user()->image) || Auth::user()->image == 'NULL') { ?>
                             <img src="{{ asset('findash/assets/images/user/1.jpg') }}" class="img-fluid rounded me-3" alt="user">
                         <?php } elseif (!empty(Auth::user()->image || Auth::user()->image != 'NULL')) { ?>
                             <img src="{{ asset('imageprofil/'.Auth::user()->image) }}" class="img-fluid rounded me-3" alt="user">
-                        <?php } ?>
+                        <?php } ?> --}} 
                         <div class="caption">
                             <?php if (!empty(Auth::user()->name)) { ?>
                                 <h6 class="mb-0 line-height" style="color:white"><?= Auth::user()->name ?></h6>
                             <?php } ?>
                             <p class="mb-0 text" style="color:white">
                                 <?= !empty(Auth::user()->getroleNames()) ? Auth::user()->getroleNames() : '' ?> <br />
-                                <?php
-                                if (!empty($unit)) {
-                                    for ($u = 0; $u < count($unit); $u++) {
-                                        if ($unit[$u]->id == Auth::user()->id_unit) {
-                                            echo $unit[$u]->nama_unit;
-                                        }
-                                    }
-                                }
-                                ?>
+                                {{Auth::user()->unit->nama_unit}}
                             </p>
                         </div>
                     </a>
@@ -120,7 +79,7 @@ use Spatie\Permission\Contracts\Role;
                                         <div class="rounded iq-card-icon bg-primary">
                                             <i class="ri-file-user-line"></i>
                                         </div>
-                                        <div class="media-body ms-3">
+                                        <div class="media-body ml-3">
                                             <h6 class="mb-0 ">My Profile</h6>
                                             <p class="mb-0 font-size-12">View personal profile details.</p>
                                         </div>
@@ -131,7 +90,7 @@ use Spatie\Permission\Contracts\Role;
                                         <div class="rounded iq-card-icon bg-primary">
                                             <i class="ri-profile-line"></i>
                                         </div>
-                                        <div class="media-body ms-3">
+                                        <div class="media-body ml-3">
                                             <h6 class="mb-0 ">Edit Profile</h6>
                                             <p class="mb-0 font-size-12">Modify your personal details.</p>
                                         </div>

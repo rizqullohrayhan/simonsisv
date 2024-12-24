@@ -42,7 +42,7 @@ class AnggaranController extends Controller
         $request->validate([]);
 
         $total = [$request->total_anggaran +  $request->anggaran]; //total anggaran
-        $inserting = anggaran::create($request->except('_token', 'id_mak', 'id_kelompok', 'id_belanja', 'total_anggaran', 'id_tor', 'total_anggaran_tor'));
+        $inserting = anggaran::create($request->except('_token', 'total_anggaran', 'id_tor', 'total_anggaran_tor'));
         if ($request->total_anggaran <= $request->total_anggaran_tor) {
             $inserting = DB::table('tor')->select('jumlah_anggaran')->where('id', $request->id_tor)->update(array('jumlah_anggaran' => $total[0]));
         }

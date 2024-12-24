@@ -21,32 +21,19 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label>Kategori MAK</label><br />
-                        <select class="js-example-basic-single1" name="id_mak" id="mak" style="width: 100%;height:50px;line-height:45px;color:#a09e9e;background:#00000000;border:1px solid #f1f1f1;border-radius:5px">
-                            <option hidden>Pilih Kategori MAK</option>
-                            <?php for ($e = 0; $e < count($mak); $e++) { ?>
-                                <option value="{{$mak[$e]->id}}" style="color:1px solid #f1f1f1;">{{$mak[$e]->jenis_belanja}}</option>
-                            <?php } ?>
-                        </select>
+                        <label>Nomor MAK</label>
+                        <input name="nomor_mak" id="nomor_mak" type="text" class="form-control" required>
+                        <span>Contoh: 51040101</span>
                     </div>
-                    <div class="container ml-2 mr-2">
-                        <div class="form-group">
-                            <label>Nama Kelompok</label>
-                            <select class="js-example-basic-single2" name="id_kelompok" id="kelompok" aria-hidden="true" data-select2-id="select2-data-58-6f8l" style="width: 100%;height:50px;line-height:45px;color:#a09e9e;background:#00000000;border:1px solid #f1f1f1;border-radius:5px"> </select>
-                        </div>
+                    <div class="form-group">
+                        <label>Nama Belanja</label>
+                        <input name="nama_belanja" id="nama_belanja" type="text" class="form-control" required>
+                        <span>Contoh: Beban Perjalanan Dinas Pegawai-DN</span>
                     </div>
-                    <div class="container ml-2 mr-2">
-                        <div class="form-group">
-                            <label>Nama Belanja</label>
-                            <select class="js-example-basic-single3" name="id_belanja" id="belanja" aria-hidden="true" data-select2-id="select2-data-58-6f8l" style="width: 100%;height:50px;line-height:45px;color:#a09e9e;background:#00000000;border:1px solid #f1f1f1;border-radius:5px"></select>
-                        </div>
-                    </div>
-                    <div class="container ml-2 mr-2">
-                        <div class="form-group">
-                            <label>Nama Detail</label>
-                            <select class="js-example-basic-single4" name="id_detail_mak" id="id_detail_mak" aria-hidden="true" data-select2-id="select2-data-58-6f8l" style="width: 100%;height:50px;line-height:45px;color:#a09e9e;background:#00000000;border:1px solid #f1f1f1;border-radius:5px">
-                            </select>
-                        </div>
+                    <div class="form-group">
+                        <label>Detail</label>
+                        <input name="detail" id="detail" type="text" class="form-control">
+                        <span>Contoh: 124266 | Transportasi Kegiatan Dalam Kota (PP) - Pegawai UNS</span>
                     </div>
                     <div class="form-group">
                         <label for="exampleFormControlTextarea1">Catatan</label>
@@ -57,7 +44,7 @@
                         <div class="col">
                             <div class="form-group">
                                 <label>Kebutuan - Volume</label>
-                                <input name="kebutuhan_vol" id="kebutuhan_vol" type="text" class="form-control" required>
+                                <input name="kebutuhan_vol" id="kebutuhan_vol" type="number" class="form-control" required>
                             </div>
                         </div>
                         <div class="col">
@@ -69,13 +56,13 @@
                     </div>
                     <div class="form-group">
                         <label>Frekuensi</label>
-                        <input name="frek" id="frek" type="text" class="form-control" required>
+                        <input name="frek" id="frek" type="number" class="form-control" required>
                     </div>
                     <div class="row">
                         <div class="col">
                             <div class="form-group">
                                 <label>Perhitungan - Volume</label>
-                                <input name="perhitungan_vol" id="perhitungan_vol" type="text" class="form-control" required>
+                                <input name="perhitungan_vol" id="perhitungan_vol" type="number" value="0" class="form-control" readonly>
                             </div>
                         </div>
                         <div class="col">
@@ -87,11 +74,11 @@
                     </div>
                     <div class="form-group">
                         <label>Harga Satuan</label>
-                        <input name="harga_satuan" id="harga_satuan" type="text" class="form-control" required>
+                        <input name="harga_satuan" id="harga_satuan" type="number" class="form-control" required>
                     </div>
                     <div class="form-group">
                         <label>Nominal</label>
-                        <input name="anggaran" id="anggaran" type="text" class="form-control" required>
+                        <input name="anggaran" id="anggaran" type="number" value="0" class="form-control" readonly>
                     </div><?php $i = 1 ?>
                     <input name="created_at" type="hidden" value="<?= date('Y:m:d H:i:s') ?>">
                     <input name="updated_at" type="hidden" value="<?= date('Y:m:d H:i:s') ?>">
@@ -102,6 +89,24 @@
         </div>
     </div>
 </div>
+
+<script>
+    function updateValues() {
+        let kebutuhan_vol = parseInt($('#kebutuhan_vol').val()) || 0;
+        let frekuensi = parseInt($('#frek').val()) || 0;
+        let harga_satuan = parseInt($('#harga_satuan').val()) || 0;
+
+        let perhitungan_vol = kebutuhan_vol * frekuensi;
+        $('#perhitungan_vol').val(perhitungan_vol);
+
+        if (!isNaN(harga_satuan)) {
+            $('#anggaran').val(harga_satuan * perhitungan_vol);
+        }
+    }
+
+    $('#kebutuhan_vol, #frek, #harga_satuan').on('change', updateValues);
+</script>
+
 <script>
     $(document).ready(function() {
         $('.js-example-basic-single1').select2();

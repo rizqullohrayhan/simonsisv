@@ -33,15 +33,15 @@ use Illuminate\Support\Facades\Auth;
                                 <div class="container mt-2 mb-2 mr-2 ml-2">
                                     <a href="{{url('/torab')}}"><button type="button" class="btn btn-primary btn-sm mr-2">Back</button></a>
                                     <div class="user-list-files d-flex float-right">
-                                        <a class="iq-bg-primary" href="javascript:void();" onclick="printDiv()">
+                                        {{-- <a class="iq-bg-primary" href="javascript:void();" onclick="printDiv()">
                                             Print
                                         </a>
                                         <a class="iq-bg-primary" href="{{url('exportExcel/' . base64_encode($id) )}}" target="_blank">
                                             Excel
-                                        </a>
-                                        <a class="iq-bg-primary" href="{{url('exportPdf/' . base64_encode($id) )}}" target="_blank">
+                                        </a> --}}
+                                        {{-- <a class="iq-bg-primary" href="{{url('exportPdf/' . base64_encode($id) )}}" target="_blank">
                                             Pdf
-                                        </a>
+                                        </a> --}}
                                     </div>
                                 </div>
                             </div>
@@ -96,7 +96,7 @@ use Illuminate\Support\Facades\Auth;
 
                                         foreach ($status as $status_item) {
                                             if ($trx_item->id_status == $status_item->id) {
-                                                if ($status_item->nama_status == "Sudah Dinilai") {
+                                                if ($status_item->nama_status == "Sudah Disetujui") {
                                                     $disetujui = 1;
                                                 }
                                                 if ($status_item->nama_status == "Sudah Revisi") {
@@ -381,6 +381,9 @@ use Illuminate\Support\Facades\Auth;
                                                     <tr>
                                                         <td></td>
                                                         <td colspan="7">
+                                                            <span>
+                                                                Tentukan rincian jadwal yang realistik untuk pelaksanaan tiap kegiatan (mengacu pada mekanisme dan rancangan)
+                                                            </span>
                                                             @if (session('success'))
                                                                 <script>
                                                                     Swal.fire({
@@ -725,14 +728,14 @@ use Illuminate\Support\Facades\Auth;
                                                     </tr>
                                                     <!-- TANDA TANGAN -->
                                                     <tr>
-                                                        <td colspan="4" style="text-align: center; padding-top: 0;" width="50%">Kepala Program Studi
+                                                        <td colspan="4" style="text-align: center; padding-top: 0;" width="50%">{{ $tor->unit->user->jabatan }}
                                                             <br />
                                                             <br />
                                                             <br />
                                                             <br />
-                                                            <b>{{ $tor->unit->kaprodi->name }}</b>
+                                                            <b>{{ $tor->unit->user->name }}</b>
                                                             <br/>
-                                                            NIP. {{ $tor->unit->kaprodi->nip }}
+                                                            NIP. {{ $tor->unit->user->nip }}
                                                         </td>
                                                         <td colspan="4" style="text-align: center; padding-top: 0;">Perencana/Penanggungjawab
                                                             <br />
@@ -747,38 +750,17 @@ use Illuminate\Support\Facades\Auth;
                                                         <td colspan="8"></td>
                                                     </tr>
                                                     <tr>
-                                                        <td colspan="8" style="text-align: center;">Menyetujui</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td colspan="8"></td>
+                                                        <td colspan="8" style="text-align: center; padding-bottom: 0;">Menyetujui</td>
                                                     </tr>
                                                     <tr >
-                                                        <td colspan="2" width="30%">Wakil Dekan Akademik, Riset, dan Kemahasiswaan
+                                                        <td colspan="8" style="text-align: center;">{{ $verifikator->jabatan }}
                                                             <br />
                                                             <br />
                                                             <br />
                                                             <br />
                                                             <br />
-                                                            <b>{{ $wd1->name }}</b><br />
-                                                            NIP. {{ $wd1->nip }}
-                                                        </td>
-                                                        <td colspan="3" width="30%">Wakil Dekan Perencanaan, Kerjasama, Bisnis dan Informasi
-                                                            <br />
-                                                            <br />
-                                                            <br />
-                                                            <br />
-                                                            <br />
-                                                            <b>{{ $wd3->name }}</b><br />
-                                                            NIP. {{ $wd3->nip }}
-                                                        </td>
-                                                        <td colspan="3">Wakil Dekan SDM, Keuangan, dan Logistik
-                                                            <br />
-                                                            <br />
-                                                            <br />
-                                                            <br />
-                                                            <br />
-                                                            <b>{{ $wd2->name }}</b><br />
-                                                            NIP. {{ $wd2->nip }}
+                                                            <b>{{ $verifikator->name }}</b><br />
+                                                            NIP. {{ $verifikator->nip }}
                                                         </td>
                                                     </tr>
                                                     <!-- TANDA TANGAN -->
@@ -814,231 +796,232 @@ use Illuminate\Support\Facades\Auth;
                                     </div>
                                 </div>
 
-                                <!-- Modal Tambah Jadwal -->
-                                <div class="modal fade" tabindex="-1" role="dialog" id="tambah_jadwal<?= $tor->id ?>">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title">Tambah Jadwal Pelaksanaan</h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <form class="form-horizontal" method="post" action="{{ url('/tor/create_jadwal/') }}">
-                                                    @csrf
-                                                    <label>Contoh</label><br />
-                                                    <img width="450" src="../assets/contoh/jadwaltor.png">
-                                                    <br />
-                                                    <div class="form-group">
-                                                        <label>TOR</label>
-                                                        <select name="id_tor" id="id_tor" class="form-control">
-                                                            <option value="{{$tor->id}}">{{$tor->nama_kegiatan}}</option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="form-group ">
-                                                        <label>Komponen Jadwal</label>
-                                                        <textarea class="form-control" id="komponen" name="komponen" rows="2" placeholder="komponen..."></textarea>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col">
-                                                            <label>Mulai Kegiatan</label>
-                                                            <select name="bulan_awal" id="bulan_awal" onclick="min()" class="form-control">
-                                                                <option hidden>Pilih</option>
-                                                                <?php
-                                                                $bulan = [
-                                                                    'Januari', 'Februari', 'Maret', 'April',
-                                                                    'Mei', 'Juni', 'Juli', 'Agustus',
-                                                                    'September',  'Oktober', 'November', 'Desember'
-                                                                ];
-                                                                for ($ba = 1; $ba <= 12; $ba++) { ?>
-                                                                    <option value="{{$ba}}">{{$bulan[$ba-1]}}</option>
-                                                                <?php } ?>
-                                                            </select>
-                                                            <!-- <input type="month" id="start" name="start" min="2018-03" value="2018-05"> -->
-                                                        </div>
-                                                        <div class="col">
-                                                            <label>Selesai Kegiatan</label>
-                                                            <select name="bulan_akhir" id="bulan_akhir" onclick="max()" class="form-control">
-                                                                <option hidden>Pilih</option>
-                                                                <?php
-                                                                $bulan = [
-                                                                    'Januari', 'Februari', 'Maret', 'April',
-                                                                    'Mei', 'Juni', 'Juli', 'Agustus',
-                                                                    'September',  'Oktober', 'November', 'Desember'
-                                                                ];
-                                                                for ($br = 1; $br <= 12; $br++) { ?>
-                                                                    <option value="{{$br}}">{{$bulan[$br-1]}}</option>
-                                                                <?php } ?>
-                                                            </select>
-                                                        </div>
-
-                                                    </div>
-                                                    <input name="created_at" id="created_at" type="hidden" value="<?= date('Y-m-d H:i:s') ?>">
-                                                    <input name="updated_at" id="updated_at" type="hidden" value="<?= date('Y-m-d H:i:s') ?>">
-                                                    <br />
-                                                    <button class="btn btn-primary mr-1" type="submit">Submit</button>
-                                                </form>
-                                                <script>
-                                                    function min() {
-                                                        var selectBox = document.getElementById("bulan_awal");
-                                                        var selectedValue = selectBox.options[selectBox.selectedIndex].value;
-                                                        console.log(selectedValue);
-                                                        for (i = 1; i < 12; i++) {
-                                                            if (i < selectedValue) {
-                                                                document.getElementById("bulan_akhir").options[i].disabled = true;
-                                                            } else {
-                                                                document.getElementById("bulan_akhir").options[i].disabled = false;
-                                                            }
-                                                        }
-                                                    };
-
-                                                    function max() {
-                                                        var selectBox = document.getElementById("bulan_akhir");
-                                                        var selectedValue = selectBox.options[selectBox.selectedIndex].value;
-                                                        console.log(selectedValue);
-                                                        for (i = 1; i < 12; i++) {
-                                                            if (i > selectedValue) {
-                                                                document.getElementById("bulan_awal").options[i].disabled = true;
-                                                            } else {
-                                                                document.getElementById("bulan_awal").options[i].disabled = false;
-                                                            }
-                                                        }
-                                                    };
-                                                </script>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Modal Tambah IKU -->
-                                <div class="modal fade" tabindex="-1" role="dialog" id="tambah_iku<?= $tor->id ?>">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title">Tambah IKU</h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <form class="form-horizontal" method="post" action="{{ url('/tor/create_indikator/') }}">
-                                                    @csrf
-                                                    <label>Contoh</label><br />
-                                                    <img width="450" src="../assets/contoh/contohiku.png">
-                                                    <br />
-                                                    <div class="form-group">
-                                                        <label>TOR</label>
-                                                        <select name="id_tor" id="id_tor" class="form-control">
-                                                            <option value="{{$tor->id}}">{{$tor->nama_kegiatan}}</option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="container mt-3">
-                                                        <div class="row">
-                                                            <div class="col-md-7">
-                                                                <div class="form-group">
-                                                                    <input name="jenis" id="jenis" value="IKU" type="hidden" class="form-control">
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <label>Realisasi</label>
-                                                                    <input name="realisasi" id="realisasi" type="text" class="form-control">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-3">
-                                                                <div class="form-group">
-                                                                    <label>Tahun Realisasi</label>
-                                                                    <input name="thn_realisasi" id="thn_realisasi" type="text" class="form-control">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-md-7">
-                                                                <div class="form-group">
-                                                                    <label>Target</label>
-                                                                    <input name="target" id="target" type="text" class="form-control">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-3">
-                                                                <div class="form-group">
-                                                                    <label>Tahun Target</label>
-                                                                    <input name="thn_target" id="thn_target" type="text" class="form-control">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <button class="btn btn-primary mr-1" type="submit">Submit</button>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <br />
-                                <hr>
-                                <!-- Modal Tambah IK -->
-                                <div class="modal fade" tabindex="-1" role="dialog" id="tambah_ik<?= $tor->id ?>">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title">Tambah IK</h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <form class="form-horizontal" method="post" action="{{ url('/tor/create_indikator/') }}">
-                                                    @csrf
-                                                    <label>Contoh</label><br />
-                                                    <img width="450" src="../assets/contoh/contohik.png">
-                                                    <br />
-                                                    <div class="form-group">
-                                                        <label>TOR</label>
-                                                        <select name="id_tor" id="id_tor" class="form-control">
-                                                            <option value="{{$tor->id}}">{{$tor->nama_kegiatan}}</option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="container mt-3">
-                                                        <div class="row">
-                                                            <div class="col-md-7">
-                                                                <div class="form-group">
-                                                                    <input name="jenis" id="jenis" value="IK" type="hidden" class="form-control">
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <label>Realisasi</label>
-                                                                    <input name="realisasi" id="realisasi" type="text" class="form-control">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-3">
-                                                                <div class="form-group">
-                                                                    <label>Tahun Realisasi</label>
-                                                                    <input name="thn_realisasi" id="thn_realisasi" type="text" class="form-control">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-md-7">
-                                                                <div class="form-group">
-                                                                    <label>Target</label>
-                                                                    <input name="target" id="target" type="text" class="form-control">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-3">
-                                                                <div class="form-group">
-                                                                    <label>Tahun Target</label>
-                                                                    <input name="thn_target" id="thn_target" type="text" class="form-control">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <button class="btn btn-primary mr-1" type="submit">Submit</button>
-
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                
                             </div>
                         </div>
                     @endif
+                    <!-- Modal Tambah Jadwal -->
+                    <div class="modal fade" tabindex="-1" role="dialog" id="tambah_jadwal<?= $tor->id ?>">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Tambah Jadwal Pelaksanaan</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form class="form-horizontal" method="post" action="{{ url('/tor/create_jadwal/') }}">
+                                        @csrf
+                                        <label>Contoh</label><br />
+                                        <img width="450" src="../assets/contoh/jadwaltor.png">
+                                        <br />
+                                        <div class="form-group">
+                                            <label>TOR</label>
+                                            <select name="id_tor" id="id_tor" class="form-control">
+                                                <option value="{{$tor->id}}">{{$tor->nama_kegiatan}}</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group ">
+                                            <label>Komponen Jadwal</label>
+                                            <textarea class="form-control" id="komponen" name="komponen" rows="2" placeholder="komponen..."></textarea>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <label>Mulai Kegiatan</label>
+                                                <select name="bulan_awal" id="bulan_awal" onclick="min()" class="form-control">
+                                                    <option hidden>Pilih</option>
+                                                    <?php
+                                                    $bulan = [
+                                                        'Januari', 'Februari', 'Maret', 'April',
+                                                        'Mei', 'Juni', 'Juli', 'Agustus',
+                                                        'September',  'Oktober', 'November', 'Desember'
+                                                    ];
+                                                    for ($ba = 1; $ba <= 12; $ba++) { ?>
+                                                        <option value="{{$ba}}">{{$bulan[$ba-1]}}</option>
+                                                    <?php } ?>
+                                                </select>
+                                                <!-- <input type="month" id="start" name="start" min="2018-03" value="2018-05"> -->
+                                            </div>
+                                            <div class="col">
+                                                <label>Selesai Kegiatan</label>
+                                                <select name="bulan_akhir" id="bulan_akhir" onclick="max()" class="form-control">
+                                                    <option hidden>Pilih</option>
+                                                    <?php
+                                                    $bulan = [
+                                                        'Januari', 'Februari', 'Maret', 'April',
+                                                        'Mei', 'Juni', 'Juli', 'Agustus',
+                                                        'September',  'Oktober', 'November', 'Desember'
+                                                    ];
+                                                    for ($br = 1; $br <= 12; $br++) { ?>
+                                                        <option value="{{$br}}">{{$bulan[$br-1]}}</option>
+                                                    <?php } ?>
+                                                </select>
+                                            </div>
+
+                                        </div>
+                                        <input name="created_at" id="created_at" type="hidden" value="<?= date('Y-m-d H:i:s') ?>">
+                                        <input name="updated_at" id="updated_at" type="hidden" value="<?= date('Y-m-d H:i:s') ?>">
+                                        <br />
+                                        <button class="btn btn-primary mr-1" type="submit">Submit</button>
+                                    </form>
+                                    <script>
+                                        function min() {
+                                            var selectBox = document.getElementById("bulan_awal");
+                                            var selectedValue = selectBox.options[selectBox.selectedIndex].value;
+                                            console.log(selectedValue);
+                                            for (i = 1; i < 12; i++) {
+                                                if (i < selectedValue) {
+                                                    document.getElementById("bulan_akhir").options[i].disabled = true;
+                                                } else {
+                                                    document.getElementById("bulan_akhir").options[i].disabled = false;
+                                                }
+                                            }
+                                        };
+
+                                        function max() {
+                                            var selectBox = document.getElementById("bulan_akhir");
+                                            var selectedValue = selectBox.options[selectBox.selectedIndex].value;
+                                            console.log(selectedValue);
+                                            for (i = 1; i < 12; i++) {
+                                                if (i > selectedValue) {
+                                                    document.getElementById("bulan_awal").options[i].disabled = true;
+                                                } else {
+                                                    document.getElementById("bulan_awal").options[i].disabled = false;
+                                                }
+                                            }
+                                        };
+                                    </script>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Modal Tambah IKU -->
+                    <div class="modal fade" tabindex="-1" role="dialog" id="tambah_iku<?= $tor->id ?>">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Tambah IKU</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form class="form-horizontal" method="post" action="{{ url('/tor/create_indikator/') }}">
+                                        @csrf
+                                        <label>Contoh</label><br />
+                                        <img width="450" src="../assets/contoh/contohiku.png">
+                                        <br />
+                                        <div class="form-group">
+                                            <label>TOR</label>
+                                            <select name="id_tor" id="id_tor" class="form-control">
+                                                <option value="{{$tor->id}}">{{$tor->nama_kegiatan}}</option>
+                                            </select>
+                                        </div>
+                                        <div class="container mt-3">
+                                            <div class="row">
+                                                <div class="col-md-7">
+                                                    <div class="form-group">
+                                                        <input name="jenis" id="jenis" value="IKU" type="hidden" class="form-control">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>Realisasi</label>
+                                                        <input name="realisasi" id="realisasi" type="text" class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <label>Tahun Realisasi</label>
+                                                        <input name="thn_realisasi" id="thn_realisasi" type="text" class="form-control">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-7">
+                                                    <div class="form-group">
+                                                        <label>Target</label>
+                                                        <input name="target" id="target" type="text" class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <label>Tahun Target</label>
+                                                        <input name="thn_target" id="thn_target" type="text" class="form-control">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <button class="btn btn-primary mr-1" type="submit">Submit</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <hr>
+                    <!-- Modal Tambah IK -->
+                    <div class="modal fade" tabindex="-1" role="dialog" id="tambah_ik<?= $tor->id ?>">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Tambah IK</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form class="form-horizontal" method="post" action="{{ url('/tor/create_indikator/') }}">
+                                        @csrf
+                                        <label>Contoh</label><br />
+                                        <img width="450" src="../assets/contoh/contohik.png">
+                                        <br />
+                                        <div class="form-group">
+                                            <label>TOR</label>
+                                            <select name="id_tor" id="id_tor" class="form-control">
+                                                <option value="{{$tor->id}}">{{$tor->nama_kegiatan}}</option>
+                                            </select>
+                                        </div>
+                                        <div class="container mt-3">
+                                            <div class="row">
+                                                <div class="col-md-7">
+                                                    <div class="form-group">
+                                                        <input name="jenis" id="jenis" value="IK" type="hidden" class="form-control">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>Realisasi</label>
+                                                        <input name="realisasi" id="realisasi" type="text" class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <label>Tahun Realisasi</label>
+                                                        <input name="thn_realisasi" id="thn_realisasi" type="text" class="form-control">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-7">
+                                                    <div class="form-group">
+                                                        <label>Target</label>
+                                                        <input name="target" id="target" type="text" class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <label>Tahun Target</label>
+                                                        <input name="thn_target" id="thn_target" type="text" class="form-control">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <button class="btn btn-primary mr-1" type="submit">Submit</button>
+
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
             </div>

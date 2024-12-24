@@ -22,7 +22,7 @@
                                             $wstatus = $stat->nama_status;
                                             if ($wstatus == 'Belum Dinilai') {
                                                 $warnaLingkar = 'timeline-dots';
-                                            } elseif ($wstatus == 'Sudah Dinilai') {
+                                            } elseif ($wstatus == 'Sudah Disetujui') {
                                                 $warnaLingkar = 'timeline-dots border-success';
                                             } elseif ($wstatus == 'Revisi') {
                                                 $warnaLingkar = 'timeline-dots  border-danger';

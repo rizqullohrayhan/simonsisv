@@ -111,6 +111,8 @@ Route::group(['prefix' => 'sv', 'middleware' =>  ['IsProdi', 'auth', 'PreventBac
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
+    Route::get('/home/getTriwulan', [HomeController::class, 'getTriwulan'])->name('home.getTriwulan');
+    Route::get('/home/getData', [HomeController::class, 'getData'])->name('home.getData');
 
     Route::post('/pergantian', [ProfilController::class, 'ganti']);
 
@@ -173,7 +175,7 @@ Route::group(['middleware' => 'auth'], function () {
     // Route::get('/tor', [TorController::class, 'index']);
     Route::get('/pengajuantor', [TorController::class, 'pengajuan']);
     Route::get('/steppengajuantor', [TorController::class, 'stepPengajuan']);
-    Route::get('/getEmailPIC/{namapic}', [TorController::class, 'getEmailPIC']);
+    Route::get('/getEmailPIC/{namapic}', [TorController::class, 'getEmailPIC'])->name('getEmailPIC');
 
 
     Route::get('/lengkapitor/{id}', [TorController::class, 'lengkapitor']);

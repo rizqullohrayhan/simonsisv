@@ -11,7 +11,7 @@ class Tahun extends Model
     protected $primaryKey = 'id';
     public $keyType = 'string';
     protected $table = 'tahun';
-    protected $guarded = [];
+    protected $guarded = ['id'];
     public function triwulan()
     {
         // $this->relationsType("Model","Foreign_key","Local_key");

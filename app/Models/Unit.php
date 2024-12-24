@@ -23,6 +23,11 @@ class Unit extends Model
         return $this->hasOne(Kaprodi::class, 'id_unit', 'id');
     }
 
+    public function user()
+    {
+        return $this->hasOne(User::class, 'id_unit', 'id');
+    }
+
     /**
      * Get all of the tor for the Unit
      *

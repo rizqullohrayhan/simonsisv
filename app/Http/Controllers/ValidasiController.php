@@ -12,6 +12,7 @@ use App\Models\User;
 use App\Models\SubKegiatan;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Auth;
 // use Maatwebsite\Excel\Facades\Excel;
@@ -21,6 +22,7 @@ use Excel;
 use App\Exports\TORExport;
 use App\Models\TrxStatusTor;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\File;
 use Maatwebsite\Excel\Concerns\ToArray;
 use setasign\Fpdi\Fpdi;
 use Yajra\DataTables\Facades\DataTables;
@@ -131,7 +133,7 @@ class ValidasiController extends Controller
             })
             ->editColumn('id', function ($row) use ($status) {
                 return '<a href="' . url('/detailtor/' . base64_encode($row->id)) . '?status=' . $status . '" class="badge badge-warning rounded">
-                            Detail
+                            Lihat
                         </a>';
             })
             ->rawColumns(['tgl_mulai_pelaksanaan', 'jumlah_anggaran', 'status', 'id'])
@@ -238,10 +240,21 @@ class ValidasiController extends Controller
         $request->validate([]);
 
         // $inserting = DB::table('trx_status_tor')->insert($request->except('_token', 'validator'));
-        $inserting = Tor::findOrFail($request->id_tor)->update(['validator' => $request->validator]);
+        // $tor = Tor::findOrFail($request->id_tor);
+        // $judul = Str::words($request->judul, '2');
+        // $fileName = 'KAK-RAB ' . Auth::user()->unit->nama_unit . ' ' . $judul . '_' . time() . '.pdf';
+        // $request->file->storeAs('fileScan/', $fileName, 'public');
+        
+        // $fileLama = $tor->file;
+        // $fileLamaPath = public_path() . "/storage/fileScan/" . $fileLama;
+        // File::delete($fileLamaPath);
+        $tor = Tor::findOrFail($request->id_tor)->update([
+            'validator' => $request->validator,
+            // 'file' => $fileName,
+        ]);
         $inserting = TrxStatusTor::create($request->input());
         if ($inserting) {
-            return redirect()->back()->with("success", "Data berhasil ditambahkan");
+            return redirect()->back()->with("success", "TOR Berhasil Diajukan");
         } else {
             return redirect()->back()->withInput()->withErrors("Terjadi kesalahan");
         }
@@ -256,9 +269,21 @@ class ValidasiController extends Controller
 
         // dd($request->input());
 
-        $inserting = DB::table('trx_status_tor')->insert($request->except('_token'));
+        if ($request->hasFile('file')) {
+            $tor = Tor::where('id', $request->id_tor)->first();
+            $judul = Str::words($request->judul, '2');
+            $fileName = 'KAK-RAB ' . $tor->unit->nama_unit . ' ' . $judul . '_' . time() . '.pdf';
+            $request->file->storeAs('fileScan/', $fileName, 'public');
+
+            $fileLama = $tor->file;
+            $fileLamaPath = public_path() . "/storage/fileScan/" . $fileLama;
+            File::delete($fileLamaPath);
+            $tor->update(['file' => $fileName]);
+        }
+
+        $inserting = TrxStatusTor::create($request->input());
         if ($inserting) {
-            return redirect()->back()->with("success", "Data berhasil ditambahkan");
+            return redirect('/validasi')->with("success", "Data berhasil ditambahkan");
         } else {
             return redirect()->back()->withInput()->withErrors("Terjadi kesalahan");
         }
@@ -291,6 +316,7 @@ class ValidasiController extends Controller
         $status = DB::table('status')->get();
         $roles = DB::table('roles')->get();
         $trx_status_tor = DB::table('trx_status_tor')->where('id_tor', $id)->get();
+        // $status = 
         $tabeltahun = DB::table('tahun')->get();
         $pagu = DB::table('pagu')->get();
         $komponen_jadwal = DB::table('komponen_jadwal')->where('id_tor', $id)->get();
@@ -313,9 +339,10 @@ class ValidasiController extends Controller
         $anggaran = DB::table('anggaran')->where('id_rab', $rab->id ?? '0')->get();
         $rab_ang = $anggaranStatic->Rab_Ang();
         $tabelRole =  Role::all();
-        $wd1 = User::where('multirole', '3')->first();
-        $wd2 = User::where('multirole', '4')->first();
-        $wd3 = User::where('multirole', '5')->first();
+        $verifikator = User::where('multirole', $indikator_p->verifikator)->where('is_aktif', '1')->first();
+        // $wd1 = User::where('multirole', '3')->first();
+        // $wd2 = User::where('multirole', '4')->first();
+        // $wd3 = User::where('multirole', '5')->first();
         // dd(User::where('role', '5')->first());
         return view(
             // "perencanaan.validasi.detail_tor",
@@ -345,9 +372,7 @@ class ValidasiController extends Controller
                 'belanja_mak',
                 'detail_mak',
                 'tabelRole',
-                'wd1',
-                'wd2',
-                'wd3',
+                'verifikator',
             )
         );
     }
@@ -612,15 +637,19 @@ class ValidasiController extends Controller
             ->leftjoin('indikator_iku', 'indikator_ik.id_iku', '=', 'indikator_iku.id')
             ->first();
         $anggaran = DB::table('anggaran')->where('id_rab', $rab->id ?? '0')->get();
-        $tanggal = Carbon::now()->translatedFormat('d F Y');
-        $wd1 = User::where('multirole', '3')->first();
-        $wd2 = User::where('multirole', '4')->first();
-        $wd3 = User::where('multirole', '5')->first();
+        $trxStatusTor = TrxStatusTor::where('id_tor', $id)->where('id_status', '4')->first();
+        $tanggal = Carbon::parse($trxStatusTor->created_at)->translatedFormat('d F Y');
+        // $verifikator = User::where('multirole', $indikator_p->verifikator)->where('is_aktif', '1')->first();
+        $verifikator = User::findOrFail($trxStatusTor->create_by);
+        // $wd1 = User::where('multirole', '3')->first();
+        // $wd2 = User::where('multirole', '4')->first();
+        // $wd3 = User::where('multirole', '5')->first();
         $data = [
             'tor' => $tor, 'prodi' => $prodi, 'rab' => $rab, 'kelompok_mak' => $kelompok_mak,
             'belanja_mak' => $belanja_mak, 'detail_mak' => $detail_mak, 'komponen_jadwal' => $komponen_jadwal,
             'indikator_p' => $indikator_p, 'anggaran' => $anggaran, 'tanggal' => $tanggal,
-            'wd1' => $wd1, 'wd2' => $wd2, 'wd3' => $wd3,
+            'verifikator' => $verifikator,
+            // 'wd1' => $wd1, 'wd2' => $wd2, 'wd3' => $wd3,
         ];
 
         // return view("perencanaan.validasi_v2.printTor",
@@ -643,8 +672,12 @@ class ValidasiController extends Controller
         // Gabungkan PDF
         $mergedPdf = $this->mergePdf([$pdf1, $pdf2]);
 
+        // Hapus file PDF yang telah digabung
+        unlink($pdf1);
+        unlink($pdf2);
+
         // Kembalikan sebagai file PDF untuk diunduh
-        return $mergedPdf->stream();
+        return $mergedPdf->stream("$tor->nama_kegiatan.pdf");
     }
 
     private function generatePdfFromHtml($htmlContent, $name)

@@ -32,7 +32,7 @@
                                                     $warnaLingkar = 'timeline-dots  border-danger';
                                                 } elseif ($wstatus == 'Sudah Revisi') {
                                                     $warnaLingkar = 'timeline-dots';
-                                                } elseif ($wstatus == 'Sudah Dinilai') {
+                                                } elseif ($wstatus == 'Sudah Disetujui') {
                                                     $warnaLingkar = 'timeline-dots border-success';
                                                 }
                                         ?>

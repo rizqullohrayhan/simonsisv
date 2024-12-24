@@ -142,9 +142,12 @@ use Illuminate\Support\Facades\Auth;
                                                     <div class="row" style="border: 1cm;">
                                                         <div class="col-sm-4">
                                                             <div class="card">
-                                                                <b>
-                                                                    <h6 class="card-title"><b>Indikator Kinerja Utama (IKU)</b></h6>
-                                                                </b>
+                                                                <h6 class="card-title"><b>Indikator Kinerja Utama (IKU)</b></h6>
+                                                                <span>
+                                                                    - Indikator Kinerja dimaksudkan sebagai alat ukur pencapaian tujuan <br>
+                                                                    - Sebutkan target langsung dari setiap kegiatan pada akhir tahun <br>
+                                                                    - Sajikan baik Indikator Kinerja Utama, dan Output
+                                                                </span>
                                                                 <div class="form-group">
                                                                     <label>Realisasi IKU (%)</label>
                                                                     <input name="realisasi_IKU" id="realisasi_IKU" value="{{old('realisasi_IKU',$tor['realisasi_IKU'])}}" type="text" class="form-control @error('realisasi_IKU') is-invalid @enderror">
@@ -163,9 +166,12 @@ use Illuminate\Support\Facades\Auth;
                                                         </div>
                                                         <div class="col-sm-4">
                                                             <div class="card">
-                                                                <b>
-                                                                    <h6 class="card-title"><b>Indikator Kinerja Kegiatan (IK)</b></h6>
-                                                                </b>
+                                                                <h6 class="card-title"><b>Indikator Kinerja Kegiatan (IK)</b></h6>
+                                                                <span>
+                                                                    - Indikator Kinerja dimaksudkan sebagai alat ukur pencapaian tujuan <br>
+                                                                    - Sebutkan target langsung dari setiap kegiatan pada akhir tahun <br>
+                                                                    - Sajikan baik Indikator Kinerja Utama, dan Output
+                                                                </span>
                                                                 <div class="form-group">
                                                                     <label>Realisasi IK (%)</label>
                                                                     <input name="realisasi_IK" id="realisasi_IK" value="{{old('realisasi_IK',$tor['realisasi_IK'])}}" type="text" class="form-control @error('realisasi_IK') is-invalid @enderror">
@@ -199,22 +205,47 @@ use Illuminate\Support\Facades\Auth;
                                             <div class="container mt-3">
                                                 <div class="form-group">
                                                     <label><b>Latar Belakang</b></label>
+                                                    <br>
+                                                    <span>
+                                                        Jelaskan : <br>
+                                                        - Argumentasi tentang mengapa usulan Komponen Input ini adalah pilihan tepat untuk menyelesaikan permasalahan <br>
+                                                        - Keterkaitan antara program Renstra dan Kegiatan
+                                                    </span>
                                                     <textarea class="ckeditor form-control" id="latar_belakang" name="latar_belakang" value="{!!old('latar_belakang',$tor['latar_belakang'])!!}">{{$tor['latar_belakang']}}</textarea>
                                                 </div>
                                                 <div class="form-group">
                                                     <label><b>Rasionalisasi</b></label>
+                                                    <br>
+                                                    <span>
+                                                        Jelaskan keterkaitan/ akibat logis antara kegiatan yang dilaksanakan dengan KPI/IKK yang akan dicapai.
+                                                        (Jika ... Maka ... / dengan ... Maka ...)
+                                                    </span>
                                                     <textarea class="ckeditor form-control" id="rasionalisasi" name="rasionalisasi" rows="2">{{$tor['rasionalisasi']}}</textarea>
                                                 </div>
                                                 <div class="form-group">
                                                     <label><b>Tujuan</b></label>
+                                                    <br>
+                                                    <span>
+                                                        Uraikan tujuan yang ingin dicapai oleh kegiatan ini
+                                                    </span>
                                                     <textarea class="ckeditor form-control" id="tujuan" name="tujuan" rows="2">{{$tor['tujuan']}}</textarea>
                                                 </div>
                                                 <div class="form-group">
                                                     <label><b>Mekanisme</b></label>
+                                                    <br>
+                                                    <span>
+                                                        - Jelaskan rincian, tahapan dan langkah-langkah kegiatan yang akan dilaksanakan untuk menghasilkan output <br>
+                                                        - Fokuskan pada pencapaian indikator kinerja terkait
+                                                    </span>
                                                     <textarea class="ckeditor form-control" id="mekanisme" name="mekanisme" rows="2">{{$tor['mekanisme']}}</textarea>
                                                 </div>
                                                 <div class="form-group">
                                                     <label><b>Keberlanjutan</b></label>
+                                                    <br>
+                                                    <span>
+                                                        - Jelaskan bagaimana kegiatan ini dapat terus berlanjut setelah investasi selesai <br>
+                                                        - Implikasi finansial, alokasi Sumber daya dan komitmen manajemen
+                                                    </span>
                                                     <textarea class="ckeditor form-control" id="keberlanjutan" name="keberlanjutan" rows="2">{{$tor['keberlanjutan']}}</textarea>
                                                 </div>
                                             </div>
@@ -227,21 +258,53 @@ use Illuminate\Support\Facades\Auth;
                                         <div class="form-card text-left">
                                             <div class="container mt-3">
                                                 <div class="form-group">
-                                                    <label><b>Nama Perancana / Penanggungjawab Kegiatan</b></label>
-                                                    <select name="nama_pic" id="nama_pic" class="form-control @error('nama_pic') is-invalid @enderror">
+                                                    <label><b>Nama PIC Kegiatan</b></label>
+                                                    <br>
+                                                    <span>
+                                                        - Siapa yang bertanggung jawab terhadap pelaksanaan program ini. (TTD)
+                                                    </span>
+                                                    <br>
+                                                    <select name="nama_pic" id="selectnya" onchange="Ganti()" class="form-control @error('nama_pic') is-invalid @enderror" style="width: 100%;height:50px;line-height:45px;color:#a09e9e;background:#00000000;border:1px solid #f1f1f1;border-radius:5px">
+                                                        <option>-</option>
                                                         @foreach ($pics as $pic)
                                                             <option value="{{$pic->id}}" @if (old('nama_pic') == $pic->id) selected @endif>{{$pic->name}}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
-                                                {{-- <div class="form-group">
+                                                <div class="form-group">
                                                     <label><b>Email PIC Kegiatan</b></label>
                                                     <input name="email_pic" id="email_pic" type="text" class="form-control" value="{{old('email_pic',$tor['email_pic'])}}">
                                                 </div>
+                                                <script>
+                                                    $(document).ready(function() {
+                                                        $('#selectnya').select2();
+                                                    });
+
+                                                    function Ganti() {
+                                                        var namapic = document.getElementById('selectnya').value;
+                                                        let url = "{{route('getEmailPIC', ':namapic')}}";
+                                                        url = url.replace(':namapic', namapic);
+                                                        $.ajax({
+                                                            url: url,
+                                                            type: "GET",
+                                                            data: {
+                                                                "_token": "{{ csrf_token() }}",
+                                                            },
+                                                            dataType: "json",
+                                                            success: function(data) {
+                                                                $.each(data, function(key, pic) {
+                                                                    document.getElementById("email_pic").value = pic.email;
+                                                                    document.getElementById("kontak_pic").value = pic.telepon;
+                                                                });
+
+                                                            }
+                                                        });
+                                                    }
+                                                </script>
                                                 <div class="form-group">
                                                     <label><b>Kontak PIC Kegiatan</b></label>
                                                     <input name="kontak_pic" id="kontak_pic" type="text" class="form-control" value="{{old('kontak_pic',$tor['kontak_pic'])}}">
-                                                </div> --}}
+                                                </div>
                                             </div>
                                         </div>
                                         <button type="button" class="btn btn-primary next action-button float-right" value="Next">Next</button>
@@ -352,10 +415,17 @@ use Illuminate\Support\Facades\Auth;
             });
         </script>
 </body>
-<script src="//cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
+{{-- <script src="//cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script> --}}
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
-        $('.ckeditor').ckeditor();
+        $('.ckeditor').summernote({
+            toolbar: [
+                ['style', ['bold', 'italic', 'underline']],
+                ['font', ['strikethrough', 'superscript', 'subscript']],
+                ['para', ['ul', 'ol']],
+            ]
+        });
     });
 </script>
 

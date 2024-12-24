@@ -28,9 +28,10 @@ class KController extends Controller
         $iku = DB::table('indikator_iku')->get();
         $ik = DB::table('indikator_ik')->get();
         $k = DB::table('indikator_p')
-            ->select('indikator_iku.IKU', 'indikator_ik.IK', 'indikator_p.*')
+            ->select('indikator_iku.IKU', 'indikator_ik.IK', 'indikator_p.*', 'roles.name as wd_terkait')
             ->leftJoin('indikator_ik', 'indikator_p.id_ik', '=', 'indikator_ik.id')
             ->leftJoin('indikator_iku', 'indikator_ik.id_iku', '=', 'indikator_iku.id')
+            ->leftJoin('roles', 'indikator_p.verifikator', '=', 'roles.id')
             ->orderBy('indikator_iku.IKU')
             ->orderBy('indikator_ik.IK')
             ->orderBy('indikator_p.P')
@@ -38,12 +39,14 @@ class KController extends Controller
         // $subk = DB::table('indikator_subk')->get();
         // $tabeltahun = DB::table('tahun')->get();
         $tabelRole =  Role::all();
+        $listWD = Role::whereIn('id', [3, 4, 5])->get();
         return view(
             "pengaturan.iku.k.index",
             [
                 'iku' => $iku,
                 'ik' => $ik,
                 'k' => $k,
+                'listWD' => $listWD,
                 // 'tabeltahun' => $tabeltahun,
                 'tabelRole' => $tabelRole
             ]

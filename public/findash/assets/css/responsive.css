@@ -291,7 +291,7 @@ NOTE: This file contains the styling for responsive Template.
 	.right-block .image-absulute.image-absulute-1 { right: 50px; }
 	.right-block .image-absulute.image-absulute-2 { left: 40px; right: auto; top: auto; bottom: 50px; }
 	.iq-search-bar { width:100%; position: absolute; bottom: -48px; left: 0; right: 0; }
-	.iq-top-navbar, body.sidebar-main .iq-top-navbar { min-height: auto; padding-bottom: 60px; }
+	.iq-top-navbar, body.sidebar-main .iq-top-navbar { min-height: auto;}
 	.content-page, body.sidebar-main .content-page { padding: 160px 0 0; }
 	.iq-sidebar { top: 140px; }
 	.iq-search-bar .search-input { background: var(--iq-light-primary); }
@@ -341,7 +341,7 @@ NOTE: This file contains the styling for responsive Template.
 	.iq-search-bar { padding: 0 0px; width: 100%; margin: 15px 0 0; }
 	.two-sidebar .iq-search-bar { margin-right: 0; padding: 0; }
 	.iq-top-navbar .iq-sub-dropdown { width: 240px; }
-	.iq-top-navbar .navbar-nav.navbar-list li:first-child .iq-sub-dropdown { right: -100px; }
+	/* .iq-top-navbar .navbar-nav.navbar-list li:first-child .iq-sub-dropdown { right: -100px; } */
 	.iq-page-menu-horizontal .iq-top-navbar .navbar-nav.navbar-list li:first-child .iq-sub-dropdown,.top-tab-horizontal .iq-top-navbar .navbar-nav.navbar-list li:first-child .iq-sub-dropdown{ right: -150px; }
 	.iq-page-menu-horizontal .navbar-collapse, .top-tab-horizontal .navbar-collapse { top: 75px; }
 	.iq-page-menu-horizontal .iq-top-navbar .navbar-toggler, .iq-page-menu-horizontal .iq-top-navbar .iq-navbar-custom .iq-menu-bt, .top-tab-horizontal .iq-top-navbar .navbar-toggler, .top-tab-horizontal .iq-top-navbar .iq-navbar-custom .iq-menu-bt { top: 18px; }

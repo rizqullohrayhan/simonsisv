@@ -1,7 +1,7 @@
 <div class="iq-sidebar">
     <div class="iq-navbar-logo d-flex justify-content-between">
         <a href="{{ route('home') }}" class="header-logo">
-            <img src="{{ asset('findash/assets/images/logo.png') }}" class="img-fluid rounded" alt="">
+            <img src="{{ asset('findash/assets/images/logosv.png') }}" class="img-fluid rounded" alt="">
         </a>
         <div class="iq-menu-bt align-self-center">
             <div class="wrapper-menu">
@@ -14,7 +14,7 @@
         <nav class=" iq-sidebar-menu">
             <ul id="iq-sidebar-toggle" class="iq-menu">
                 {{-- DASHBOARD --}}
-                @can('dashboard')
+                {{-- @can('dashboard') --}}
                     <li class="{{ Request::is('home', 'admin/dashboard') ? 'active' : '' }}">
                         <a href="{{ route('home') }}" class="iq-waves-effect custom-tooltip">
                             <span class="ripple rippleEffect"></span>
@@ -24,7 +24,7 @@
                             </span>
                         </a>
                     </li>
-                @endcan
+                {{-- @endcan --}}
 
                 {{-- MENU PERENCANAAN --}}
                 <li
@@ -43,7 +43,7 @@
                     <ul id="perencanaan"
                         class="iq-submenu {{ Request::is('monitoringUsulan', 'torab', 'validasi', 'detailtor', 'steppengajuantor') ? 'collapse show' : 'collapse' }}"
                         data-parent="#iq-sidebar-toggle">
-                        @can('ajuan_monitoringUsulan')
+                        {{-- @can('ajuan_monitoringUsulan')
                             <li class="sub-menu-perencanaan {{ Request::is('monitoringUsulan') ? 'active' : '' }}">
                                 <a href="{{ url('/monitoringUsulan') }}">
                                     <i class="las la-chalkboard" data-toggle="tooltip" data-placement="right"
@@ -56,7 +56,7 @@
                                     <i class="las la-chalkboard" data-toggle="tooltip" data-placement="right"
                                         title="Monitoring IKU"></i>Monitoring IKU</a>
                             </li>
-                        @endcan
+                        @endcan --}}
                         @can('ajuan_torrab')
                             <li
                                 class="sub-menu-perencanaan {{ Request::is('torab', 'steppengajuantor', 'lengkapitor') ? 'active' : '' }}">
@@ -158,14 +158,14 @@
                                 </a>
                             </li>
                         @endcan
-                        @can('kaprodi_show')
+                        {{-- @can('kaprodi_show')
                             <li class="{{ Request::is('kaprodi') ? 'active' : '' }}">
                                 <a href="{{ url('/kaprodi') }}"><i class="las la-stream" data-toggle="tooltip"
                                         data-placement="right" title="Kaprodi"></i>Kaprodi
                                     
                                 </a>
                             </li>
-                        @endcan
+                        @endcan --}}
                         @can('spjkategori_show')
                             <li class="{{ Request::is('spj_kategori') ? 'active' : '' }}">
                                 <a href="{{ url('/spj_kategori') }}"><i class="las la-stream" data-toggle="tooltip"

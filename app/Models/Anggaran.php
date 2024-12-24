@@ -19,8 +19,8 @@ class Anggaran extends Model
     {
         $rab_ang = DB::table('anggaran')
             ->leftjoin('rab', 'anggaran.id_rab', '=', 'rab.id')
-            ->leftjoin('detail_mak', 'anggaran.id_detail_mak', '=', 'detail_mak.id')
-            ->select('rab.id as id_rab', 'anggaran.anggaran', 'anggaran.*', 'detail_mak.detail')
+            // ->leftjoin('detail_mak', 'anggaran.id_detail_mak', '=', 'detail_mak.id')
+            ->select('rab.id as id_rab', 'anggaran.anggaran', 'anggaran.*')
             ->get('*');
         return $rab_ang;
     }

@@ -20,6 +20,7 @@ class Indikator_kImport implements ToModel, WithHeadingRow
             'id_ik' => $row["ik"],
             'P' => $row["p"],
             'deskripsi' => $row["deskripsi"],
+            'verifikator' => $row["verifikator"],
         ]);
     }
 }

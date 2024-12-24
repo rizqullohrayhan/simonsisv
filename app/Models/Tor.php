@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Permission\Models\Role;
 
 class Tor extends Model
 {
@@ -83,5 +84,15 @@ class Tor extends Model
     public function unit()
     {
         return $this->belongsTo(Unit::class, 'id_unit', 'id');
+    }
+
+    public function statusMany()
+    {
+        return $this->belongsToMany(Status::class, 'trx_status_tor', 'id_tor', 'id_status');
+    }
+
+    public function validator()
+    {
+        return $this->belongsTo(Role::class, 'validator', 'id');
     }
 }

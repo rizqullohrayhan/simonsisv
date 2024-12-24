@@ -10,7 +10,7 @@
             </div>
             <div class="modal-body">
                 <!-- <h4 class="card-title">Pengajuan TOR & RAB ke Sekolah Vokasi</h4> -->
-                <form method="post" action="{{url('/validasi/pengajuanProdi')}}">
+                <form method="post" action="{{url('/validasi/pengajuanProdi')}}" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
                         <i>Lengkapi Data TOR & RAB Sebelum Diajukan</i>
@@ -61,27 +61,20 @@
                                 <input type="hidden" name="role_by" value="<?= $roleby->name ?>">
                             @endif
                         @endforeach
+                        @php
+                            $validator = $indikator_p->firstWhere('id', $tItem->id_p)->verifikator;
+                        @endphp
                         <div class="form-group">
-                            <label class="form-label">Pilih Verifikator</label>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="validator" id="validator1" value="3" checked>
-                                <label class="form-check-label" for="validator1">
-                                    Wakil Dekan 1
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="validator" id="validator2" value="4" {{ ($tItem->validator == 4) ? 'checked' : ''}}>
-                                <label class="form-check-label" for="validator2">
-                                    Wakil Dekan 2
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="validator" id="validator3" value="5" {{ ($tItem->validator == 5) ? 'checked' : ''}}>
-                                <label class="form-check-label" for="validator3">
-                                    Wakil Dekan 3
-                                </label>
-                            </div>
+                            <input type="hidden" name="validator" value="{{$validator}}">
                         </div>
+                        {{-- <div class="form-group">
+                            <label for="file">Unggah File TOR & RAB yang telah di TTD oleh Kaprodi dan PIC dalam format .pdf</label>
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" name="file" id="file" accept="application/pdf" required>
+                                <label class="custom-file-label" for="file">Pilih File</label>
+                            </div>
+                        </div> --}}
+                        <input type="hidden" name="judul" value="{{ $tItem->nama_kegiatan }}">
                         <input type="hidden" name="id_tor" value="{{ $tItem->id }}">
                         <?php date_default_timezone_set('Asia/Jakarta'); ?>
                         <input name="created_at" id="created_at" type="hidden" value="<?= date('Y-m-d H:i:s') ?>">

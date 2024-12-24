@@ -72,9 +72,9 @@ class TorController extends Controller
         );
         // return $PIC;
     }
-    public function pengajuan2()
+    public function pengajuan2(Request $request)
     {
-        $filtertahun = date('Y');
+        $filtertahun = ($request->tahun) ? $request->tahun : date('Y');
         $filterprodi = 0;
         if (auth()->user()->id_unit != 1) {
             // $tor = Tor::where('id_unit', auth()->user()->id_unit)->simplePaginate(3);
@@ -87,17 +87,16 @@ class TorController extends Controller
             if ($torcount->count() % 2 != 0) {
                 $h = 6;
             }
-            $tor = Tor::where('tgl_mulai_pelaksanaan', 'LIKE',  $filtertahun . '%')
+            $tor = DB::table('tor')
+                ->where('tgl_mulai_pelaksanaan', 'LIKE',  $filtertahun . '%')
                 ->where('id_unit', auth()->user()->id_unit)
                 ->orderBy('created_at', 'desc')->cursorPaginate($h);
             // ->where('tgl_pelaksanaan', 'LIKE', date('Y') . '%')
             // ->simplepaginate(3);
         }
         if (auth()->user()->id_unit == 1) {
-            $tor = DB::table('tor')
-                ->orderBy('created_at', 'desc')
-                // $tor = Tor::where('tgl_pelaksanaan', 'LIKE', date('Y') . '%')
-                ->simplePaginate(3);
+            // $tor = Tor::where('tgl_pelaksanaan', 'LIKE', date('Y') . '%')
+            $tor = Tor::orderBy('created_at', 'desc')->simplePaginate(3);
         }
 
         $userStatic = new User();
@@ -208,9 +207,10 @@ class TorController extends Controller
         $anggaran = DB::table('anggaran')->where('id_rab', $rab->id ?? '0')->get();
         // dd($anggaran);
         $tabelRole =  Role::all();
-        $wd1 = User::where('role', '3')->first();
-        $wd2 = User::where('role', '4')->first();
-        $wd3 = User::where('role', '5')->first();
+        $verifikator = User::where('multirole', $indikator_p->verifikator)->where('is_aktif', '1')->first();
+        // $wd1 = User::where('role', '3')->first();
+        // $wd2 = User::where('role', '4')->first();
+        // $wd3 = User::where('role', '5')->first();
 
         return view(
             "perencanaan.tor.lengkapitor",
@@ -239,9 +239,7 @@ class TorController extends Controller
                 'belanja_mak',
                 'detail_mak',
                 'tabelRole',
-                'wd1',
-                'wd2',
-                'wd3',
+                'verifikator',
             )
         );
     }
@@ -372,7 +370,8 @@ class TorController extends Controller
     public function processUpdate(Request $request, $id)
     {
         $request->validate([]);
-        $process = Tor::findOrFail($id)->update($request->except('_token'));
+        // dd($request->input());
+        $process = Tor::findOrFail($id)->update($request->except('_token', 'files'));
         if ($process) {
             return redirect('/torab')->with("success", "Data berhasil diperbarui");
         } else {
@@ -421,7 +420,7 @@ class TorController extends Controller
         $mak = DB::table('mak')->get();
         $tahun = DB::table('tor')->get();
         $tabeltahun = DB::table('tahun')->get();
-        $trx_status_tor = DB::table('trx_status_tor')->get();
+        $trx_status_tor = DB::table('trx_status_tor')->where('id_tor', $id)->get();
         $pagu = DB::table('pagu')->get();
         $indikator_p = DB::table('indikator_p')->get();
         $users = User::all();
@@ -448,9 +447,10 @@ class TorController extends Controller
 
     public function processRevisi(Request $request, $id)
     {
+        // dd($request->input());
         $id = base64_decode($id);
         $request->validate([]);
-        $process = Tor::findOrFail($id)->update($request->except('_token'));
+        $process = Tor::findOrFail($id)->update($request->except('_token', 'files'));
         if ($process) {
             return redirect('/lengkapitor/' . base64_encode($id))->with("success", "Data berhasil diperbarui");
         } else {
@@ -528,27 +528,6 @@ class TorController extends Controller
                     ->simplePaginate($h);
             }
         }
-        // if (auth()->user()->id_unit == 1) {
-        //     if (!empty($request->tahun) && empty($request->prodi)) {
-        //         $torcount = Tor::where('tgl_mulai_pelaksanaan', 'LIKE', $request->tahun . '%')->get();
-        //         if ($torcount->count() % 2 == 0) {
-        //             $h = 4;
-        //         }
-        //         if ($torcount->count() % 2 != 0) {
-        //             $h = 6;
-        //         }
-        //         $tor = Tor::where('tgl_mulai_pelaksanaan', 'LIKE', $request->tahun . '%')->orderBy('id')->cursorPaginate($h);
-        //     } elseif (empty($request->tahun) && !empty($request->prodi)) {
-        //         $tor = Tor::where('id_unit', 'LIKE', $request->prodi . '%')->simplepaginate(2);
-        //     } elseif (!empty($request->prodi) && !empty($request->tahun)) {
-        //         $tor = Tor::where('tgl_mulai_pelaksanaan', 'LIKE', $request->tahun . '%')
-        //             ->where('id_unit', 'LIKE', $request->prodi . '%')
-        //             ->simplepaginate(2);
-        //     } elseif (empty($request->tahun && empty($request->prodi))) {
-        //         $tor = DB::table('tor')->orderBy('id')->cursorPaginate(2);
-        //         // redirect('/tor');
-        //     }
-        // }
 
         $userStatic = new User();
         $anggaranStatic = new Anggaran();

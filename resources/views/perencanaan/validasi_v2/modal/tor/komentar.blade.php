@@ -548,21 +548,24 @@
                                 <!-- TANDA TANGAN -->
                                 <tr>
                                     <td colspan="10"></td>
+                                    {{-- <td></td> --}}
                                     <td colspan="11">Surakarta</td>
                                 </tr>
                                 <tr>
                                     <td colspan="2"></td>
-                                    <td colspan="7" style="text-align: center;">Kepala Program Studi
+                                    <td colspan="7">{{ $tor->unit->user->jabatan }}
+                                        <br />{{ $tor->unit->nama_unit }}
                                         <br />
                                         <br />
                                         <br />
                                         <br />
-                                        <b>{{ $tor->unit->kaprodi->name }}</b>
+                                        <b>{{ $tor->unit->user->name }}</b>
                                         <br/>
-                                        NIP. {{ $tor->unit->kaprodi->nip }}
+                                        NIP. {{ $tor->unit->user->nip }}
                                     </td>
                                     <td></td>
-                                    <td colspan="11" style="text-align: center;">Perencana/Penanggungjawab
+                                    <td colspan="11">Perencana/Penanggungjawab
+                                        <br />
                                         <br />
                                         <br />
                                         <br />
@@ -581,30 +584,29 @@
                                     <td colspan="21"></td>
                                 </tr>
                                 <tr>
-                                    <td></td>
-                                    <td colspan="5" class="border-top border-right border-left">Wakil Dekan Akademik, Riset, dan Kemahasiswaan</td>
-                                    <td colspan="8" class="border-top border-right border-left">Wakil Dekan Perencanaan, Kerjasama, Bisnis dan Informasi</td>
-                                    <td colspan="7" class="border-top border-right border-left">Wakil Dekan SDM, Keuangan, dan Logistik</td>
+                                    <td colspan="21" style="text-align: center; padding-bottom: 0;">{{ $verifikator->jabatan }}</td>
+                                    {{-- <td colspan="8" class="border-top border-right border-left">{{ $wd3->jabatan }}</td>
+                                    <td colspan="7" class="border-top border-right border-left">{{ $wd2->jabatan }}</td> --}}
                                 </tr>
+                                {{-- <tr>
+                                    <td colspan="21" style="text-align: center; padding-top: 0;">{{ $verifikator->unit->nama_unit }}</td>
+                                </tr> --}}
                                 @for ($i = 0; $i < 10; $i++)
                                     <tr>
-                                        <td></td>
-                                        <td colspan="5" class="border-left border-right"></td>
-                                        <td colspan="8" class="border-left border-right"></td>
-                                        <td colspan="7" class="border-left border-right"></td>
+                                        <td colspan="21" style="text-align: center;"></td>
+                                        {{-- <td colspan="8" class="border-left border-right"></td>
+                                        <td colspan="7" class="border-left border-right"></td> --}}
                                     </tr>
                                 @endfor
                                 <tr>
-                                    <td></td>
-                                    <td colspan="5" class="border-left border-right"><b>{{ $wd1->name }}</b></td>
-                                    <td colspan="8" class="border-left border-right"><b>{{ $wd3->name }}</b></td>
-                                    <td colspan="7" class="border-left border-right"><b>{{ $wd2->name }}</b></td>
+                                    <td colspan="21" style="text-align: center;"><b>{{ $verifikator->name }}</b></td>
+                                    {{-- <td colspan="8" class="border-left border-right"><b>{{ $wd3->name }}</b></td>
+                                    <td colspan="7" class="border-left border-right"><b>{{ $wd2->name }}</b></td> --}}
                                 </tr>
                                 <tr>
-                                    <td></td>
-                                    <td colspan="5" class="border-left border-right border-bottom">NIP. {{ $wd1->nip }}</td>
-                                    <td colspan="8" class="border-left border-right border-bottom">NIP. {{ $wd3->nip }}</td>
-                                    <td colspan="7" class="border-left border-right border-bottom">NIP. {{ $wd2->nip }}</td>
+                                    <td colspan="21" style="text-align: center;">NIP. {{ $verifikator->nip }}</td>
+                                    {{-- <td colspan="8" class="border-left border-right border-bottom">NIP. {{ $wd3->nip }}</td>
+                                    <td colspan="7" class="border-left border-right border-bottom">NIP. {{ $wd2->nip }}</td> --}}
                                 </tr>
                             <!-- TANDA TANGAN -->
                             </tbody>
@@ -645,6 +647,9 @@
                         </div>
                     </div>
                     <br />
+                    <div class="text-right p-4">
+                        <button class="btn btn-primary btn-sm" type="submit">Validasi</button>
+                    </div>
                 </div>
             </div>
         </div>

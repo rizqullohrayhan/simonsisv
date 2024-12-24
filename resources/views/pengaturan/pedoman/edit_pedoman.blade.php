@@ -17,19 +17,26 @@
                              <label class="">
                                  {{ $pedomansbm->jenis }}</label> -->
                              <div id="sbm2">
-                                 <input type="radio" name="jenis" class="btn-check" id="sbm2" value="SBM" autocomplete="off">
-                                 <label>Standar Biaya
-                                     Masukan</label>
+                                 <input type="radio" name="jenis" class="btn-check" id="sbm2" value="SBM" autocomplete="off" 
+                                    @if ($pedomansbm->jenis == "SBM")
+                                        checked
+                                    @endif
+                                 >
+                                 <label>Standar Biaya Masukan</label>
                              </div>
-                             <div id="torrab2">
-                                 <input type="radio" name="jenis" class="btn-check" id="torrab2" value="TorRab" autocomplete="off">
-                                 <label>Template TOR & RAB</label>
-                             </div>
-                             <div id="spj2"><input type="radio" name="jenis" class="btn-check" id="spj2" value="SPJ" autocomplete="off">
+                             <div id="spj2"><input type="radio" name="jenis" class="btn-check" id="spj2" value="SPJ" autocomplete="off"
+                                    @if (preg_match("/^" . preg_quote("SPJ", '/') . "/", $pedomansbm->jenis))
+                                        checked
+                                    @endif
+                                 >
                                  <label>SPJ</label>
                              </div>
                              <div id="lpj2">
-                                 <input type="radio" name="jenis" class="btn-check" id="lpj2" value="LPJ" autocomplete="off">
+                                 <input type="radio" name="jenis" class="btn-check" id="lpj2" value="LPJ" autocomplete="off"
+                                    @if ($pedomansbm->jenis == "LPJ")
+                                        checked
+                                    @endif
+                                 >
                                  <label>LPJ</label>
                              </div>
                          </div>

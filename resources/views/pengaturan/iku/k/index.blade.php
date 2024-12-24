@@ -41,9 +41,7 @@ use Illuminate\Support\Facades\Auth;
                                     <div class="iq-card iq-card-block iq-card-stretch iq-card-height">
                                         <div class="iq-card-header d-flex justify-content-between">
                                             <div class="iq-header-title">
-                                                <h4 class="card-text">Indikator Kegiatan
-
-                                                </h4>
+                                                <h4 class="card-text">Indikator Kegiatan</h4>
                                                 <!-- Modal Tambah k -->
                                                 <div class="modal fade" tabindex="-1" role="dialog" id="tambahk">
                                                     <div class="modal-dialog" role="document">
@@ -71,7 +69,15 @@ use Illuminate\Support\Facades\Auth;
                                                                     </div>
                                                                     <div class="form-group">
                                                                         <label>Deskripsi</label>
-                                                                        <input name="deskripsi" id="deskripsi" type="text" class="form-control">
+                                                                        <textarea class="form-control" id="deskripsi" name="deskripsi" rows="2" cols="50"></textarea>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label>Verifikator / WD Terkait</label>
+                                                                        <select name="id_ik" id="id_ik" class="form-control">
+                                                                            @foreach($listWD as $wd)
+                                                                            <option value="{{$wd->id}}">{{$wd->name}}</option>
+                                                                            @endforeach
+                                                                        </select>
                                                                     </div>
                                                                     <input name="created_at" id="created_at" type="hidden" value="<?= date('Y-m-d') ?>">
                                                                     <input name="updated_at" id="updated_at" type="hidden" value="<?= date('Y-m-d') ?>">
@@ -153,6 +159,7 @@ use Illuminate\Support\Facades\Auth;
                                                             <th scope="col">IK</th>
                                                             <th scope="col">P</th>
                                                             <th scope="col">Deskripsi</th>
+                                                            <th scope="col">WD Terkait</th>
                                                             <th scope="col" width="8%">Aksi</th>
                                                         </tr>
                                                     </thead>
@@ -165,6 +172,7 @@ use Illuminate\Support\Facades\Auth;
                                                                 <td>{{$indikatorK->IK}}</td>
                                                                 <td>{{$indikatorK->P}}</td>
                                                                 <td>{{$indikatorK->deskripsi}}</td>
+                                                                <td>{{$indikatorK->wd_terkait}}</td>
                                                                 <td>
                                                                     <div class="flex align-items-center list-user-action">
                                                                         @can('k_update')
@@ -202,8 +210,19 @@ use Illuminate\Support\Facades\Auth;
                                                                                     <input name="P" id="K" value="{{old('P',$indikatorK->P)}}" type="text" class="form-control">
                                                                                 </div>
                                                                                 <div class="form-group">
+                                                                                    <label>Verifikator / WD Terkait</label>
+                                                                                    <select name="id_ik" id="id_ik" class="form-control">
+                                                                                        @foreach($listWD as $wd)
+                                                                                        <option value="{{$wd->id}}" @if ($indikatorK->verifikator == $wd->id) selected @endif>
+                                                                                            {{$wd->name}}
+                                                                                        </option>
+                                                                                        @endforeach
+                                                                                    </select>
+                                                                                </div>
+                                                                                <div class="form-group">
                                                                                     <label>Deskripsi</label>
-                                                                                    <input name="deskripsi" id="deskripsi" value="{{old('deskripsi',$indikatorK->deskripsi)}}" type="text" class="form-control">
+                                                                                    <textarea class="form-control" id="deskripsi" name="deskripsi" rows="2" cols="50">{{old('deskripsi',$indikatorK->deskripsi)}}</textarea>
+                                                                                    {{-- <input name="deskripsi" id="deskripsi" value="{{old('deskripsi',$indikatorK->deskripsi)}}" type="text" class="form-control"> --}}
                                                                                 </div>
                                                                                 <input name="created_at" id="created_at" type="hidden" value="<?= date('Y-m-d') ?>">
                                                                                 <input name="updated_at" id="updated_at" type="hidden" value="<?= date('Y-m-d') ?>">
